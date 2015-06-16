@@ -4,8 +4,7 @@
     
     using System;
     using System.Collections;
-    using Yoda.Net.Networking.Packet.Data.room;
-    
+    using Yoda.Net.Networking.Data.Room;
 
     public class PlaceFurnitureResultData : IPacket
     {

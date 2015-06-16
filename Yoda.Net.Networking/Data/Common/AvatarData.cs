@@ -1,4 +1,4 @@
-﻿namespace Yoda.Net.Data.Common
+﻿namespace Yoda.Net.Networking.Data.Common
 {
 
     using System;

@@ -9,10 +9,10 @@ namespace Yoda.Net.Networking.Packet.Chat
     using System.Collections;
     using System.Collections.Specialized;
     using System.Collections.Generic;
-    using Yoda.Net.Networking.Packet.Data.diary;
-    using Yoda.Net.Networking.Packet.Data.pet;
-    using Yoda.Net.Networking.Packet.Data.mannequin;
-    using Yoda.Net.Networking.Packet.Data.room;
+    using Yoda.Net.Networking.Data.Pet;
+    using Yoda.Net.Networking.Data.Diary;
+    using Yoda.Net.Networking.Data.Mannequin;
+    using Yoda.Net.Networking.Data.Room;
     
 
     public class EnterUserRoomResultData : BaseEnterRoomResultData ,IPacket

@@ -2,7 +2,7 @@
 {
 
     using System;
-    using Yoda.Net.Data.Common;
+    using Yoda.Net.Networking.Data.Common;
 
 
     public class ClubCreateData

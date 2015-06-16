@@ -1,8 +1,8 @@
 ﻿namespace Yoda.Net.Networking.Packet.Chat
 {
-    
+
     using System;
-    using Yoda.Net.Networking.Packet.Data.common;
+    using Yoda.Net.Networking.Data.Common;
     
     
 

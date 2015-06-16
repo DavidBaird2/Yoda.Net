@@ -7,9 +7,11 @@ using Yoda.Net.Networking;
 
 namespace Yoda.Net.Client.Delegate
 {
-    public class ChatClientDelegate : IMessageDelegate
+    class InfoClientHandler:IMessageDelegate
     {
+        public InfoClientHandler(BotSession client)
+        {
 
+        }
     }
-    
 }

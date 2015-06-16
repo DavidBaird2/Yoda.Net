@@ -3,7 +3,7 @@
     
     
     using System;
-    using Yoda.Net.Networking.Packet.Data.pet;
+    using Yoda.Net.Networking.Data.Pet;
 
 
     public class PetPlaceResultData : IPacket

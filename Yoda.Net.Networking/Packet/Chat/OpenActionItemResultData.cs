@@ -1,10 +1,8 @@
 ﻿namespace Yoda.Net.Networking.Packet.Chat
 {
-    
-    using System;
-    
-    using Yoda.Net.Networking.Packet.Data.gift;
 
+    using System;
+    using Yoda.Net.Networking.Data.Gift;
     public class OpenActionItemResultData : IPacket
     {
         public int sequence;

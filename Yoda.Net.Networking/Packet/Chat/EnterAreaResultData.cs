@@ -1,4 +1,5 @@
-﻿using Yoda.Net.Networking.Packet.Data.room;
+﻿
+using Yoda.Net.Networking.Data.Room;
 namespace Yoda.Net.Networking.Packet.Chat
 {
     

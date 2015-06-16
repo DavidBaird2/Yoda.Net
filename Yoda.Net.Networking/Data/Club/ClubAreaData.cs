@@ -1,7 +1,7 @@
 ﻿namespace Yoda.Net.Networking.Data.Club
 {
     using System;
-    using Yoda.Net.Data.Common;
+    using Yoda.Net.Networking.Data.Common;
 
     public class ClubAreaData
     {

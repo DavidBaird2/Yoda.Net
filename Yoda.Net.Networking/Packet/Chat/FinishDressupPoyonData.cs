@@ -1,12 +1,8 @@
 ﻿namespace Yoda.Net.Networking.Packet.Chat
 {
     using System;
-    
-    
-    
     using System.Collections;
-    using Yoda.Net.Networking.Packet.Data.common;
-
+    using Yoda.Net.Networking.Data.Common;
 
     public class FinishDressupPoyonData : IPacket,IEncrypted
     {

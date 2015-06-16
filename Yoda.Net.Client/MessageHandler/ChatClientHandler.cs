@@ -5,13 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Yoda.Net.Networking;
 
-namespace Yoda.Net.Client.Delegate
+namespace Yoda.Net.Client.MessageHandler
 {
-    class InfoClientDelegate:IMessageDelegate
+    public class ChatClientHandler : IMessageDelegate
     {
-        public InfoClientDelegate(BotSession client)
-        {
 
-        }
     }
+    
 }

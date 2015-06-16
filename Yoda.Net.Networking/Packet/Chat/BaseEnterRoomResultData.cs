@@ -4,8 +4,8 @@
 
     using System;
     using System.Collections;
-    using Yoda.Net.Networking.Packet.Data.common;
-    using Yoda.Net.Networking.Packet.Data.room;
+    using Yoda.Net.Networking.Data.Common;
+    using Yoda.Net.Networking.Data.Room;
     
     
     

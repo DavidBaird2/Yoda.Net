@@ -6,7 +6,7 @@ namespace Yoda.Net.Networking.Packet.Chat
     
     
     using System.Collections;
-    using Yoda.Net.Networking.Packet.Data.room;
+    using Yoda.Net.Networking.Data.Room;
     public class PoyonProvideDefineData : IPacket, IEncrypted
     {
         public ArrayList DefineList;

@@ -1,4 +1,4 @@
-﻿namespace Yoda.Net.Data.Common.Test
+﻿namespace Yoda.Net.Networking.Data.Common.Test
 {
     using System;
 

@@ -1,7 +1,7 @@
 ﻿namespace Yoda.Net.Networking.Data.Room
 {
     
-    using Yoda.Net.Data.Common;
+    using Yoda.Net.Networking.Data.Common;
     using System;
 
     public class DefineAvatar : DefineData

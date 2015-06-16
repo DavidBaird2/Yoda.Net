@@ -1,6 +1,6 @@
 ﻿namespace Yoda.Net.Networking.Data.Club
 {
-    using Yoda.Net.Data.Common;
+    using Yoda.Net.Networking.Data.Common;
     using System;
 
     public class ProfileClubData

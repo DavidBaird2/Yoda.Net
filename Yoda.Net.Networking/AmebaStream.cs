@@ -19,9 +19,11 @@
             this.BinWriter = new EndianBinaryWriter(EndianBitConverter.Big, this.stream, Encoding.UTF8);
             this.BinReader = new EndianBinaryReader(EndianBitConverter.Big, this.stream, Encoding.UTF8);
         }
-        public AmebaStream(byte[] value) : base()
+        public AmebaStream(byte[] value)
         {
-            
+            this.stream = new MemoryStream();
+            this.BinWriter = new EndianBinaryWriter(EndianBitConverter.Big, this.stream, Encoding.UTF8);
+            this.BinReader = new EndianBinaryReader(EndianBitConverter.Big, this.stream, Encoding.UTF8);
             BinWriter.Write(value);
             this.position = 0;
         }
