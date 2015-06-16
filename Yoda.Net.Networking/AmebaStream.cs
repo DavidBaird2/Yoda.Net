@@ -6,7 +6,7 @@
     using System.IO;
     using System.Text;
 
-    public class AmebaStream
+    public class AmebaStream : IDisposable
     {
         private EndianBinaryReader BinReader;
         private EndianBinaryWriter BinWriter;
@@ -19,6 +19,12 @@
             this.BinWriter = new EndianBinaryWriter(EndianBitConverter.Big, this.stream, Encoding.UTF8);
             this.BinReader = new EndianBinaryReader(EndianBitConverter.Big, this.stream, Encoding.UTF8);
         }
+        public AmebaStream(byte[] value) : base()
+        {
+            
+            BinWriter.Write(value);
+            this.position = 0;
+        }
 
         public byte[] toArray()
         {
@@ -30,29 +36,6 @@
             return BinReader.ReadBytes((int)(stream.Length - stream.Position));
 
         }
-
-
-        public AmebaStream(byte[] value)
-        {
-            this.stream = new MemoryStream();
-            this.BinWriter = new EndianBinaryWriter(EndianBitConverter.Big, this.stream, Encoding.UTF8);
-            this.BinReader = new EndianBinaryReader(EndianBitConverter.Big, this.stream, Encoding.UTF8);
-            BinWriter.Write(value);
-            this.position = 0;
-        }
-        public AmebaStream(byte[] value, int startindex)
-        {
-            this.stream = new MemoryStream(value, startindex, value.Length - startindex);
-            this.BinWriter = new EndianBinaryWriter(EndianBitConverter.Big, this.stream, Encoding.UTF8);
-            this.BinReader = new EndianBinaryReader(EndianBitConverter.Big, this.stream, Encoding.UTF8);
-        }
-        public void close()
-        {
-            this.BinWriter.Dispose();
-            this.BinReader.Dispose();
-            this.stream.Dispose();
-        }
-
         public bool readBoolean()
         {
             return this.BinReader.ReadBoolean();
@@ -72,7 +55,6 @@
         }
         public byte[] readBytes(int count)
         {
-            long postion = this.BinReader.BaseStream.Position;
             byte[] data = this.BinReader.ReadBytes(count);
             this.BinReader.BaseStream.Position = position;
             return data;
@@ -105,18 +87,9 @@
 
         public string readUTF()
         {
-            string str2;
-            try
-            {
-                int num = this.BinReader.ReadInt16();
-                byte[] bytes = this.BinReader.ReadBytes(num);
-                str2 = Encoding.UTF8.GetString(bytes);
-            }
-            catch
-            {
-                throw;
-            }
-            return str2;
+            int num = this.BinReader.ReadInt16();
+            byte[] bytes = this.BinReader.ReadBytes(num);
+            return Encoding.UTF8.GetString(bytes);
         }
 
         public string readUTFBytes(int length)
@@ -203,20 +176,6 @@
             byte[] bytes = Encoding.UTF8.GetBytes(value);
             this.BinWriter.Write(bytes);
         }
-        public string toHex()
-        {
-            return ToHexString(toArray());
-        }
-        public static string ToHexString(byte[] bytes)
-        {
-            StringBuilder sb = new StringBuilder(bytes.Length * 2);
-            foreach (byte b in bytes)
-            {
-                if (b < 16) sb.Append('0'); // 二桁になるよう0を追加
-                sb.Append(Convert.ToString(b, 16));
-            }
-            return sb.ToString();
-        }
 
 
         public Stream BaseStream
@@ -245,6 +204,13 @@
             {
                 this.stream.Position = value;
             }
+        }
+
+        public void Dispose()
+        {
+            this.BinWriter.Dispose();
+            this.BinReader.Dispose();
+            this.stream.Dispose();
         }
     }
 }

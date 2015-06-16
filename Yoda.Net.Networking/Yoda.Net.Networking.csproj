@@ -75,6 +75,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="zlib.net">
+      <HintPath>..\packages\zlib.net.1.0.4.0\lib\zlib.net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AmebaStream.cs" />
@@ -191,6 +194,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -206,6 +210,12 @@
       <Project>{9f3cf5e8-a6a7-4371-bdfb-77de184b0777}</Project>
       <Name>Yoda.Net.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="lib\MiscUtil-r285\licence.txt" />
+    <Content Include="lib\MiscUtil-r285\MiscUtil.dll" />
+    <Resource Include="lib\MiscUtil-r285\MiscUtil.xml" />
+    <Resource Include="lib\MiscUtil-r285\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -28,7 +28,7 @@
 
         public void readData(AmebaStream In)
         {
-            var test = In.toHex();
+
             var count = In.readInt();
             friends = new List<MessengerUser>(count);
             int i = 0;
