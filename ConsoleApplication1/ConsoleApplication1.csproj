@@ -44,7 +44,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChatClientDelegate.cs" />
+    <Compile Include="ChatClientHandler.cs" />
     <Compile Include="ChatServerHandler.cs" />
     <Compile Include="InfoClientHandler.cs" />
     <Compile Include="InfoServerHandler.cs" />
