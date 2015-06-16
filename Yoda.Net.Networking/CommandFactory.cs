@@ -24,6 +24,7 @@ namespace Yoda.Net.Networking
             _dataClass = new Dictionary<int, IPacket>();
             foreach (Type Type in Assembly.GetExecutingAssembly().GetTypes())
             {
+                string test = "." + Enum.GetName(typeof(ServerType), _serverType) + ".";
                 if (Type == null || !Type.FullName.Contains("." + Enum.GetName(typeof(ServerType), _serverType) + "."))
                 {
                     continue;
