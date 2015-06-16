@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Yoda.Net.Networking.Packet
+{
+    public interface IPacket
+    {
+        int packetId
+        {
+            get;
+        }
+        void readData(AmebaStream stream);
+        void writeData(AmebaStream stream);
+    }
+}
