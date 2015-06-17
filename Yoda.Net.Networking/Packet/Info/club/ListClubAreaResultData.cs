@@ -1,12 +1,10 @@
 ﻿namespace Yoda.Net.Networking.Packet.Info.club
 {
-    
-    using System;
 
+    using System;
     using System.Collections;
-    
-    using Yoda.Net.Networking.Packet.Data.club;
-    using Yoda.Net.Networking.Packet.Data.common;
+    using Yoda.Net.Networking.Data.Club;
+    using Yoda.Net.Networking.Data.Common;
 
 
     public class ListClubAreaResultData : IPacket

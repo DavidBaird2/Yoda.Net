@@ -16,15 +16,20 @@ namespace ConsoleApplication1
 
             var policySever = new Yoda.Net.Networking.PolicyServer();
             policySever.init();
+
+
             var session = new ProxySession();
-            session.InfoClientHandler = new InfoClientHandler();
-            session.ChatClientHandler = new ChatClientHandler();
+
+            session.InfoClientHandler = new InfoClientHandler(session);
+            session.ChatClientHandler = new ChatClientHandler(session);
+
             session.InfoServerHandler = new InfoServerHandler(session);
-            session.ChatServerHandler = new ChatServerHandler();
+            session.ChatServerHandler = new ChatServerHandler(session);
 
             var manager = new CommandProxyManager();
             manager.session = session;
             manager.init();
+
 
             Console.ReadLine();
         }

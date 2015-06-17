@@ -5,6 +5,7 @@
     
     using System;
     using System.Collections;
+    using Yoda.Net.Networking.Data.Common;
     public class ListUserActionItemResultData : IPacket
     {
         public ArrayList list;

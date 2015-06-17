@@ -5,9 +5,8 @@ using System.Text;
 using System.Collections;
 
 using Yoda.Net.Networking.Packet.Info;
+using Yoda.Net.Networking.Data.Action;
 
-
-using Yoda.Net.Networking.Packet.Data.action;
 
 namespace Yoda.Net.Networking.Packet.Info.action
 {

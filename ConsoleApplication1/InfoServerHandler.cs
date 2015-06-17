@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Yoda.Net.Networking;
 using Yoda.Net.Networking.Packet.Info.Area;
+using Yoda.Net.Networking.Packet.Info.friend;
 using Yoda.Net.Proxy;
 
 namespace ConsoleApplication1
@@ -15,9 +16,15 @@ namespace ConsoleApplication1
         {
             this.session = session;
         }
+
         public CommandRouteOption onGetAreaResultData(GetAreaResultData data )
         {
             session.LastGetAreaServer = data.server.Split(':')[0];
+            return CommandRouteOption.Nothing;
+        }
+
+        public CommandRouteOption onListUserFriendData(ListFriendResultData data )
+        {
             return CommandRouteOption.Nothing;
         }
     }

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Yoda.Net.Networking.Packet.Data.common;
-
-
+using Yoda.Net.Common;
+using Yoda.Net.Networking.Data.Common;
 
 namespace Yoda.Net.Networking.Packet.Info.create
 {

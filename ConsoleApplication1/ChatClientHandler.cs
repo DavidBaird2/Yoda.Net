@@ -10,8 +10,9 @@ namespace ConsoleApplication1
 {
     class ChatClientHandler : IMessageDelegate
     {
-        public ChatClientHandler()
-        { 
+        public ChatClientHandler(ProxySession session)
+        {
+ 
         }
         public CommandRouteOption onTalkData(TalkData data)
         {

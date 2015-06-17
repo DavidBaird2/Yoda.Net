@@ -137,6 +137,7 @@ namespace Yoda.Net.Networking
 
         private void WaitData()
         {
+            if(Connected)
             this.socket.BeginReceive(this.mServerBuffer, 0, this.mServerBuffer.Length, 0, new AsyncCallback(this.ReceivedDataAsync), null);
         }
         protected void ReceivedDataAsync(IAsyncResult iAr)

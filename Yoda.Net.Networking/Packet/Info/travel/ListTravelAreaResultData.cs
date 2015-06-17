@@ -5,8 +5,7 @@ using System.Text;
 
 using System.Collections;
 
-using Yoda.Net.Networking.Packet.Data.common;
-using Yoda.Net.Networking.Packet.Data.common.test;
+using Yoda.Net.Networking.Data.Common;
 
 namespace Yoda.Net.Networking.Packet.Info.area
 {

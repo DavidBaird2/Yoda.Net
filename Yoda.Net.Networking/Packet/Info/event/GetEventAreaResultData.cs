@@ -6,6 +6,7 @@ using Yoda.Net.Networking.Packet.Data.Event;
 using System;
 using System.Collections;
     using Yoda.Net.Networking.Packet.Data.Event;
+    using Yoda.Net.Networking.Data.Event;
 
     public class GetEventAreaResultData : IPacket
     {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Yoda.Net.Networking.Data.Gacha;
 using Yoda.Net.Networking.Packet.Data.gacha;
 
 

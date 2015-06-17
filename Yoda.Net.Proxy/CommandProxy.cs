@@ -105,9 +105,11 @@ namespace Yoda.Net.Proxy
                     {
                         data.readData(array);
                     }
-                    catch
+                    catch(Exception ex)
                     {
                         //Error Read Data 
+                       Logger.Log(LogLevel.Infomation,"Error read Packet : "+data.GetType().FullName);
+                       Logger.Log(LogLevel.Infomation, ex.ToString());
                         clientNetworkManager.SendData(rawPacket.toArray());
                         break;
                     }

@@ -10,7 +10,7 @@ namespace ConsoleApplication1
 {
     class ChatServerHandler : IMessageDelegate
     {
-        public ChatServerHandler()
+        public ChatServerHandler(ProxySession session)
         {
 
         }

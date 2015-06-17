@@ -4,8 +4,6 @@
     using System;
     
     using System.Collections;
-    using Yoda.Net.Networking.Packet.Data.common;
-
     public class TrashItemData : IPacket, IEncrypted, IncludeClientTime
     {
         public string type;

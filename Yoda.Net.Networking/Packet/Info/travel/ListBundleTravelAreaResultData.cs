@@ -10,6 +10,7 @@ namespace Yoda.Net.Networking.Packet.Info.area
     using System.Collections;
     using Yoda.Net.Networking.Packet.Data.common.test;
 using Yoda.Net.Networking.Packet.Data.common;
+    using Yoda.Net.Networking.Data.Common;
 
     public class ListBundleTravelAreaResultData : IPacket
     {

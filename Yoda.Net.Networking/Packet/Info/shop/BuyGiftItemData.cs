@@ -5,9 +5,7 @@ namespace Yoda.Net.Networking.Packet.Info.area
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    
-    
-using Yoda.Net.Networking.Packet.Data.common;
+    using Yoda.Net.Networking.Data.Common;
 
     public class BuyGiftItemData : IPacket, IEncrypted
     {

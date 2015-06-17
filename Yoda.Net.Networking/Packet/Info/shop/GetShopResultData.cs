@@ -7,8 +7,8 @@ namespace Yoda.Net.Networking.Packet.Info.area
     using System.Text;
     
     
-    using Yoda.Net.Networking.Packet.Data.common;
     using System.Collections;
+    using Yoda.Net.Networking.Data.Common;
 
     public class GetShopResultData : IPacket
     {

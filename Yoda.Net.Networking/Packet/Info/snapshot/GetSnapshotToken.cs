@@ -6,8 +6,6 @@ namespace Yoda.Net.Networking.Packet.Info.snapshot
     using System.Linq;
     using System.Text;
     
-    
-    using Yoda.Net.Networking.Packet.Data.common;
     using System.Collections;
 
     public class GetSnapshotTokenResult : IPacket
