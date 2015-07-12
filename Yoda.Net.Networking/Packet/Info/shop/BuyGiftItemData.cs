@@ -7,7 +7,7 @@ namespace Yoda.Net.Networking.Packet.Info.area
     using System.Text;
     using Yoda.Net.Networking.Data.Common;
 
-    public class BuyGiftItemData : IPacket, IEncrypted
+    public class BuyGiftItemData : ICommandData, IEncrypted
     {
         public ShopGiftBuyData _data;
         public string userCode;
@@ -29,7 +29,7 @@ namespace Yoda.Net.Networking.Packet.Info.area
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
 
             this.userCode = In.readUTF();
@@ -44,7 +44,7 @@ namespace Yoda.Net.Networking.Packet.Info.area
       this.giftReserveDate=In.readDouble();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
 
             Out.writeUTF(this.userCode);

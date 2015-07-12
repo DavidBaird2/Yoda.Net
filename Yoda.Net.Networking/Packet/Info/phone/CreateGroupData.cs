@@ -3,41 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
+using Yoda.Net.Networking.Data.Phone;
 
 
-using Yoda.Net.Networking.Packet.Data.phone;
 
 namespace Yoda.Net.Networking.Packet.Info.phone
 {
-    public class CreateGroupData : IPacket
+    public class CreateGroupData : ICommandData
 	{
-        private bool _oneToOne;
-        private ArrayList _memberList;
-        private string _title;
+        public CreateGroupData()
+        {
+        }
+        private bool oneToOne;
+        private ArrayList memberList;
+        private string title;
 
         public CreateGroupData(bool oneToOne, string title, ArrayList memberList)
         {
-            _oneToOne = oneToOne;
-            _title = title;
-            _memberList = memberList;
+            this.oneToOne = oneToOne;
+            this.title = title;
+            this.memberList = memberList;
             return;
         }
-        public void writeData(AmebaStream param1) 
+        public void writeData(PiggStream stream) 
         {
-            param1.writeBoolean(_oneToOne);
-            param1.writeUTF(_title);
-            var count = _memberList.Count;
-            param1.writeInt(count);
-            foreach (PhoneMemberData _loc_4 in _memberList)
+            stream.writeBoolean(oneToOne);
+            stream.writeUTF(title);
+            var count = memberList.Count;
+            stream.writeInt(count);
+            foreach (PhoneMemberData member in memberList)
             {
-                param1.writeUTF(_loc_4.userCode);
+                stream.writeUTF(member.userCode);
             }
 
             return;
         }
-        public void readData(AmebaStream param1)
+        public void readData(PiggStream stream)
         {
-            return;
+            throw new NotImplementedException();
         }
         public int packetId
         {

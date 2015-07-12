@@ -9,17 +9,17 @@
     
     using Yoda.Net.Networking.Packet.Chat;
 
-    public class MoveResultData : IPacket, IEncrypted
+    public class MoveResultData : ICommandData
     {
         public int z;
         public int x;
         public int y;
         public string code;
-        public MoveResultData(int param1 = 0, int param2 = 0, int param3 = 0)
+        public MoveResultData(int x = 0, int y = 0, int z = 0)
         {
-            this.x = param1;
-            this.y = param2;
-            this.z = param3;
+            this.x = x;
+            this.y = y;
+            this.z = z;
         }
         public MoveResultData()
         {
@@ -33,7 +33,7 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             code = In.readUTFBytes(16);
             x = In.readShort();
@@ -41,7 +41,7 @@
             z = In.readShort();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTFBytes(code);
             Out.writeShort((short) this.x);

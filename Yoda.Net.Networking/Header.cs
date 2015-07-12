@@ -12,14 +12,14 @@ namespace Yoda.Net.Networking
         public short packetId;
         public int length;
         public short type;
-        public void read(AmebaStream array)
+        public void read(PiggStream array)
         {
             type = array.readShort();
             packetId = array.readShort();
             length = array.readInt();
             callId = array.readInt();
         }
-        public void write(AmebaStream array)
+        public void write(PiggStream array)
         {
             array.writeShort(type);
             array.writeShort(packetId);

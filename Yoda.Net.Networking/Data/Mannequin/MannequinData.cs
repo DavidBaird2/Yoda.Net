@@ -9,16 +9,16 @@ namespace Yoda.Net.Networking.Data.Mannequin
 {
     public class MannequinData
     {
-        public MannequinData(MannequinIdData param1 = null)
+        public MannequinData(MannequinIdData data = null)
         {
 
-            if (param1 == null)
+            if (data == null)
             {
                 this.mannequinId = new MannequinIdData();
             }
             else
             {
-                this.mannequinId = param1;
+                this.mannequinId = data;
             }
             this.item = new MannequinBodyItemData();
         }
@@ -27,78 +27,74 @@ namespace Yoda.Net.Networking.Data.Mannequin
 
         public MannequinBodyItemData item;
 
-        public void readData(AmebaStream param1)
+        public void readData(PiggStream stream)
         {
-            this.mannequinId.readData(param1);
+            this.mannequinId.readData(stream);
             this.item = new MannequinBodyItemData();
-            this.item.readData(param1);
+            this.item.readData(stream);
         }
 
-        public void readmannequinIdsAndItemUniqueIdsData(AmebaStream param1)
+        public void readmannequinIdsAndItemUniqueIdsData(PiggStream stream)
         {
-            this.mannequinId.readData(param1);
+            this.mannequinId.readData(stream);
             this.item = new MannequinBodyItemData();
-            this.item.readUniqueIdData(param1);
+            this.item.readUniqueIdData(stream);
         }
 
-        public void readmannequinIdData(AmebaStream param1)
+        public void readmannequinIdData(PiggStream stream)
         {
-            this.mannequinId.readData(param1);
+            this.mannequinId.readData(stream);
         }
 
-        public void readDataEnterRoom(AmebaStream param1)
+        public void readDataEnterRoom(PiggStream stream)
         {
-            this.mannequinId.readAreaCodeAndSequenceData(param1);
+            this.mannequinId.readAreaCodeAndSequenceData(stream);
             this.item = new MannequinBodyItemData();
-            this.item.readData(param1);
+            this.item.readData(stream);
         }
-
-        public void readAllData(AmebaStream param1)
+        public void writeDataEnterRoom(PiggStream stream)
         {
-            this.mannequinId.readData(param1);
+            mannequinId.writeAreaCodeAndSequenceData(stream);
+            this.item.writeData(stream);
+        }
+        public void readAllData(PiggStream stream)
+        {
+            this.mannequinId.readData(stream);
             this.item = new MannequinBodyItemData();
-            this.item.readDataWithUniqueId(param1);
+            this.item.readDataWithUniqueId(stream);
         }
 
-        public void readDataWithUniqueId(AmebaStream param1)
+        public void readDataWithUniqueId(PiggStream stream)
         {
-            this.mannequinId.readAreaCodeAndSequenceData(param1);
+            this.mannequinId.readAreaCodeAndSequenceData(stream);
             this.item = new MannequinBodyItemData();
-            this.item.readDataWithUniqueId(param1);
+            this.item.readDataWithUniqueId(stream);
         }
 
-        public void writeSaveMannequin(AmebaStream param1)
+        public void writeSaveMannequin(PiggStream stream)
         {
-            this.mannequinId.writeData(param1);
-            this.item.writeUniqueIdsData(param1);
+            this.mannequinId.writeData(stream);
+            this.item.writeUniqueIdsData(stream);
         }
 
-        public bool hasItem(int param1)
+        public bool hasItem(int code)
         {
             if (this.item == null)
             {
                 return false;
             }
-            return this.item.hasItem(param1);
+            return this.item.hasItem(code);
         }
 
-        public int getItemIndex(int param1)
+        public int getItemIndex(int index)
         {
             if (this.item == null)
             {
                 return -1;
             }
-            return this.item.getItemIndex(param1);
+            return this.item.getItemIndex(index);
         }
 
-        public MannequinData clone()
-        {
-            MannequinData _loc1_ = new MannequinData(this.mannequinId.clone());
-            if (this.item.items != null)
-            {
-                //   _loc1_.item.items = this.item.items.concat();
-            }
-            return _loc1_;
-        }
+
     }
 }

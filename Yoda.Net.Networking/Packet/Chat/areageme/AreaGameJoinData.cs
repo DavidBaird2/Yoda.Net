@@ -1,4 +1,4 @@
-﻿namespace Yoda.Net.Networking.Packet.Chat.areagame
+﻿namespace Yoda.Net.Networking.Packet.Chat.Areagame
 {
     
 
@@ -8,18 +8,18 @@
     
     
 
-    public class AreaGameJoinData : IPacket
+    public class AreaGameJoinData : ICommandData
     {
         public int areaGameId;
         public bool enableEntry;
         public int areaGameRoomId;
-        public AmebaStream byteBuilder;
+        public PiggStream byteBuilder;
         public int areaGameOpts;
         public AreaGameJoinData()
         {
 
         }
-        public AreaGameJoinData(int areaGameRoomId = 0, int areaGameId = 0, bool enableEntry = true, int areaGameOpts = 0, AmebaStream byteBuilder = null)
+        public AreaGameJoinData(int areaGameRoomId = 0, int areaGameId = 0, bool enableEntry = true, int areaGameOpts = 0, PiggStream byteBuilder = null)
         {
             this.areaGameRoomId = areaGameRoomId;
             this.areaGameId = areaGameId;
@@ -36,12 +36,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-
+            throw new NotImplementedException();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {   
             Out.writeInt(areaGameRoomId);
             Out.writeByte((byte)areaGameId);

@@ -8,8 +8,11 @@ using System.Text;
 using Yoda.Net.Networking.Packet.Chat;
 namespace Yoda.Net.Networking.Packet.Chat
 {
-	public class ReceivePenaltyResultData :IPacket 
+	public class ReceivePenaltyResultData :ICommandData 
 	{
+        public ReceivePenaltyResultData()
+        {
+        }
         public int ReceivePenaltyResutData;
         public ReceivePenaltyResultData(int _code)
         {
@@ -25,13 +28,13 @@ namespace Yoda.Net.Networking.Packet.Chat
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             ReceivePenaltyResutData = In.readInt();
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(ReceivePenaltyResutData);
             return;

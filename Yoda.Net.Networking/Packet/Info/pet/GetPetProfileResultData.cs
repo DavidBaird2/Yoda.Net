@@ -6,12 +6,10 @@
     using System.Collections;
     using System;
 
-    public class GetPetProfileResultData : IPacket
+    public class GetPetProfileResultData : ICommandData
     {
    
-  
  
-        private int _petId;
         public GetPetProfileResultData(string usercode, int petId)
         {
   
@@ -29,12 +27,12 @@
         {
             return;
         }
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
    
 

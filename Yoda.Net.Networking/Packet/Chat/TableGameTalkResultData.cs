@@ -3,7 +3,7 @@
     
     using System;
     
-    public class TableGameTalkResultData : IPacket
+    public class TableGameTalkResultData : ICommandData
     {
 
         public uint color;
@@ -20,11 +20,11 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(hexCode);
             Out.writeUTF(nickname);

@@ -6,7 +6,7 @@
     using System.Collections;
     using System;
 
-    public class ListScratchData : IPacket
+    public class ListScratchData : ICommandData
     {
 
         public int packetId
@@ -20,12 +20,12 @@
         {
             return;
         }
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
 
             return;

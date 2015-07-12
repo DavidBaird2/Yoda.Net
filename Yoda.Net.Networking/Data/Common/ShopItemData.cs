@@ -39,52 +39,50 @@
 
         public ShopItemData()
         {
-            //log(this);
             return;
         }
 
-        public void readData(AmebaStream param1)
+        public void readData(PiggStream In)
         {
-            this.shelf = param1.readUTF();
-            this.type = param1.readUTF();
-            this.category = param1.readUTF();
-            this.itemId = param1.readUTF();
-            this.name = param1.readUTF();
-            this.description = param1.readUTF();
-            this.price = param1.readInt();
-            this.originalPrice = param1.readInt();
-            this.remainTime = param1.readDouble();
-            this.stock = param1.readInt();
-            this.orderNum = param1.readInt();
-            this.quantity = param1.readInt();
-            this.newItem = param1.readBoolean();
-            this.disableCoupon = param1.readBoolean();
-            this.countLimited = param1.readBoolean();
-            this.termLimited = param1.readBoolean();
-            this.again = param1.readBoolean();
-            this.recommended = param1.readBoolean();
-            this.sale = param1.readBoolean();
-            this.bargain = param1.readBoolean();
-            this.maleOnly = param1.readBoolean();
-            this.femaleOnly = param1.readBoolean();
-            this.isGiftItem = param1.readBoolean();
-            this.isGiftOnly = param1.readBoolean();
-            this.isRequirementMet = param1.readBoolean();
-            this.isForOppositeGender = param1.readBoolean();
-            this.soldOut = param1.readBoolean();
-            this.setItemSize = param1.readInt();
+            this.shelf = In.readUTF();
+            this.type = In.readUTF();
+            this.category = In.readUTF();
+            this.itemId = In.readUTF();
+            this.name = In.readUTF();
+            this.description = In.readUTF();
+            this.price = In.readInt();
+            this.originalPrice = In.readInt();
+            this.remainTime = In.readDouble();
+            this.stock = In.readInt();
+            this.orderNum = In.readInt();
+            this.quantity = In.readInt();
+            this.newItem = In.readBoolean();
+            this.disableCoupon = In.readBoolean();
+            this.countLimited = In.readBoolean();
+            this.termLimited = In.readBoolean();
+            this.again = In.readBoolean();
+            this.recommended = In.readBoolean();
+            this.sale = In.readBoolean();
+            this.bargain = In.readBoolean();
+            this.maleOnly = In.readBoolean();
+            this.femaleOnly = In.readBoolean();
+            this.isGiftItem = In.readBoolean();
+            this.isGiftOnly = In.readBoolean();
+            this.isRequirementMet = In.readBoolean();
+            this.isForOppositeGender = In.readBoolean();
+            this.soldOut = In.readBoolean();
+            this.setItemSize = In.readInt();
             if (this.setItemSize > 0)
             {
-                // this.setItemData = new Vector.<ShopSetItemData>;
-                int _loc_2 = 0;
-                while (_loc_2 < this.setItemSize)
+                int n = 0;
+                while (n < this.setItemSize)
                 {
-                    param1.readUTF();
-                    param1.readUTF();
-                    param1.readUTF();
+                    In.readUTF();
+                    In.readUTF();
+                    In.readUTF();
 
-                    param1.readInt();
-                    _loc_2++;
+                    In.readInt();
+                    n++;
                 }
 
             }

@@ -8,7 +8,7 @@ namespace Yoda.Net.Networking.Packet.Info.area
 
 
 
-    public class BuyShopItemResultData : IPacket, IEncrypted
+    public class BuyShopItemResultData : ICommandData
     {
         public string itemCode;
         public bool success;
@@ -27,7 +27,7 @@ namespace Yoda.Net.Networking.Packet.Info.area
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.itemCode = In.readUTF();
             this.type = In.readUTF();
@@ -43,9 +43,10 @@ namespace Yoda.Net.Networking.Packet.Info.area
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
 
+            throw new NotImplementedException();
         }
     }
 }

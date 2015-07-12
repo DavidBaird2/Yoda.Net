@@ -4,7 +4,7 @@
     
     using System;
 
-    public class UstResultData : IPacket
+    public class UstResultData : ICommandData
     {
         public UstData ustData = new UstData();
 
@@ -16,7 +16,7 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.ustData = new UstData();
             this.ustData.actionCode = In.readUTF();
@@ -28,7 +28,7 @@
             this.ustData.isOpen = In.readBoolean();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(this.ustData.actionCode);
             Out.writeUTF(this.ustData.channel);

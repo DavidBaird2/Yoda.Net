@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Yoda.Net.Networking.Packet
 {
-    public interface IPacket
+    public interface ICommandData
     {
         int packetId
         {
             get;
         }
-        void readData(AmebaStream stream);
-        void writeData(AmebaStream stream);
+        void readData(PiggStream stream);
+        void writeData(PiggStream stream);
     }
 }

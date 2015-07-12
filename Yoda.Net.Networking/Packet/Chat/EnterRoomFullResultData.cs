@@ -4,7 +4,7 @@
     using System;
     
 
-    public class EnterRoomFullResultData :  IPacket,IEncrypted
+    public class EnterRoomFullResultData :  ICommandData
     {
         public String category;
         public String areaCode;
@@ -34,34 +34,32 @@
 
 
 
-        public void readData(AmebaStream param1)
+        public void readData(PiggStream stream)
         {
-            this.category = param1.readUTF();
-            this.subCategoryCode = param1.readUTF();
-            this.areaCode = param1.readUTF();
-            this.roomIndex = param1.readInt();
-            if (!(this.canQueue = param1.readBoolean()))
+            this.category = stream.readUTF();
+            this.subCategoryCode = stream.readUTF();
+            this.areaCode = stream.readUTF();
+            this.roomIndex = stream.readInt();
+            if (!(this.canQueue = stream.readBoolean()))
             {
-                this.errorMessage = param1.readUTF();
+                this.errorMessage = stream.readUTF();
                 return;
             }
 
-            this.areaType = param1.readByte();
-            this.thumbnailPath = param1.readUTF();
-            this.upperDescription = param1.readUTF();
-            this.lowerDescription = param1.readUTF();
-            this.count = param1.readInt();
-            this.lastQueueableSize = param1.readInt();
+            this.areaType = stream.readByte();
+            this.thumbnailPath = stream.readUTF();
+            this.upperDescription = stream.readUTF();
+            this.lowerDescription = stream.readUTF();
+            this.count = stream.readInt();
+            this.lastQueueableSize = stream.readInt();
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-           /* Out.writeUTF(category);
-            Out.writeUTF(code);
-            Out.writeUTF(title);
-            Out.writeInt(max);*/
-            return;
+
+            throw new NotImplementedException();
+    
         }
 
 

@@ -5,9 +5,8 @@
     using System;
     using System.Collections;
     using Yoda.Net.Networking.Data.Room;
-    using Yoda.Net.Networking.Packet.Data.room;
 
-    public class ListUserFurnitureResultData : IPacket
+    public class ListUserFurnitureResultData : ICommandData
     {
         public ArrayList furnitures = new ArrayList();
         public int max;
@@ -21,7 +20,7 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             StockFurniture furniture = null;
             int capacity = 0;
@@ -61,30 +60,30 @@
                 furniture.time = In.readDouble();
                 this.furnitures.Insert(i,furniture);
             }
-            int _loc_4 = In.readInt();
+            int placecount = In.readInt();
             placedFurnitures = new Hashtable();
-            int _loc_3 = 0;
-            while (_loc_3 < _loc_4)
+            int num = 0;
+            while (num < placecount)
             {
 
-                string _loc_10 = In.readUTF();
-               int _loc_11 = In.readInt();
-                placedFurnitures[_loc_10] = new ArrayList(_loc_11);
-              int  _loc_8 = 0;
-                while (_loc_8 < _loc_11)
+                string code = In.readUTF();
+               int num6 = In.readInt();
+                placedFurnitures[code] = new ArrayList(num6);
+              int  i = 0;
+                while (i < num6)
                 {
 
                     var _loc_12 = new Hashtable();
                     _loc_12["category"] = In.readUTF();
                     _loc_12["code"] = In.readUTF();
-                    ((ArrayList)placedFurnitures[_loc_10]).Add(_loc_12);
-                    _loc_8++;
+                    ((ArrayList)placedFurnitures[code]).Add(_loc_12);
+                    i++;
                 }
-                _loc_3++;
+                num++;
             }
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             int capacity = 0;
             ArrayList list = null;

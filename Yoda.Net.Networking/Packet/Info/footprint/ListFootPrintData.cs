@@ -4,7 +4,7 @@
     
     using System;
     using System.Collections;
-    public class ListFootPrintData : IPacket
+    public class ListFootPrintData : ICommandData
     {
 
         public ListFootPrintData()
@@ -18,13 +18,13 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
 
          
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
         }
 

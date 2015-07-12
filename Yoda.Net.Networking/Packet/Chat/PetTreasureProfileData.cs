@@ -4,7 +4,7 @@
     
     using System;
 
-    public class PetTreasureProfileData : IPacket
+    public class PetTreasureProfileData : ICommandData
     {
         public int petId;
         public PetTreasureProfileData(int id)
@@ -22,12 +22,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.petId = In.readInt();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(this.petId);
         }

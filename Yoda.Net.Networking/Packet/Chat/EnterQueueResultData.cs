@@ -4,7 +4,7 @@
     using System;
     
 
-    public class EnterQueueResultData :  IPacket,IEncrypted
+    public class EnterQueueResultData :  ICommandData,IEncrypted
     {
         public int current;
 
@@ -22,15 +22,15 @@
 
 
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             current = In.readInt();
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-
+            Out.writeInt(current);
             return;
         }
 

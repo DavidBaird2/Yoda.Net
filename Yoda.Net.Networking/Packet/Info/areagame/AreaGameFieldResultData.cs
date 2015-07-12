@@ -4,9 +4,9 @@
     
     using System;
 
-    public class AreaGameFieldResultData : IPacket
+    public class AreaGameFieldResultData : ICommandData
     {
-        public AmebaStream data;
+        public PiggStream data;
         public int areaGamePacketId;
 
 
@@ -22,16 +22,17 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             areaGamePacketId = In.readShort();
-            data = new AmebaStream();
+            data = new PiggStream();
             data.writeBytes(In.readBytes((int)(In.length - In.position)));
             data.position = 0;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
+            throw new NotImplementedException();
         }
     }
 }

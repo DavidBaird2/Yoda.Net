@@ -8,11 +8,9 @@ namespace Yoda.Net.Networking.Packet.Info.area
     
     
     using System.Collections;
-    using Yoda.Net.Networking.Packet.Data.common.test;
-using Yoda.Net.Networking.Packet.Data.common;
     using Yoda.Net.Networking.Data.Common;
 
-    public class ListBundleTravelAreaResultData : IPacket
+    public class ListBundleTravelAreaResultData : ICommandData
     {
         public string categoryName;
         public List<TravelAreaData> bundleList;
@@ -29,38 +27,40 @@ using Yoda.Net.Networking.Packet.Data.common;
             }
         }
 
-        public void readData(AmebaStream param1)
+        public void readData(PiggStream In)
         {
-         this.categoryName = param1.readUTF();
-            var _loc_2 = param1.readInt();
-            this.bundleList = new List<TravelAreaData>(_loc_2);
-            var _loc_3 = 0;
-            while (_loc_3 < _loc_2)
+         this.categoryName = In.readUTF();
+            var totalCount = In.readInt();
+            this.bundleList = new List<TravelAreaData>(totalCount);
+            var i = 0;
+            while (i < totalCount)
             {
                 
                 this.areaData = new TravelAreaData();
-                this.areaData.categoryCode = param1.readUTF();
-                this.areaData.code = param1.readUTF();
-                this.areaData.name = param1.readUTF();
-                this.areaData.description = param1.readUTF();
-                this.areaData.capacity = param1.readInt();
-                this.areaData.currentCount = param1.readInt();
-                this.areaData.condition = param1.readByte();
+                this.areaData.categoryCode = In.readUTF();
+                this.areaData.code = In.readUTF();
+                this.areaData.name = In.readUTF();
+                this.areaData.description = In.readUTF();
+                this.areaData.capacity = In.readInt();
+                this.areaData.currentCount = In.readInt();
+                this.areaData.condition = In.readByte();
                 this.bundleList.Add(this.areaData);
-                _loc_3++;
+                i++;
             }
-            this.isEnterable = param1.readBoolean();
+            this.isEnterable = In.readBoolean();
             if (!this.isEnterable)
             {
-                this.enterableDescription = param1.readUTF();
-                this.ticketShopCode = param1.readUTF();
+                this.enterableDescription = In.readUTF();
+                this.ticketShopCode = In.readUTF();
             }
             return;
         }
 
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
+
+            throw new NotImplementedException();
         }
     }
 }

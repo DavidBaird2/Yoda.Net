@@ -5,25 +5,24 @@ using System.Text;
 
 
 
-namespace Yoda.Net.Networking.Packet.Chat.channel
+namespace Yoda.Net.Networking.Packet.Chat.Channel
 {
-    public class UpdateFanRequest : IPacket
+    public class UpdateFanRequest : ICommandData
     {
         public UpdateFanRequest()
         {
 
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
 
-
-            return;
+            throw new NotImplementedException();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            Out.writeUTF(this._targetUsercode);
+            Out.writeUTF(this.targetUsercode);
         }
 
         public int packetId
@@ -35,6 +34,6 @@ namespace Yoda.Net.Networking.Packet.Chat.channel
         }
 
 
-        public string _targetUsercode { get; set; }
+        public string targetUsercode { get; set; }
     }
 }

@@ -6,7 +6,7 @@
     
     
 
-    public class FinishDressupResultData : IPacket
+    public class FinishDressupResultData : ICommandData
     {
         public string userCode;
         public AvatarData avatarData;
@@ -25,7 +25,7 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             if (In.readBoolean())
             {
@@ -40,7 +40,7 @@
             return;
             
         }
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             if (avatarData == null)
             {

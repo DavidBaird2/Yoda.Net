@@ -9,7 +9,7 @@
     
     using Yoda.Net.Networking.Packet.Chat;
 
-    public class MoveFromToData : IPacket, IEncrypted
+    public class MoveFromToData : ICommandData, IEncrypted
     {
         public short fromSpeed;
         public short fromDir;
@@ -31,12 +31,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-
+          
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeShort(this.fromX);
             Out.writeShort(this.fromY);

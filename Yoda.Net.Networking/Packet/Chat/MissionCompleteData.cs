@@ -5,9 +5,9 @@
     using System;
 
 
-    public class MissionCompleteData : IPacket
+    public class MissionCompleteData : ICommandData
     {
-        public string _code;
+        public string code;
 
         public int packetId
         {
@@ -17,13 +17,14 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
+            code = In.readUTF();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            Out.writeUTF(this._code);
+            Out.writeUTF(this.code);
 
         }
     }

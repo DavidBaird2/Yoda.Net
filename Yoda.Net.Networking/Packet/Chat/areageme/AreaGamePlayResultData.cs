@@ -1,4 +1,4 @@
-﻿namespace Yoda.Net.Networking.Packet.Chat.areagame
+﻿namespace Yoda.Net.Networking.Packet.Chat.Areagame
 {
     
 
@@ -9,9 +9,9 @@
     
 
 
-    public class AreaGamePlayResultData : IPacket
+    public class AreaGamePlayResultData : ICommandData
     {
-        public AmebaStream data;
+        public PiggStream data;
         public int areaGamePacketId;
 
 
@@ -27,20 +27,19 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             areaGamePacketId = In.readShort();
-            data = new AmebaStream();
+            data = new PiggStream();
             data.writeBytes(In.readBytes((int)(In.length - In.position)));
             data.position = 0;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeShort((short)areaGamePacketId);
             data.position = 0;
             Out.writeBytes(data.readBytes((int)data.length));
-        //    Out.writeBytes(BytesConvert.FromHexString("00000000000000000000000000000000000466697368"));
         }
     }
 }

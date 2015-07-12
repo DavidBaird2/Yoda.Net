@@ -6,16 +6,16 @@
     using System.Collections;
     using System;
 
-    public class GetPetProfileData : IPacket
+    public class GetPetProfileData : ICommandData
     {
 
-        public string _usercode;
+        public string usercode;
 
-        public int _petId;
+        public int petId;
         public GetPetProfileData(string usercode, int petId)
         {
-            _petId = petId;
-            _usercode = usercode;
+            this.petId = petId;
+            this.usercode = usercode;
             return;
         }
 
@@ -30,17 +30,17 @@
         {
             return;
         }
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-            _usercode = In.readUTF();
-            _petId = In.readInt();
+            usercode = In.readUTF();
+            petId = In.readInt();
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            Out.writeUTF(_usercode);
-            Out.writeInt(_petId);
+            Out.writeUTF(usercode);
+            Out.writeInt(petId);
 
 
             return;

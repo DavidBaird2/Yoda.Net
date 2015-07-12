@@ -5,7 +5,7 @@
     using System;
     
 
-    public class ForceMoveResultData : IPacket
+    public class ForceMoveResultData : ICommandData
     {
         public string userCode;
 
@@ -21,12 +21,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             userCode = In.readUTF();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(userCode);
         }

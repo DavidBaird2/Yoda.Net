@@ -4,7 +4,7 @@
     using System;
     
 
-    public class EnterRoomExecuteData :  IPacket,IEncrypted
+    public class EnterRoomExecuteData :  ICommandData,IEncrypted
     {
         public string category;
         public string code;
@@ -22,12 +22,12 @@
 
 
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-            return;
+            throw new NotImplementedException();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(category);
             Out.writeUTF(code);

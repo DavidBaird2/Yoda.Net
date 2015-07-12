@@ -4,7 +4,7 @@
     
     using System;
 
-    public class MoveFurnitureResultData : IPacket
+    public class MoveFurnitureResultData : ICommandData
     {
         public int dir;
         public int sequence;
@@ -20,7 +20,7 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.sequence = In.readInt();
             this.dir = In.readByte();
@@ -29,7 +29,7 @@
             this.z = In.readInt();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(this.sequence);
             Out.writeByte((byte) this.dir);

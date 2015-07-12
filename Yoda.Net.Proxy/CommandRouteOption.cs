@@ -6,7 +6,7 @@ using System.Text;
 namespace Yoda.Net.Proxy
 {
 
-    public enum CommandRouteOption
+    public enum CommandRoute
     {
         Nothing,
         Block,

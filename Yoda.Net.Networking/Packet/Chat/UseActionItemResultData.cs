@@ -4,7 +4,7 @@
     
     using System;
 
-    public class UseActionItemResultData : IPacket
+    public class UseActionItemResultData : ICommandData
     {
         public int sequence;
         public string userCode;
@@ -20,14 +20,16 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             userCode = In.readUTF();
             sequence = In.readInt();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
+            Out.writeUTF(userCode);
+            Out.writeInt(sequence);
         }
     }
 }

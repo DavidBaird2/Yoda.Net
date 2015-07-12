@@ -4,7 +4,7 @@
     
     using System;
 
-    public class ChangeRoomSizeData : IPacket
+    public class ChangeRoomSizeData : ICommandData
     {
         private string _authTicket;
         private string _buyType;
@@ -29,14 +29,14 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this._type = In.readByte();
             this._buyType = In.readUTF();
             this._authTicket = In.readUTF();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeByte((byte) this._type);
             Out.writeUTF(this._buyType);

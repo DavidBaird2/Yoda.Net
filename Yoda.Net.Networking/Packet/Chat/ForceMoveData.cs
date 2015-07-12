@@ -4,14 +4,17 @@
     
     using System;
 
-    public class ForceMoveData : IPacket, IEncrypted
+    public class ForceMoveData : ICommandData, IEncrypted
     {
+        public ForceMoveData()
+        {
+        }
         public string userId;
         public bool _forceDisconnect;
-        public ForceMoveData(string param1 , bool param2)
+        public ForceMoveData(string userId, bool forceDisconnect)
         {
-            this.userId = param1;
-            this._forceDisconnect = param2;
+            this.userId = userId;
+            this._forceDisconnect = forceDisconnect;
         }
 
         public int packetId
@@ -22,11 +25,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
+            throw new NotImplementedException();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(this.userId);
             Out.writeBoolean(_forceDisconnect);

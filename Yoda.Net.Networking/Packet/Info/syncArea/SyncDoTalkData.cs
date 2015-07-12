@@ -7,12 +7,14 @@ using System.Text;
 
 namespace Yoda.Net.Networking.Packet.Info.syncArea
 {
-    public class SyncDoTalkData : IPacket, IEncrypted
+    public class SyncDoTalkData : ICommandData, IEncrypted
     {
-
-        private int _color;
-        private string _message;
-        private string _areaCategory;
+        public SyncDoTalkData()
+        {
+        }
+        public int color;
+        public string message;
+        public string areaCategory;
         public int packetId
         {
             get
@@ -21,25 +23,27 @@ namespace Yoda.Net.Networking.Packet.Info.syncArea
             }
         }
 
-        public SyncDoTalkData(string param1, string param2, int param3)
+        public SyncDoTalkData(string areaCategory, string message, int color)
         {
-            _areaCategory = param1;
-            _message = param2;
-            _color = param3;
+            this.areaCategory = areaCategory;
+
+            this.message = message;
+
+            this.color = color;
             return;
         }
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
 
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            Out.writeUTF(_areaCategory);
-            Out.writeUTF(_areaCategory);
-            Out.writeUTF(_message);
-            Out.writeInt(_color);
-            Out.writeUTF(_areaCategory);
+            Out.writeUTF(areaCategory);
+            Out.writeUTF(areaCategory);
+            Out.writeUTF(message);
+            Out.writeInt(color);
+            Out.writeUTF(areaCategory);
         }
     }
 }

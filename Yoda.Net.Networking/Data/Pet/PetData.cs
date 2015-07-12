@@ -22,7 +22,7 @@
         public int petId;
         public string type;
         public string category;
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.petId = In.readInt();
             this.type = In.readUTF();
@@ -37,7 +37,7 @@
             this.category = In.readUTF();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(this.petId);
             Out.writeUTF(this.type);

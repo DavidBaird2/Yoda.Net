@@ -4,7 +4,7 @@
     
     using System;
 
-    public class RemoveFurnitureResultData : IPacket
+    public class RemoveFurnitureResultData : ICommandData
     {
         public int sequence;
 
@@ -16,12 +16,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.sequence = In.readInt();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(this.sequence);
         }

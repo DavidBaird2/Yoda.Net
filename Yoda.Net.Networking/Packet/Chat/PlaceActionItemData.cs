@@ -4,7 +4,7 @@
     
     using System;
 
-    public class PlaceActionItemData : IPacket ,IEncrypted,IncludeClientTime
+    public class PlaceActionItemData : ICommandData ,IEncrypted,IncludeClientTime
     {
         public string _code;
         public int _x;
@@ -29,7 +29,7 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             _code = In.readUTF();
             _x = In.readShort();
@@ -37,7 +37,7 @@
             _z= In.readShort();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(_code);
             Out.writeShort((short)_x);

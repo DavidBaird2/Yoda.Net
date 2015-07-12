@@ -4,8 +4,11 @@
     
     using System;
 
-    public class GetScratchData : IPacket
+    public class GetScratchData : ICommandData
     {
+        public GetScratchData()
+        {
+        }
         public string code;
 
         public int packetId
@@ -15,18 +18,18 @@
                 return PacketId.GET_SCRACTH;
             }
         }
-        public GetScratchData(string _code = "")
+        public GetScratchData(string code = "")
         {
-            this.code = _code;
+            this.code = code;
             return;
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             code = In.readUTF();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(code);
             return;

@@ -6,18 +6,18 @@
     using System.Collections;
     using System;
 
-    public class SetPetProfileData : IPacket
+    public class SetPetProfileData : ICommandData
     {
-        public int _petId;
-        public string _name;
-        public string _description;
-        public bool _follow;
+        public int petId;
+        public string name;
+        public string description;
+        public bool follow;
         public SetPetProfileData(int _petId, string _name, string _description, bool _follow)
         {
-            this._petId = _petId;
-            this._name = _name;
-            this._description = _description;
-            this._follow = _follow;
+            this.petId = _petId;
+            this.name = _name;
+            this.description = _description;
+            this.follow = _follow;
             return;
         }
 
@@ -32,17 +32,17 @@
         {
             return;
         }
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-            return;
+            throw new NotImplementedException();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            Out.writeInt(this._petId);
-            Out.writeUTF(this._name);
-            Out.writeUTF(this._description);
-            Out.writeBoolean(this._follow);
+            Out.writeInt(this.petId);
+            Out.writeUTF(this.name);
+            Out.writeUTF(this.description);
+            Out.writeBoolean(this.follow);
 
             return;
         }

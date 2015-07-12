@@ -1,14 +1,14 @@
 ﻿
 
-
-namespace Yoda.Net.Networking.Packet.Chat.game.data
+using System;
+namespace Yoda.Net.Networking.Packet.Chat.Game.Data
 {
 
 
-    public class GameResultData : IPacket
+    public class GameResultData : ICommandData
     {
         public int id;
-        public AmebaStream data;
+        public PiggStream data;
 
         public virtual int packetId
         {
@@ -18,19 +18,19 @@ namespace Yoda.Net.Networking.Packet.Chat.game.data
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             id = In.readShort();
-            data = new AmebaStream();
+            data = new PiggStream();
             data.writeBytes(In.readBytes((int)(In.length - In.BaseStream.Position)));
             data.position = 0;
             
         }
 
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-
+            throw new NotImplementedException();
         }
 
 

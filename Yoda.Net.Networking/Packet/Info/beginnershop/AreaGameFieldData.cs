@@ -5,17 +5,17 @@
     using System;
 
 
-    public class GetBeginnerShopData : IPacket, IEncrypted
+    public class GetBeginnerShopData : ICommandData, IEncrypted
     {
-        public string _shopCode;
+        public string shopCode;
 
         public GetBeginnerShopData()
         {
 
         }
-        public GetBeginnerShopData(string param2)
+        public GetBeginnerShopData(string shopCode)
         {
-            this._shopCode = param2;
+            this.shopCode = shopCode;
         }
 
         public int packetId
@@ -26,20 +26,20 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-            _shopCode = In.readUTF();
-            _type = In.readByte();
+            shopCode = In.readUTF();
+            type = In.readByte();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
           
-            Out.writeUTF(_shopCode);
-            Out.writeByte(this._type);
+            Out.writeUTF(shopCode);
+            Out.writeByte(this.type);
         }
 
-        public sbyte _type { get; set; }
+        public sbyte type { get; set; }
     }
 }
 

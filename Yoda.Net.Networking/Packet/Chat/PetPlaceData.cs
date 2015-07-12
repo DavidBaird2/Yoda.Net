@@ -4,8 +4,11 @@
     
     using System;
 
-    public class PetPlaceData : IPacket
+    public class PetPlaceData : ICommandData
     {
+        public PetPlaceData()
+        {
+        }
           private int _petId;
         private int _x;
         private int _y;
@@ -13,13 +16,13 @@
         private int _dir;
 
 
-        public PetPlaceData(int param1, int param2,int  param3,int  param4,int  param5)
+        public PetPlaceData(int petId, int x, int y, int z, int dir)
         {
-         this._petId = param1;
-            this._x = param2;
-            this._y = param3;
-            this._z = param4;
-            this._dir = param5;
+            this._petId = petId;
+            this._x = x;
+            this._y = y;
+            this._z = z;
+            this._dir = dir;
         }
 
         public int packetId
@@ -30,11 +33,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
+            throw new NotImplementedException();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(this._petId);
             Out.writeShort((short)this._x);

@@ -4,8 +4,11 @@
     
     using System;
 
-    public class PetFollowFurnitureData : IPacket
+    public class PetFollowFurnitureData : ICommandData
     {
+        public PetFollowFurnitureData()
+        {
+        }
         private int _petId;
         private int _sequence;
         private string _actionCode;
@@ -14,14 +17,14 @@
         private int _posz;
 
 
-        public PetFollowFurnitureData(int param1,int param2,int param3, int param4,int  param5, string param6 = "sleep")
+        public PetFollowFurnitureData(int petId, int sequence, int posy, int posx, int posz, string actionCode = "sleep")
         {
-            this._petId = param1;
-            this._sequence = param2;
-            this._actionCode = param6;
-            this._posx = param3;
-            this._posy = param4;
-            this._posz = param5;
+            this._petId = petId;
+            this._sequence = sequence;
+            this._actionCode = actionCode;
+            this._posx = posx;
+            this._posy = posy;
+            this._posz = posz;
         }
 
         public int packetId
@@ -32,11 +35,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
+            throw new NotImplementedException();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(this._petId);
             Out.writeInt(this._sequence);

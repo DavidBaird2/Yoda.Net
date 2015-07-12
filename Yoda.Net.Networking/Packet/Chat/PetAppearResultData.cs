@@ -5,7 +5,7 @@
     using System;
 
 
-    public class PetAppearResultData : IPacket
+    public class PetAppearResultData : ICommandData
     {
         public int petId;
         public bool owner;
@@ -20,19 +20,15 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-            try
-            {
                 this.petId = In.readInt();
                 this.owner = In.readBoolean();
-            }
-            catch(Exception e)
-            {
-            }
+            
+      
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             this.petId = Out.readInt();
             this.owner = Out.readBoolean();

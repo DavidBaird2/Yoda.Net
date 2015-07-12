@@ -7,7 +7,7 @@
     using System.Collections;
 
 
-    public class ListFriendshipRequestData : IPacket
+    public class ListFriendshipRequestData : ICommandData
     {
         public ListFriendshipRequestData()
         {
@@ -21,14 +21,14 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
 
 
         }
         
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
 
             

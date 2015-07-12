@@ -1,11 +1,14 @@
 ﻿namespace Yoda.Net.Networking.Data.Room
 {
+
     using System;
     using System.Collections;
     using System.Collections.Specialized;
+    using Yoda.Net.Common;
 
     public class AreaData
     {
+
         public int roomIndex;
         public string categoryName;
         public string areaName;
@@ -17,7 +20,7 @@
         public bool isUserRoomOwner;
         public bool hasLeftFootPrintToday;
         public int numFootPrintToday;
-        public bool isAdmin;
+
         public Double serverTime;
         public string wallCode;
         public string floorCode;
@@ -32,16 +35,17 @@
         public AreaOwnerData ownerData;
         public bool hasGarden;
         public int expansionSize;
-        public Hashtable users = new Hashtable();
+        public LinkedHashMap<int, int> users = new LinkedHashMap<int, int>();
         public string areaType;
         public bool canMoveGarden;
-                public string oneMessage;
+        public string oneMessage;
         public bool becomableFriend;
         public static readonly int BASE_HOUSE_SIZE = 7;
         public static readonly string TYPE_AREA = "area";
         public static readonly string TYPE_ROOM = "room";
         public static readonly string TYPE_GARDEN = "garden";
         public static readonly string TYPE_CLUB = "club";
+
 
         public AreaData()
         {
@@ -73,31 +77,39 @@
 
         public AreaData clone()
         {
-            var _loc_1 = new AreaData();
-            _loc_1.categoryName = this.categoryName;
-            _loc_1.areaName = this.areaName;
-            _loc_1.categoryCode = this.categoryCode;
-            _loc_1.subCategoryCode = this.subCategoryCode;
-            _loc_1.bundleCode = this.bundleCode;
-            _loc_1.isPublished = this.isPublished;
-            _loc_1.areaCode = this.areaCode;
-            _loc_1.wallCode = this.wallCode;
-            _loc_1.floorCode = this.floorCode;
-            _loc_1.windowCode = this.windowCode;
-            _loc_1.frontCode = this.frontCode;
-            _loc_1.sizeX = this.sizeX;
-            _loc_1.sizeY = this.sizeY;
-            _loc_1.ownerData = new AreaOwnerData();
-            _loc_1.ownerData.acceptMessage = this.ownerData.acceptMessage;
-            _loc_1.ownerData.nickname = this.ownerData.nickname;
-            _loc_1.expansionSize = this.expansionSize;
-            _loc_1.canMoveGarden = this.canMoveGarden;
-            return _loc_1;
+            var areaData = new AreaData();
+            areaData.categoryName = this.categoryName;
+            areaData.areaName = this.areaName;
+            areaData.categoryCode = this.categoryCode;
+            areaData.subCategoryCode = this.subCategoryCode;
+            areaData.bundleCode = this.bundleCode;
+            areaData.isPublished = this.isPublished;
+            areaData.areaCode = this.areaCode;
+            areaData.wallCode = this.wallCode;
+            areaData.floorCode = this.floorCode;
+            areaData.windowCode = this.windowCode;
+            areaData.frontCode = this.frontCode;
+            areaData.sizeX = this.sizeX;
+            areaData.sizeY = this.sizeY;
+            areaData.ownerData = new AreaOwnerData();
+            areaData.ownerData.acceptMessage = this.ownerData.acceptMessage;
+            areaData.ownerData.nickname = this.ownerData.nickname;
+            areaData.expansionSize = this.expansionSize;
+            areaData.canMoveGarden = this.canMoveGarden;
+            return areaData;
         }
 
         public bool isSupportContest { get; set; }
 
         public string contestCode { get; set; }
+
+        public int zone { get; set; }
+
+        public string gameCode { get; set; }
+
+        public bool isMatchingArea { get; set; }
+
+        public System.Collections.Generic.Dictionary<int, int> tags { get; set; }
     }
 }
 

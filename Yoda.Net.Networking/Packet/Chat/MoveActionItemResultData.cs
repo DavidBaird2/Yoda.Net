@@ -4,7 +4,7 @@
     
     using System;
 
-    public class MoveActionItemResultData : IPacket
+    public class MoveActionItemResultData : ICommandData
     {
         public string userCode;
         public int sequence;
@@ -20,7 +20,7 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             userCode = In.readUTF();
             sequence = In.readInt();
@@ -29,7 +29,7 @@
             z = In.readShort();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
 
         }

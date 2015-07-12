@@ -7,7 +7,7 @@ namespace Yoda.Net.Networking.Packet.Chat
     
     using System.Collections;
     using Yoda.Net.Networking.Data.Room;
-    public class PoyonProvideDefineData : IPacket, IEncrypted
+    public class PoyonProvideDefineData : ICommandData, IEncrypted
     {
         public ArrayList DefineList;
         public PoyonProvideDefineData()
@@ -22,7 +22,7 @@ namespace Yoda.Net.Networking.Packet.Chat
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             int count = In.readInt();
 
@@ -55,12 +55,11 @@ namespace Yoda.Net.Networking.Packet.Chat
                     };
                     furniture.parts.Insert(i, data);
                 }
-                //  DefineList.Add(furniture);
                 DefineList.Add(furniture);
             }
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(DefineList.Count);
             foreach (DefineFurniture define in DefineList)

@@ -4,18 +4,18 @@
     
     using System;
 
-    public class UserEffectData : IPacket
+    public class UserEffectData : ICommandData
     {
-        private string _code;
+
         public string code;
 
         public UserEffectData()
         {
         }
 
-        public UserEffectData(string param1)
+        public UserEffectData(string code)
         {
-            this._code = param1;
+            this.code = code;
         }
 
         public int packetId
@@ -26,15 +26,15 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.code = In.readUTF();
             
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            Out.writeUTF(this._code);
+            Out.writeUTF(this.code);
         }
     }
 }

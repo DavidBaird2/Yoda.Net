@@ -4,7 +4,7 @@
     
     using System;
 
-    public class PetTalkResultData : IPacket
+    public class PetTalkResultData : ICommandData
     {
         public uint color;
         public string msg;
@@ -18,14 +18,14 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.petId = In.readInt();
             this.msg = In.readUTF();
             this.color = In.readUnsignedInt();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(this.petId);
             Out.writeUTF(this.msg);

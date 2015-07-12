@@ -4,8 +4,11 @@
     
     using System;
 
-    public class OpenScratchData : IPacket
+    public class OpenScratchData : ICommandData
     {
+        public OpenScratchData()
+        {
+        }
         public int index;
         public string code;
 
@@ -16,20 +19,20 @@
                 return PacketId.OPEN_SCRATCH;
             }
         }
-        public OpenScratchData(string _code, int _index)
+        public OpenScratchData(string code, int index)
         {
-            this.code = _code;
-            this.index = _index;
+            this.code = code;
+            this.index = index;
             return;
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             code = In.readUTF();
             index = In.readByte();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(code);
             Out.writeByte((byte)index);

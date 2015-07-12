@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Yoda.Net.Networking;
+using Yoda.Net.Networking.Data.Action;
+using Yoda.Net.Networking.Packet.Info.action;
 using Yoda.Net.Networking.Packet.Info.Area;
 using Yoda.Net.Networking.Packet.Info.friend;
 using Yoda.Net.Proxy;
 
 namespace ConsoleApplication1
 {
-    class InfoServerHandler : IMessageDelegate
+    class InfoServerHandler : IMessageHandler
     {
         private ProxySession session;
         public InfoServerHandler(ProxySession session)
@@ -17,15 +19,16 @@ namespace ConsoleApplication1
             this.session = session;
         }
 
-        public CommandRouteOption onGetAreaResultData(GetAreaResultData data )
+        public CommandRoute onGetAreaResultData(GetAreaResultData data )
         {
             session.LastGetAreaServer = data.server.Split(':')[0];
-            return CommandRouteOption.Nothing;
+            return CommandRoute.Nothing;
         }
-
-        public CommandRouteOption onListUserFriendData(ListFriendResultData data )
+        public CommandRoute onListActionResult(ListActionResultData data)
         {
-            return CommandRouteOption.Nothing;
+            //data.list.Add(new ActionData());
+            return CommandRoute.Edit;
         }
+  
     }
 }

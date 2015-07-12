@@ -4,7 +4,7 @@
     using System;
     
 
-    public class EnterRoomReadyResultData :  IPacket,IEncrypted
+    public class EnterRoomReadyResultData :  ICommandData,IEncrypted
     {
         public string title;
         public int packetId
@@ -21,15 +21,16 @@
 
 
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             title = In.readUTF();
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            return;
+            Out.writeUTF(title);
+        
         }
 
     }

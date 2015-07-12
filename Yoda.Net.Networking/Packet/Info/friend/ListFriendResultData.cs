@@ -9,7 +9,7 @@
     using Yoda.Net.Networking.Data.Messenger;
     
 
-    public class ListFriendResultData : IPacket
+    public class ListFriendResultData : ICommandData
     {
         public List<MessengerUser> friends = new List<MessengerUser>();
 
@@ -26,7 +26,7 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
 
             var count = In.readInt();
@@ -42,8 +42,8 @@
                 user.nickname = In.readUTF();
                 user.zone = In.readByte();
                 user.isOnline = In.readBoolean();
-                user.lastLogin = In.readInt();
                 user.isFriendListViewabled = In.readBoolean();
+    
                 if (user.isOpenEvent = In.readBoolean())
                 {
                     user.title = In.readUTF();
@@ -57,18 +57,23 @@
                 user.enableDiary = In.readBoolean();
                 user.hasNewDiaryPage = In.readBoolean();
                 user.diaryLastPostedTime = In.readDouble();
+                user.isFavoriteListViewabled = In.readBoolean();
+                user.myFavorites = In.readInt();
+                user.receiveFavorites = In.readInt();
+                user.friends = In.readInt();
                 this.friends.Add(user);
                
                 i++;
             }
-            this.userAge = In.readInt();
+            this.friendRequestCondition = In.readByte();
             return;
         }
 
        
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            Out.writeInt(friends.Count);
+            throw new NotImplementedException();
+       /*     Out.writeInt(friends.Count);
             foreach (MessengerUser user in friends)
             {
                 Out.writeUTF(user.hexCode);
@@ -80,10 +85,10 @@
                 Out.writeBoolean(user.isFriendListViewabled);
                 Out.writeBoolean(user.isOpenEvent);
                 Out.writeUTF(user.title);
-            }
+            }*/
         }
 
-        public int userAge { get; set; }
+        public int friendRequestCondition { get; set; }
     }
 }
 

@@ -9,12 +9,13 @@ namespace Yoda.Net.Proxy
     public class ProxySession
     {
         public string username;
-        public CommandProxy InfoProxy;
-        public List<CommandProxy> ChatProxy = new List<CommandProxy>();
-        public IMessageDelegate InfoClientHandler;
-        public IMessageDelegate InfoServerHandler;
-        public IMessageDelegate ChatClientHandler;
-        public IMessageDelegate ChatServerHandler;
+        public CommandProxyTest InfoProxy;
+        public List<CommandProxyTest> ChatProxy = new List<CommandProxyTest>();
+        public IMessageHandler InfoClientHandler;
+        public IMessageHandler InfoServerHandler;
+        public IMessageHandler ChatClientHandler;
+        public IMessageHandler ChatServerHandler;
         public string LastGetAreaServer = "";
+        private System.Diagnostics.Stopwatch time = new System.Diagnostics.Stopwatch();
     }
 }

@@ -6,20 +6,22 @@
     using System.IO;
     using System.Text;
 
-    public class AmebaStream : IDisposable
+    public class PiggStream : IDisposable
     {
+        //TODO :　要修正
+
         private EndianBinaryReader BinReader;
         private EndianBinaryWriter BinWriter;
         private Stream stream;
 
 
-        public AmebaStream()
+        public PiggStream()
         {
             this.stream = new MemoryStream();
             this.BinWriter = new EndianBinaryWriter(EndianBitConverter.Big, this.stream, Encoding.UTF8);
             this.BinReader = new EndianBinaryReader(EndianBitConverter.Big, this.stream, Encoding.UTF8);
         }
-        public AmebaStream(byte[] value)
+        public PiggStream(byte[] value)
         {
             this.stream = new MemoryStream();
             this.BinWriter = new EndianBinaryWriter(EndianBitConverter.Big, this.stream, Encoding.UTF8);
@@ -42,7 +44,7 @@
         {
             return this.BinReader.ReadBoolean();
         }
-        public void readBytes(AmebaStream output)
+        public void readBytes(PiggStream output)
         {
             output.writeBytes(BinReader.ReadBytes((int)(stream.Length - stream.Position)));
             output.BaseStream.Position = 0;
@@ -61,7 +63,12 @@
             this.BinReader.BaseStream.Position = position;
             return data;
         }
-
+        public DateTime readTime()
+        {
+            DateTime time = DateTime.Parse("1970/1/1 09:00");
+            time.AddMilliseconds(readDouble());
+            return time;
+        }
         public double readDouble()
         {
             return this.BinReader.ReadDouble();
@@ -119,7 +126,7 @@
             this.BinWriter.Write(value);
         }
 
-        public void writeBytes(AmebaStream Base, int start, int length)
+        public void writeBytes(PiggStream Base, int start, int length)
         {
             byte[] buffer = new byte[length];
             Base.stream.Read(buffer, start, length);

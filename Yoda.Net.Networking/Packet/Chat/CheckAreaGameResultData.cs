@@ -8,7 +8,7 @@
     
     
 
-    public class CheckAreaGameResultData : IPacket, IEncrypted
+    public class CheckAreaGameResultData : ICommandData, IEncrypted
     {
         public int areaGameId;
         public CheckAreaGameResultData()
@@ -22,12 +22,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             areaGameId = In.readByte();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeByte((byte)areaGameId);
         }

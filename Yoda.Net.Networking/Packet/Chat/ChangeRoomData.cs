@@ -4,7 +4,7 @@
     
     
 
-    public class ChangeRoomData : IPacket, IEncrypted
+    public class ChangeRoomData : ICommandData, IEncrypted
     {
         public int type;
         public string code;
@@ -21,13 +21,13 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             type = In.readByte();
             code = In.readUTF();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeByte((byte)type);
             Out.writeUTF(code);

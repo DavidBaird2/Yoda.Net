@@ -1,16 +1,20 @@
 ﻿
 
 
+using System;
 namespace Yoda.Net.Networking.Packet.Chat.game.data
 {
 
 
-    public class TableGameResultData : IPacket
+    public class TableGameResultData : ICommandData
     {
         public string method;
-        public AmebaStream data;
+        public PiggStream data;
         public bool serial;
+        public TableGameResultData()
+        {
 
+        }
         public virtual int packetId
         {
             get
@@ -19,22 +23,22 @@ namespace Yoda.Net.Networking.Packet.Chat.game.data
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             method = In.readUTF();
             serial = In.readBoolean();
             if (In.readBoolean())
             {
-                data = new AmebaStream();
-                data.writeBytes(In.readBytes((int)(In.length-In.BaseStream.Position)));
+                data = new PiggStream();
+                data.writeBytes(In.readBytes((int)(In.length - In.BaseStream.Position)));
                 data.position = 0;
             }
         }
 
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-
+            throw new NotImplementedException();
         }
 
 

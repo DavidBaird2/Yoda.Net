@@ -28,12 +28,12 @@
         }
 
 
-        public AmebaStream binary()
+        public PiggStream binary()
         {
-            var _loc_1 = new AmebaStream();
-            _config.writeData(_loc_1);
-            _emblem.writeData(_loc_1);
-            return _loc_1;
+            var stream = new PiggStream();
+            _config.writeData(stream);
+            _emblem.writeData(stream);
+            return stream;
         }
 
         public ClubEmblemData emblem

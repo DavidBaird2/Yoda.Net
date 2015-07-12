@@ -5,7 +5,7 @@
     
 
 
-    public class FinishDressupData : IPacket
+    public class FinishDressupData : ICommandData
     {
         public bool updated = false;
 
@@ -21,12 +21,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             updated = In.readBoolean();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeBoolean(updated);
         }

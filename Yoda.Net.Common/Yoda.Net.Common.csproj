@@ -66,10 +66,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Astar\AsterEngine.cs" />
-    <Compile Include="Astar\AsterNode.cs" />
+    <Compile Include="CommandInspector.cs" />
     <Compile Include="DNS.cs" />
     <Compile Include="FileCompressionUtility.cs" />
+    <Compile Include="LinkedHashMap.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

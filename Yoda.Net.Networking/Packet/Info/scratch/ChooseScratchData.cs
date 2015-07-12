@@ -3,8 +3,11 @@
 
     using System;
 
-    public class ChooseScratchData : IPacket
+    public class ChooseScratchData : ICommandData
     {
+        public ChooseScratchData()
+        {
+        }
         public string code;
 
         public int packetId
@@ -14,18 +17,18 @@
                 return PacketId.CHOOSE_SCRATCH;
             }
         }
-        public ChooseScratchData(string _code)
+        public ChooseScratchData(string code)
         {
-            this.code = _code;
+            this.code = code;
             return;
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             code = In.readUTF();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(code);
             return;

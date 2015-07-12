@@ -5,7 +5,7 @@
     using System;
     using System.Runtime.InteropServices;
 
-    public class MoveFurnitureData : IPacket, IEncrypted
+    public class MoveFurnitureData : ICommandData, IEncrypted
     {
         public int dir;
         public int sequence;
@@ -34,7 +34,7 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.sequence = In.readInt();
             this.dir = In.readByte();
@@ -43,7 +43,7 @@
             this.z = In.readInt();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(this.sequence);
             Out.writeByte((byte) this.dir);

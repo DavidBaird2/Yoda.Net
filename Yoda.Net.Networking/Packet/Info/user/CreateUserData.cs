@@ -1,4 +1,4 @@
-﻿namespace libPigg.net.info.user
+﻿namespace Yoda.Net.Networking.Data.Room
 {
 
     using System;
@@ -7,22 +7,21 @@
     using Yoda.Net.Networking.Packet;
     using Yoda.Net.Networking.Packet.Info;
     using Yoda.Net.Networking.Packet.Info.create;
-    public class CreateUserData : IPacket
+    public class CreateUserData : ICommandData
     {
-        private CreateAvatarData _data;
-        private Bitmap _thumbnail;
+        private CreateAvatarData data;
+
         private byte[] image;
-        private string _nickname;
+        private string nickname;
         public CreateUserData()
         {
-            _data = new CreateAvatarData();
+            data = new CreateAvatarData();
             return;
         }
-        public CreateUserData(CreateAvatarData param1, string nickname ,Bitmap param2 = null )
+        public CreateUserData(CreateAvatarData cud, string nickname  )
         {
-            _data = param1;
-            _thumbnail = param2;
-            _nickname = nickname;
+            this.data = cud;
+            this.nickname = nickname;
             return;
         }
         public int packetId
@@ -33,32 +32,23 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-            try
-            {
+         
                 short length = In.readShort();
                 image = In.readBytes(length);
-                _data.Decompress(In.readBytes((int)(In.length - In.position)));
-            }
-            catch(Exception e)
-            {
-              //  Engine.Log(e.ToString());
-            }
+                data.Decompress(In.readBytes((int)(In.length - In.position)));
+
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {            
 
-          //  var _loc_2:* = _thumbnail.getPixels(new Rectangle(0, 0, _thumbnail.width, _thumbnail.height));
-          //  _loc_2.compress();
             Out.writeShort(0);
-         //   Out.writeShort((short)image.Length);
-          //  Out.writeBytes(image);
-         //   Out.writeBytes();
-            Out.writeUTF(_nickname);
-            Out.writeBytes(_data.binary());
+
+            Out.writeUTF(nickname);
+            Out.writeBytes(data.binary());
             return;
         }
     }

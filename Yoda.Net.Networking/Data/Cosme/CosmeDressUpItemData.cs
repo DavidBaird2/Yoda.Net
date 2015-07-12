@@ -11,14 +11,14 @@ namespace Yoda.Net.Networking.Data.Cosme
         public string itemCode;
         public string type;
         public Boolean  newParts;
-        public CosmeDressUpItemData(String param1 = "", string param2 = "")
+        public CosmeDressUpItemData(String itemCode = "", string type = "")
         {
-            itemCode = param1;
-            type = param2;
+            this.itemCode = itemCode;
+            this.type = type;
             return;
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             itemCode = In.readUTF();
             type = In.readUTF();
@@ -26,7 +26,7 @@ namespace Yoda.Net.Networking.Data.Cosme
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(itemCode);
             Out.writeUTF(type);

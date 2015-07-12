@@ -8,8 +8,11 @@ namespace Yoda.Net.Networking.Packet.Info.gacha
 
 
 
-    public class GetGachaData : IPacket, IEncrypted
+    public class GetGachaData : ICommandData, IEncrypted
     {
+        public GetGachaData()
+        {
+        }
         public string shopCode;
         public bool isAdminRequest;
 
@@ -20,19 +23,19 @@ namespace Yoda.Net.Networking.Packet.Info.gacha
                 return PacketId.GET_GACHA;
             }
         }
-        public GetGachaData(string param1 = null,  bool param2 = false)
+        public GetGachaData(string shopCode = null, bool isAdminRequest = false)
         {
-            this.shopCode = param1;
-            this.isAdminRequest = param2;
+            this.shopCode = shopCode;
+            this.isAdminRequest = isAdminRequest;
             return;
         } 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             shopCode = In.readUTF();
             isAdminRequest = In.readBoolean();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(shopCode);
             Out.writeBoolean(false);

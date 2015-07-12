@@ -8,7 +8,7 @@
     
     
     using Yoda.Net.Networking.Packet.Chat;
-    public class PetMoveEndResultData : IPacket
+    public class PetMoveEndResultData : ICommandData
     {
         public short dir;
         public int petId;
@@ -24,7 +24,7 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.petId = In.readInt();
             this.x = In.readShort();
@@ -33,7 +33,7 @@
             this.dir = In.readByte();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(petId);
             Out.writeShort((short)this.x);

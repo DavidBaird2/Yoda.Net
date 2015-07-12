@@ -5,12 +5,15 @@ using System.Text;
 
 namespace Yoda.Net.Networking.Packet.Chat
 {
-	public class DoCrackActionData :IPacket ,IEncrypted
+	public class DoCrackActionData :ICommandData ,IEncrypted
 	{
-        public string code;
-        public DoCrackActionData(string _code)
+        public DoCrackActionData()
         {
-            this.code = _code;
+        }
+        public string code;
+        public DoCrackActionData(string code)
+        {
+            this.code = code;
             return;
         }
 
@@ -22,13 +25,13 @@ namespace Yoda.Net.Networking.Packet.Chat
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             code = In.readUTF();
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeShort((short)(code.Length + 8));
             Out.writeUTFBytes(code);

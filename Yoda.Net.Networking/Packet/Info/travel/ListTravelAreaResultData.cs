@@ -9,7 +9,7 @@ using Yoda.Net.Networking.Data.Common;
 
 namespace Yoda.Net.Networking.Packet.Info.area
 {
-    public class ListTravelAreaResultData : IPacket
+    public class ListTravelAreaResultData : ICommandData
     {
         public List<TravelAreaCategoryData> areaCategoryList;
 
@@ -22,31 +22,31 @@ namespace Yoda.Net.Networking.Packet.Info.area
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-            TravelAreaCategoryData _loc_4 = null;
-            int _loc_5 = 0;
-            int _loc_6 = 0;
+           
+
             TravelAreaData areaData = null;
-            var _loc_2 = In.readInt();
-            this.areaCategoryList = new List<TravelAreaCategoryData>(_loc_2);
-            int _loc_3 = 0;
-            while (_loc_3 < _loc_2)
+            var totalCount = In.readInt();
+            this.areaCategoryList = new List<TravelAreaCategoryData>();
+            int n = 0;
+            while (n < totalCount)
             {
 
-                _loc_4 = new TravelAreaCategoryData();
-                _loc_4.areaCode = In.readUTF();
-                _loc_4.areaName = In.readUTF();
-                _loc_4.areaType = In.readInt();
-                _loc_4.condtion = In.readByte();
-                _loc_5 = In.readInt();
+               var tacd = new TravelAreaCategoryData();
+                tacd.areaCode = In.readUTF();
+                tacd.areaName = In.readUTF();
+                tacd.areaType = In.readInt();
+                tacd.condtion = In.readByte();
+                var count = In.readInt();
 
-                _loc_4.list = new List<TravelAreaData>(_loc_5);
-                _loc_6 = 0;
-                while (_loc_6 < _loc_5)
+                tacd.list = new List<TravelAreaData>(count);
+              var n2 = 0;
+                while (n2 < count)
                 {
 
                     areaData = new TravelAreaData();
+                    
                     areaData.code = In.readUTF();
                     areaData.bundle = In.readUTF();
                     areaData.name = In.readUTF();
@@ -69,16 +69,16 @@ namespace Yoda.Net.Networking.Packet.Info.area
                         areaData.isBecomeEnterable = In.readBoolean();
                         areaData.becomeEnterableMessage = In.readUTF();
                     }
-                    _loc_4.list.Add(areaData);
-                    _loc_6++;
+                    tacd.list.Add(areaData);
+                    n2++;
                 }
-                this.areaCategoryList.Add(_loc_4);
-                _loc_3++;
+                this.areaCategoryList.Add(tacd);
+                n++;
             }
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(areaCategoryList.Count);
             foreach (TravelAreaCategoryData categoryData in areaCategoryList)

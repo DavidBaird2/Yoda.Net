@@ -5,10 +5,10 @@
     using System;
     using System.Collections;
 
-    public class GetEventAreaData : IPacket
+    public class GetEventAreaData : ICommandData
     {
-        public string _dataType;
-        public string _areaCode;
+        public string dataType;
+        public string areaCode;
         public int packetId
         {
             get
@@ -16,25 +16,25 @@
                 return PacketId.GET_NOTICE_BOARD_MESSAGE_OF_AREA;
             }
         }
-        public GetEventAreaData(string param1 , string param2)
+        public GetEventAreaData(string areaCode, string dataType)
         {
-            _areaCode = param1;
-            _dataType = param2;
+            this.areaCode = areaCode;
+            this.dataType = dataType;
         }
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-          _areaCode = In.readUTF();
-          _dataType = In.readUTF();
+          areaCode = In.readUTF();
+          dataType = In.readUTF();
             return;
         }
         public GetEventAreaData()
         {
 
         }
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            Out.writeUTF(_areaCode);
-            Out.writeUTF(_dataType);
+            Out.writeUTF(areaCode);
+            Out.writeUTF(dataType);
             return;
         }
     }

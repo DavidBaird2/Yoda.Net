@@ -6,7 +6,7 @@
     using Yoda.Net.Networking.Data.Pet;
 
 
-    public class PetPlaceResultData : IPacket
+    public class PetPlaceResultData : ICommandData
     {
         public PetData petData;
         public bool sleeping;
@@ -23,7 +23,7 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             petData = new PetData();
             petData.readData(In);
@@ -34,8 +34,9 @@
             sleeping = In.readBoolean();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
+            throw new NotImplementedException();
         }
     }
 }

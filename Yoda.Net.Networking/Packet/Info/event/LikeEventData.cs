@@ -5,9 +5,12 @@
     using System;
     using System.Collections;
 
-    public class LikeEventData : IPacket
+    public class LikeEventData : ICommandData
     {
-        public string _userCode;
+        public LikeEventData()
+        {
+        }
+        public string userCode;
         public int packetId
         {
             get
@@ -17,17 +20,17 @@
         }
         public LikeEventData(string userCode)
         {
-            _userCode = userCode;
+           this.userCode = userCode;
         }
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-            _userCode = In.readUTF();
+            userCode = In.readUTF();
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            Out.writeUTF(_userCode);
+            Out.writeUTF(userCode);
             return;
         }
     }

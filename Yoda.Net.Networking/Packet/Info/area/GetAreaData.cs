@@ -8,7 +8,7 @@
     
     using Yoda.Net.Networking.Packet.Info;
 
-    public class GetAreaData : IPacket, IEncrypted
+    public class GetAreaData : ICommandData, IEncrypted
     {
         public string code;
         public string category;
@@ -32,7 +32,7 @@
         {
 
         }
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             category = In.readUTF();
             code = In.readUTF();
@@ -41,7 +41,7 @@
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(category);
             Out.writeUTF(code);

@@ -5,7 +5,7 @@ namespace Yoda.Net.Networking.Packet.Chat
     
     
 
-    public class LeaveUserData : IPacket
+    public class LeaveUserData : ICommandData
     {
         public string code;
 
@@ -17,12 +17,12 @@ namespace Yoda.Net.Networking.Packet.Chat
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.code = In.readUTFBytes(0x10);
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTFBytes(code);
         }

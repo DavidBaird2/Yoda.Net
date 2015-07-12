@@ -5,9 +5,7 @@
     using System;
     using System.Collections;
     using Yoda.Net.Networking.Data.Room;
-    using Yoda.Net.Networking.Packet.Data.room;
-
-    public class ListAdminFurnitureResultData : IPacket
+    public class ListAdminFurnitureResultData : ICommandData
     {
         public ArrayList furnitures = new ArrayList();
 
@@ -19,16 +17,16 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             StockFurniture furniture = null;
             int capacity = 0;
             ArrayList list = null;
-            int num2 = 0;
+
             PartData data = null;
-            int num3 = In.readInt();
-            this.furnitures = new ArrayList(num3);
-            for (int i = 0; i < num3; i++)
+            int n = In.readInt();
+            this.furnitures = new ArrayList(n);
+            for (int i = 0; i < n; i++)
             {
                 furniture = new StockFurniture {
                     quantity = In.readInt(),
@@ -40,7 +38,7 @@
                 };
                 capacity = In.readShort();
                 list = new ArrayList(capacity);
-                for (num2 = 0; num2 < capacity; num2++)
+                for (i = 0; i < capacity; i++)
                 {
                     data = new PartData {
                         height = In.readInt(),
@@ -51,7 +49,7 @@
                         rx = In.readByte(),
                         ry = In.readByte()
                     };
-                    list[num2] = data;
+                    list[i] = data;
                 }
                 furniture.parts = list;
                 furniture.time = In.readDouble();
@@ -59,7 +57,7 @@
             }
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             int capacity = 0;
             ArrayList list = null;

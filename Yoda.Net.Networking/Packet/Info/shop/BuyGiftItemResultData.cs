@@ -7,9 +7,8 @@ namespace Yoda.Net.Networking.Packet.Info.area
     using System.Text;
     
     
-using Yoda.Net.Networking.Packet.Data.common;
 
-    public class BuyGiftItemResultData : IPacket, IEncrypted
+    public class BuyGiftItemResultData : ICommandData, IEncrypted
     {
          public string targetUser;
         public int shopKind;
@@ -29,7 +28,7 @@ using Yoda.Net.Networking.Packet.Data.common;
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
 
             this.success = In.readBoolean();
@@ -51,7 +50,7 @@ using Yoda.Net.Networking.Packet.Data.common;
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
 
             throw new NotImplementedException();

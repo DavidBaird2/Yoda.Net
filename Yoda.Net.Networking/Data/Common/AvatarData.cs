@@ -18,91 +18,11 @@
         public BodyPartData part = new BodyPartData();
         public BodyPositionData position = new BodyPositionData();
         public string userCode;
-        public bool getComsePartUse(string param1)
-        {
-            int _loc_2 = 0;
-            int _loc_3 = 0;
-            int _loc_4 = -1;
-            switch (param1)
-            {
-                case Category.COSME_EYELINE:
-                    {
-                        _loc_2 = 12;
-                        _loc_3 = 35;
-                        break;
-                    }
-                case Category.COSME_EYELASH:
-                case Category.COSME_EYESHADOW:
-                    {
-                        _loc_2 = 0;
-                        _loc_3 = 36;
-                        break;
-                    }
-                case Category.COSME_CONTACT:
-                    {
-                        _loc_2 = 0;
-                        _loc_3 = 35;
-                        break;
-                    }
-                case Category.COSME_MOUTH:
-                    {
-                        _loc_2 = 0;
-                        _loc_3 = 20;
-                        break;
-                    }
-                default:
-                    {
-                        return true;
-                    }
-            }
-            switch (param1)
-            {
-                case Category.COSME_EYELASH:
-                case Category.COSME_CONTACT:
-                case Category.COSME_EYELINE:
-                case Category.COSME_EYESHADOW:
-                    {
-                        _loc_4 = part.eye;
-                        break;
-                    }
-                case Category.COSME_MOUTH:
-                    {
-                        _loc_4 = part.mouth;
-                        break;
-                    }
-                default:
-                    {
-                        break;
-                    }
-            }
-            if (_loc_2 <= _loc_4 && _loc_4 < _loc_3)
-            {
-                return true;
-            }
-            return false;
-        }
-        public bool getCosmeUse()
-        {
-            CosmeDressUpItemData _loc_3 = null;
-            bool _loc_1 = true;
-            int _loc_2 = 0;
-            while (_loc_2 < cosme.Count)
-            {
 
-                _loc_3 = cosme[_loc_2] as CosmeDressUpItemData;
-                if (getComsePartUse(_loc_3.type) == false)
-                {
-                    _loc_1 = false;
-                    break;
-                }
-                _loc_2++;
-            }
-            return _loc_1;
-        }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-            CosmeDressUpItemData _loc_5 = null;
+            CosmeDressUpItemData DressupItemData = null;
             userCode = In.readUTF();
             amebaId = In.readUTF();
             asUserId = In.readUTF();
@@ -111,35 +31,35 @@
             part.readData(In);
             color.readData(In);
             position.readData(In);
-            var _loc_2 = In.readByte();
-            var _loc_3 = new ArrayList(_loc_2);
-            var _loc_4 = 0;
-            while (_loc_4 < _loc_2)
+            var total = In.readByte();
+            var itemList = new ArrayList(total);
+            var count = 0;
+            while (count < total)
             {
 
-                _loc_3.Insert(_loc_4, In.readUTF());
-                _loc_4++;
+                itemList.Insert(count, In.readUTF());
+                count++;
             }
-            item.items = _loc_3;
-            _loc_2 = In.readByte();
-            cosme = new ArrayList(_loc_2);
-            _loc_4 = 0;
-            while (_loc_4 < _loc_2)
+            item.items = itemList;
+            total = In.readByte();
+            cosme = new ArrayList(total);
+            count = 0;
+            while (count < total)
             {
 
-                _loc_5 = new CosmeDressUpItemData();
-                _loc_5.readData(In);
-                cosme.Insert(_loc_4, _loc_5);
-                _loc_4++;
+                DressupItemData = new CosmeDressUpItemData();
+                DressupItemData.readData(In);
+                cosme.Insert(count, DressupItemData);
+                count++;
             }
-            _loc_2 = In.readByte();
-            conditions = new ArrayList(_loc_2);
-            _loc_4 = 0;
-            while (_loc_4 < _loc_2)
+            total = In.readByte();
+            conditions = new ArrayList(total);
+            count = 0;
+            while (count < total)
             {
 
-                conditions.Insert(_loc_4, In.readUTF());
-                _loc_4++;
+                conditions.Insert(count, In.readUTF());
+                count++;
             }
             return;
         }
@@ -148,43 +68,44 @@
         }
 
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            CosmeDressUpItemData _loc_4 = null;
+            CosmeDressUpItemData CDUID = null;
             Out.writeUTF(userCode);
             Out.writeUTF(amebaId);
+            Out.writeUTF(asUserId);
             Out.writeUTF(nickname);
             part.writeData(Out, true);
             color.writeData(Out);
             position.writeData(Out);
-            var _loc_2 = item.items.Count;
-            Out.writeByte((Byte)_loc_2);
-            int _loc_3 = 0;
-            while (_loc_3 < _loc_2)
+            var totalNum = item.items.Count;
+            Out.writeByte((Byte)totalNum);
+            int count = 0;
+            while (count < totalNum)
             {
 
-                Out.writeUTF((string)item.items[_loc_3]);
-                _loc_3++;
+                Out.writeUTF((string)item.items[count]);
+                count++;
             }
-            _loc_2 = cosme.Count;
-            Out.writeByte((byte)_loc_2);
-            _loc_3 = 0;
-            while (_loc_3 < _loc_2)
+            totalNum = cosme.Count;
+            Out.writeByte((byte)totalNum);
+            count = 0;
+            while (count < totalNum)
             {
 
-                _loc_4 = (CosmeDressUpItemData)cosme[_loc_3];
-                Out.writeUTF(_loc_4.itemCode);
-                Out.writeUTF(_loc_4.type);
-                _loc_3++;
+                CDUID = (CosmeDressUpItemData)cosme[count];
+                CDUID.writeData(Out);
+
+                count++;
             }
-            _loc_2 = conditions.Count;
-            Out.writeByte((byte)_loc_2);
-            _loc_3 = 0;
-            while (_loc_3 < _loc_2)
+            totalNum = conditions.Count;
+            Out.writeByte((byte)totalNum);
+            count = 0;
+            while (count < totalNum)
             {
 
-                Out.writeUTF((string)conditions[_loc_3]);
-                _loc_3++;
+                Out.writeUTF((string)conditions[count]);
+                count++;
             }
             return;
         }

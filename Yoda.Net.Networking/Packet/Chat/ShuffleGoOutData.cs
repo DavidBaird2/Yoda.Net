@@ -1,18 +1,16 @@
 ﻿namespace Yoda.Net.Networking.Packet.Chat
 {
     
-    
-    
 
     public class ShuffleGoOutData
     {
-        public string _userCode;
+        public string userCode;
 
-         public  ShuffleGoOutData(string param1)
+        public ShuffleGoOutData(string userCode)
         {
-            this._userCode = param1;
+            this.userCode = userCode;
             return;
-        }// end functio
+        }
     }
 }
 

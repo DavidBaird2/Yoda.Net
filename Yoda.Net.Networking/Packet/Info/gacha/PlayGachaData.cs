@@ -4,10 +4,12 @@
     using System;
     
     using System.Collections;
-    using Yoda.Net.Networking.Packet.Data.common;
 
-    public class PlayGachaData : IPacket
+    public class PlayGachaData : ICommandData
     {
+        public PlayGachaData()
+        {
+        }
         private string _gachaCode;
         private bool _isUseCoupon;
 
@@ -26,12 +28,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-
+            throw new NotImplementedException();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(_gachaCode);
             Out.writeBoolean(_isUseCoupon);

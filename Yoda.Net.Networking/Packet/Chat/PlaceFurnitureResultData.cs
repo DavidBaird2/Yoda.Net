@@ -6,7 +6,7 @@
     using System.Collections;
     using Yoda.Net.Networking.Data.Room;
 
-    public class PlaceFurnitureResultData : IPacket
+    public class PlaceFurnitureResultData : ICommandData
     {
         public DefineFurniture define;
         public PlaceFurniture place;
@@ -19,7 +19,7 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             PartData data = null;
             this.place = new PlaceFurniture();
@@ -57,7 +57,7 @@
             this.define = furniture;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(this.place.sequence);
             Out.writeInt(this.place.x);

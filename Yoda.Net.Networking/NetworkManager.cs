@@ -12,16 +12,16 @@ using Yoda.Net.Networking.Packet;
 namespace Yoda.Net.Networking
 {
     public delegate void SocketCloseedEventHandler();
-    public delegate void PacketEventHandler(Header header, AmebaStream body, AmebaStream rawPacket);
+    public delegate void PacketEventHandler(Header header, PiggStream body, PiggStream rawPacket);
     public class NetworkManager
     {
         public event PacketEventHandler OnRecvPacket;
         public event SocketCloseedEventHandler OnSocketClosed;
         private Header header;
-        private AmebaStream clientMessage;
+        private PiggStream clientMessage;
         private object streamLock = new object();
         public Socket socket;
-        private IMessageDelegate _delegate;
+        private IMessageHandler _delegate;
         private byte[] mServerBuffer;
 
         public const short TYPE_COMMAND = 0x10;
@@ -31,10 +31,10 @@ namespace Yoda.Net.Networking
         public int encId;
         public int connectionId;
         private int mServerBufferSize = 0;
-        public NetworkManager(IMessageDelegate del)
+        public NetworkManager(IMessageHandler del)
         {
             this.mServerBuffer = new byte[65535];
-            clientMessage = new AmebaStream();
+            clientMessage = new PiggStream();
             this._delegate = del;
         }
         public void Dissconect()
@@ -50,6 +50,8 @@ namespace Yoda.Net.Networking
         {
             while (true)
             {
+                if (!Connected)
+                    return;
 
                 if (this.header == null)
                 {
@@ -68,22 +70,15 @@ namespace Yoda.Net.Networking
                     break; //not complete recived body
                 }
                 this.clientMessage.position = 12;
-                var rawPacket = new AmebaStream();
+                var rawPacket = new PiggStream();
                 header.write(rawPacket);
-                AmebaStream Body = new AmebaStream(clientMessage.readBytes(header.length));
+                PiggStream Body = new PiggStream(clientMessage.readBytes(header.length));
                 rawPacket.writeBytes(Body.toArray());
                 rawPacket.position = 0;
-                try
-                {
+              
                     OnRecvPacket(header, Body, rawPacket);
-                }
-                catch(Exception ex)
-                {
-                    Logger.Log(Common.LogLevel.Attention, ex.ToString());
-                }
-
-
-                clientMessage = new AmebaStream(clientMessage.toArrayLast());
+         
+                clientMessage = new PiggStream(clientMessage.toArrayLast());
                 this.header = null;
 
             }
@@ -93,7 +88,7 @@ namespace Yoda.Net.Networking
 
         public byte[] getEncryptionKey()
         {
-            AmebaStream stream = new AmebaStream();
+            PiggStream stream = new PiggStream();
             stream.writeInt(encId);
             stream.writeInt(connectionId);
             stream.position = 0;
@@ -114,8 +109,12 @@ namespace Yoda.Net.Networking
         }
         public void StopClient()
         {
+            if (!Connected)
+                return;
+
             this.socket.Shutdown(SocketShutdown.Both);
-            socket.BeginDisconnect(true, new AsyncCallback(DisconnectCallback), this.socket);
+       
+           socket.BeginDisconnect(true, new AsyncCallback(DisconnectCallback), this.socket);
         }
 
         private void DisconnectCallback(IAsyncResult ar)
@@ -178,24 +177,25 @@ namespace Yoda.Net.Networking
 
         public void SendData(byte[] byteData)
         {
+            if(Connected)
             socket.BeginSend(byteData, 0, byteData.Length, 0,
      new AsyncCallback(SendCallback), socket);
         }
-        public void SendCommand(IPacket data)
+        public void SendCommand(ICommandData data)
         {
-            AmebaStream @out = new AmebaStream();
+            PiggStream @out = new PiggStream();
             @out.writeShort(TYPE_COMMAND);
             @out.writeShort((short)data.packetId);
             @out.position = 11L;
             @out.writeByte(0);
 
-            var stream = new AmebaStream();
+            var stream = new PiggStream();
             data.writeData(stream);
             if (data is IncludeClientTime)
                 stream.writeDate(DateTime.Now);
 
             if (data is IEncrypted)
-                Des.encrypt(out stream, stream, getEncryptionKey());
+                Des.encrypt(ref stream, getEncryptionKey());
 
             @out.writeBytes(stream.toArray());
             @out.position = 4L;

@@ -4,7 +4,7 @@
     
     using System;
     using System.Collections;
-    public class ListUserActionItemData : IPacket
+    public class ListUserActionItemData : ICommandData
     {
         public ArrayList list;
         public ListUserActionItemData()
@@ -19,13 +19,13 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
 
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             return;
         }

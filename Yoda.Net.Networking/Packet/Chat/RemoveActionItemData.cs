@@ -4,13 +4,16 @@
     
     using System;
 
-    public class RemoveActionItemData : IPacket
+    public class RemoveActionItemData : ICommandData
     {
+        public RemoveActionItemData()
+        {
+        }
         private int _sequence;
 
-        public RemoveActionItemData(int param1)
+        public RemoveActionItemData(int _sequence)
         {
-            this._sequence = param1;
+            this._sequence = _sequence;
         }
 
         public int packetId
@@ -21,11 +24,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
+            _sequence = In.readInt();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(this._sequence);
         }

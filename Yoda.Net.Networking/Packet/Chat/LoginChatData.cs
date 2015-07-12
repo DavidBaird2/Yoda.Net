@@ -5,7 +5,7 @@
     
     
 
-    public class LoginChatData : IPacket,IEncrypted
+    public class LoginChatData : ICommandData,IEncrypted
     {
         public string amebaId;
         public byte[] secure;
@@ -23,14 +23,14 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             amebaId = In.readUTF();
             secure = In.readBytes(8);
             connectionId = In.readInt();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(amebaId);
             Out.writeBytes(secure);

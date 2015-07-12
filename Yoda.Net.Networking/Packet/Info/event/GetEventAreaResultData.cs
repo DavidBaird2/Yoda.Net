@@ -1,16 +1,15 @@
 ﻿namespace Yoda.Net.Networking.Packet.Info.Event
 {
-    
 
-using Yoda.Net.Networking.Packet.Data.Event;
-using System;
-using System.Collections;
+
     using Yoda.Net.Networking.Packet.Data.Event;
+    using System;
+    using System.Collections;
     using Yoda.Net.Networking.Data.Event;
 
-    public class GetEventAreaResultData : IPacket
+    public class GetEventAreaResultData : ICommandData
     {
-        public  EventData @event;
+        public EventData @event;
         public int myEventCondition;
         public string myEventTitle;
         public bool isSeen;
@@ -24,41 +23,41 @@ using System.Collections;
         }
         public GetEventAreaResultData()
         {
-          
+
         }
-        public void readData(AmebaStream param1)
+        public void readData(PiggStream stream)
         {
-                      this.@event = new EventData();
-            this.myEventCondition = param1.readInt();
-            this.isSeen = param1.readBoolean();
-            this.myEventTitle = param1.readUTF();
-            this.@event.roomEventCondition = param1.readBoolean();
+            this.@event = new EventData();
+            this.myEventCondition = stream.readInt();
+            this.isSeen = stream.readBoolean();
+            this.myEventTitle = stream.readUTF();
+            this.@event.roomEventCondition = stream.readBoolean();
             if (this.@event.roomEventCondition)
             {
-                this.@event.areaCategory = param1.readUTF();
-                this.@event.areaCode = param1.readUTF();
-                this.@event.areaTitle = param1.readUTF();
-                this.@event.category = param1.readUTF();
-                this.@event.title = param1.readUTF();
-                this.@event.description = param1.readUTF();
-                this.@event.createTime = param1.readDouble();
-                this.@event.image = param1.readBoolean();
-                this.@event.originPath = param1.readUTF();
-                this.@event.thumbPath = param1.readUTF();
-                this.@event.numPeople = param1.readInt();
-                this.@event.ownerUserCode = param1.readUTF();
-                this.@event.ownerName = param1.readUTF();
-                this.@event.dataType = param1.readUTF();
-                this.@event.publishing = param1.readByte();
-                this.@event.likeEnabled = param1.readBoolean();
+                this.@event.areaCategory = stream.readUTF();
+                this.@event.areaCode = stream.readUTF();
+                this.@event.areaTitle = stream.readUTF();
+                this.@event.category = stream.readUTF();
+                this.@event.title = stream.readUTF();
+                this.@event.description = stream.readUTF();
+                this.@event.createTime = stream.readDouble();
+                this.@event.image = stream.readBoolean();
+                this.@event.originPath = stream.readUTF();
+                this.@event.thumbPath = stream.readUTF();
+                this.@event.numPeople = stream.readInt();
+                this.@event.ownerUserCode = stream.readUTF();
+                this.@event.ownerName = stream.readUTF();
+                this.@event.dataType = stream.readUTF();
+                this.@event.publishing = stream.readByte();
+                this.@event.likeEnabled = stream.readBoolean();
             }
-      
+
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-           
-            return;
+
+            throw new NotImplementedException();
         }
     }
 }

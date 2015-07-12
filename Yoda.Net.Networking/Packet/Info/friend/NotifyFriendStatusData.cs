@@ -6,7 +6,7 @@
     using System.Collections;
 
 
-    public class ListFriendData : IPacket
+    public class ListFriendData : ICommandData
     {
 
         public int packetId
@@ -17,14 +17,14 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
 
         
         }
         
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
 
             

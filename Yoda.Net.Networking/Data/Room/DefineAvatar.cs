@@ -9,7 +9,7 @@
         public AvatarData data;
         public PartData part;
         public bool friend;
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.data = new AvatarData();
             this.data.readData(In);

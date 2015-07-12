@@ -12,9 +12,5 @@ namespace Yoda.Net.Networking.Data.Common
         public int areaType;
         public List<TravelAreaData> list;
         public sbyte condtion;
-    /*    public function TravelAreaCategoryData()
-        {
-            return;
-        }*/
     }
 }

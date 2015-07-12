@@ -33,6 +33,14 @@
         public bool hasNewDiaryPage { get; set; }
 
         public double diaryLastPostedTime { get; set; }
+
+        public int receiveFavorites { get; set; }
+
+        public int myFavorites { get; set; }
+
+        public bool isFavoriteListViewabled { get; set; }
+
+        public int friends { get; set; }
     }
 }
 

@@ -20,24 +20,24 @@
         public bool hasLeftFootPrintToday;
         public int numFootPrintToday;
 
-        public void readData(AmebaStream param1)
+        public void readData(PiggStream stream)
         {
-            this.nickname = param1.readUTF();
-            this.amebaId = param1.readUTF();
-            this.userCode = param1.readUTF();
-            this.asUserId = param1.readUTF();
-            this.zone = param1.readByte();
-            this.hasLeftFootPrintToday = param1.readBoolean();
-            this.numFootPrintToday = param1.readInt();
-            this.acceptMessage = param1.readBoolean();
-            this.acceptGift = param1.readBoolean();
-            this.hasLife = param1.readBoolean();
-            this.hasIsland = param1.readBoolean();
-            this.hasCafe = param1.readBoolean();
-            this.hasWorld = param1.readBoolean();
+            this.nickname = stream.readUTF();
+            this.amebaId = stream.readUTF();
+            this.userCode = stream.readUTF();
+            this.asUserId = stream.readUTF();
+            this.zone = stream.readByte();
+            this.hasLeftFootPrintToday = stream.readBoolean();
+            this.numFootPrintToday = stream.readInt();
+            this.acceptMessage = stream.readBoolean();
+            this.acceptGift = stream.readBoolean();
+            this.hasLife = stream.readBoolean();
+            this.hasIsland = stream.readBoolean();
+            this.hasCafe = stream.readBoolean();
+            this.hasWorld = stream.readBoolean();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(this.nickname);
             Out.writeUTF(this.amebaId);

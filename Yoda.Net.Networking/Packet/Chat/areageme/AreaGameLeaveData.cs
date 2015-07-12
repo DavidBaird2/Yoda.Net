@@ -1,4 +1,4 @@
-﻿namespace Yoda.Net.Networking.Packet.Chat.areagame
+﻿namespace Yoda.Net.Networking.Packet.Chat.Areagame
 {
     
 
@@ -9,12 +9,12 @@
     
 
 
-    public class AreaGameLeaveData : IPacket
+    public class AreaGameLeaveData : ICommandData
     {
         public int areaGameId;
         public bool enableEntry;
         public int areaGameRoomId;
-        public AmebaStream byteBuilder;
+        public PiggStream byteBuilder;
         public int areaGameOpts;
 
         public AreaGameLeaveData()
@@ -29,14 +29,14 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-
+            throw new NotImplementedException();
         }
 
-        public void writeData(AmebaStream Out)
-        {   
-           
+        public void writeData(PiggStream Out)
+        {
+            throw new NotImplementedException();
         }
     }
 }

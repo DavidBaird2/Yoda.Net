@@ -5,12 +5,13 @@
 
     using System.Collections;
     
-    using Yoda.Net.Networking.Packet.Data.club;
-    using Yoda.Net.Networking.Packet.Data.common;
 
 
-    public class UpdateClubUserTypeData : IPacket
+    public class UpdateClubUserTypeData : ICommandData
     {
+        public UpdateClubUserTypeData()
+        {
+        }
         private bool master;
         private string userId;
         private bool subMaster;
@@ -32,12 +33,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-
+            throw new NotImplementedException();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(areaCode);
             Out.writeUTF(userId);

@@ -1,6 +1,6 @@
 ﻿namespace Yoda.Net.Networking.Data.Common
 {
-    
+
     using System;
     using Yoda.Net.Networking;
 
@@ -14,9 +14,12 @@
         public int order;
         public DateTime time;
         public bool used;
-       public bool isCoordinateUsed;
-       public bool isMannequinUsed;
-        public void readData(AmebaStream In)
+        public bool isCoordinateUsed;
+        public bool isMannequinUsed;
+        public byte rentalType;
+        public DateTime rentalExpired;
+        public int rentalAvailableTime;
+        public void readData(PiggStream In)
         {
             this.id = In.readInt();
             this.order = In.readByte();
@@ -27,8 +30,13 @@
             this.itemId = In.readUTF();
             this.name = In.readUTF();
             this.description = In.readUTF();
-            this.time = DateTime.Parse("1970/1/1 09:00");
-            this.time = this.time.AddMilliseconds(In.readDouble());
+            this.time = In.readTime();
+            this.rentalType = (byte)In.readByte();
+            if (rentalType == 1) //TODO
+            {
+                this.rentalAvailableTime = In.readInt();
+                this.rentalExpired = In.readTime();
+            }
         }
     }
 }

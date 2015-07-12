@@ -12,7 +12,6 @@
         public string shopTemplateCode;
         public bool giftActive;
         public int itemsCount;
-   //     public var shopTemplateDomain:ApplicationDomain;
         public string staffDescription2;
         public string areaName;
         public ArrayList gachaList;

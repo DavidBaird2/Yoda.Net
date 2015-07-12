@@ -16,7 +16,7 @@
         public Point mouth = new Point();
         public Point nose = new Point();
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.eye.x = In.readFloat();
             this.eye.y = In.readFloat();
@@ -48,7 +48,7 @@
             this.mole2 = Out.mole2;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeFloat(this.eye.x);
             Out.writeFloat(this.eye.y);

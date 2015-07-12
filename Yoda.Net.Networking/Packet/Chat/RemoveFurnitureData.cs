@@ -4,7 +4,7 @@
     
     using System;
 
-    public class RemoveFurnitureData : IPacket, IEncrypted
+    public class RemoveFurnitureData : ICommandData, IEncrypted
     {
         public int sequence;
 
@@ -12,9 +12,9 @@
         {
         }
 
-        public RemoveFurnitureData(int param1)
+        public RemoveFurnitureData(int sequence)
         {
-            this.sequence = param1;
+            this.sequence = sequence;
         }
 
         public int packetId
@@ -25,12 +25,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.sequence = In.readInt();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(this.sequence);
         }

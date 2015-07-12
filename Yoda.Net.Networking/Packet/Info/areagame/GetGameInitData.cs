@@ -5,17 +5,17 @@
     using System;
     
 
-    public class GetGameInitData : IPacket
+    public class GetGameInitData : ICommandData
     {
-        public AmebaStream byteArray;
+        public PiggStream byteArray;
         public int gameId;
         public string kind;
 
-        public GetGameInitData(int param1, string param2, AmebaStream param4)
+        public GetGameInitData(int gameId, string kind, PiggStream stream)
         {
-            this.gameId = param1;
-            this.kind = param2;
-            this.byteArray = param4;
+            this.gameId = gameId;
+            this.kind = kind;
+            this.byteArray = stream;
         }
         public int packetId
         {
@@ -26,22 +26,22 @@
         }
         public GetGameInitData()
         {
-            byteArray = new AmebaStream();
+            byteArray = new PiggStream();
         }
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
 
 
             this.gameId = In.readByte();
             this.kind = In.readUTF();
 
-            AmebaStream array = new AmebaStream();
+            PiggStream array = new PiggStream();
             this.byteArray = array;
             In.readBytes(array);
 
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeByte((byte)this.gameId);
             Out.writeUTF(this.kind);

@@ -4,8 +4,7 @@
     using System;
     
     using System.Collections;
-    using Yoda.Net.Networking.Packet.Data.common;
-    public class UseActionItemData : IPacket
+    public class UseActionItemData : ICommandData
     {
                public string areaCategory;
                public string areaCode;
@@ -30,14 +29,14 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             actionItemCode = In.readUTF();
             areaCategory = In.readUTF();
             areaCode = In.readUTF();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(actionItemCode);
             Out.writeUTF(areaCategory);

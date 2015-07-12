@@ -4,9 +4,12 @@
     using System;
     
 
-    public class NotifyUserClubEnteredData : IPacket
+    public class NotifyUserClubEnteredData : ICommandData
     {
-        public string _areaCode;
+        public NotifyUserClubEnteredData()
+        {
+        }
+        public string areaCode;
 
         public int packetId
         {
@@ -15,19 +18,19 @@
                 return PacketId.NOTIFY_CLUB_ROOM_ENTERED;
             }
         }
-        public NotifyUserClubEnteredData(string param1)
+        public NotifyUserClubEnteredData(string _areaCode)
         {
-            _areaCode = param1;
+            this.areaCode = _areaCode;
         }
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-            _areaCode = In.readUTF();
+            areaCode = In.readUTF();
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            Out.writeUTF(_areaCode);
+            Out.writeUTF(areaCode);
             return;
         }
     }

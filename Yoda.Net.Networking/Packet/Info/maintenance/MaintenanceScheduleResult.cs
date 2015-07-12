@@ -5,7 +5,7 @@
     using Yoda.Net.Networking;
     using Yoda.Net.Networking.Packet;
 
-    public class MaintenanceScheduleResult : IPacket
+    public class MaintenanceScheduleResult : ICommandData
     {
         public bool enable;
         public int left;
@@ -20,7 +20,7 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.enable = In.readBoolean();
             if (this.enable)
@@ -31,7 +31,7 @@
             }
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeBoolean(this.enable);
             if (this.enable)

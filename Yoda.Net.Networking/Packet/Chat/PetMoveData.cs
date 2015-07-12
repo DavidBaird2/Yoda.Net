@@ -4,8 +4,11 @@
     
     using System;
 
-    public class PetMoveData : IPacket
+    public class PetMoveData : ICommandData
     {
+        public PetMoveData()
+        {
+        }
         private int _petId;
         private int _x;
         private int _y;
@@ -27,11 +30,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
+            throw new NotImplementedException();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(this._petId);
             Out.writeShort((short) this._x);

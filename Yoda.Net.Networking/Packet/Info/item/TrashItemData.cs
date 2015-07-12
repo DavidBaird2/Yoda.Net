@@ -4,7 +4,7 @@
     using System;
     
     using System.Collections;
-    public class TrashItemData : IPacket, IEncrypted, IncludeClientTime
+    public class TrashItemData : ICommandData, IEncrypted, IncludeClientTime
     {
         public string type;
         public int stockId;
@@ -30,7 +30,7 @@
             this.count = count;
             return;
         }
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             type = In.readUTF();
             code = In.readUTF();
@@ -39,7 +39,7 @@
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(type);
             Out.writeUTF(code);

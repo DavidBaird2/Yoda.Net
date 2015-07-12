@@ -3,7 +3,7 @@
     
     using System;
     
-    public class TalkResultData : IPacket
+    public class TalkResultData : ICommandData
     {
         public string amebaId;
         public uint color;
@@ -20,7 +20,7 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.hexCode = In.readUTFBytes(0x10);
             this.message = In.readUTF();
@@ -31,7 +31,7 @@
             roomIndex = In.readInt();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTFBytes(hexCode);
             Out.writeUTF(message);

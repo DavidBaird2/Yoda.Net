@@ -4,7 +4,7 @@
     using System;
     
 
-    public class EnterRoomData :  IPacket,IEncrypted,IncludeClientTime
+    public class EnterRoomData :  ICommandData,IEncrypted,IncludeClientTime
     {
  
         public bool queue;
@@ -25,7 +25,7 @@
 
 
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             category = In.readUTF();
             code = In.readUTF();
@@ -34,7 +34,7 @@
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(category);
             Out.writeUTF(code);

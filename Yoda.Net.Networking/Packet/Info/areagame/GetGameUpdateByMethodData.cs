@@ -4,19 +4,22 @@
     
     using System;
 
-    public class GetGameUpdateByMethodData : IPacket
+    public class GetGameUpdateByMethodData : ICommandData
     {
-        public AmebaStream byteArray;
+        public GetGameUpdateByMethodData()
+        {
+        }
+        public PiggStream byteArray;
         public int gameId;
         public string kind;
         public string method;
 
-        public GetGameUpdateByMethodData(int param1, string param2, string param3, AmebaStream param4)
+        public GetGameUpdateByMethodData(int gameId, string kind, string method, PiggStream byteArray)
         {
-            this.gameId = param1;
-            this.kind = param2;
-            this.method = param3;
-            this.byteArray = param4;
+            this.gameId = gameId;
+            this.kind = kind;
+            this.method = method;
+            this.byteArray = byteArray;
         }
 
         public int packetId
@@ -27,11 +30,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
+            throw new NotImplementedException();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeByte((byte) this.gameId);
             Out.writeUTF(this.kind);

@@ -1,12 +1,14 @@
-﻿
-
-namespace Yoda.Net.Networking.Packet.Chat.game.data
+﻿using System;
+namespace Yoda.Net.Networking.Packet.Chat.Game.Data
 {
 
-    public class TableGameAbortResultData : IPacket
+    public class TableGameAbortResultData : ICommandData
     {
         public string abortReason;
+        public TableGameAbortResultData()
+        {
 
+        }
         public virtual int packetId
         {
             get
@@ -15,15 +17,15 @@ namespace Yoda.Net.Networking.Packet.Chat.game.data
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             abortReason = In.readUTF();
         }
 
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-
+            throw new NotImplementedException();
         }
 
 

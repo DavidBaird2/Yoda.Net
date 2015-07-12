@@ -4,6 +4,7 @@
 
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using Yoda.Net.Networking.Data.Common;
     using Yoda.Net.Networking.Data.Room;
     
@@ -13,16 +14,16 @@
     
     
 
-    public class BaseEnterRoomResultData : IPacket
+    public class BaseEnterRoomResultData : ICommandData
     {
-        public AreaData areaData;
-        public ArrayList placeFurnitures;
-        public ArrayList defineFurnitures;
-        public ArrayList placeAvatars;
-        public ArrayList defineAvatars;
-        public ArrayList placePets;
-        public ArrayList definePets;
-        public ArrayList placeActionItems;
+        public Yoda.Net.Networking.Data.Room.AreaData areaData;
+        public List<PlaceFurniture> placeFurnitures;
+        public List<DefineFurniture> defineFurnitures;
+        public List<PlaceAvatar> placeAvatars;
+        public List<DefineAvatar> defineAvatars;
+        public List<PlacePet> placePets;
+        public List<DefinePet> definePets;
+        public List<PlaceActionItem> placeActionItems;
         public int isAdmin;
         public bool isChannelActor;
         public double serverTime;
@@ -37,7 +38,7 @@
         public bool isPiggDomeOpen;
         public bool isAllowRoomChange;
         public bool isRefleshedCosmeItem;
-        public ShuffleGoOutData _shuffleGoOutData;
+        public ShuffleGoOutData shuffleGoOutData;
         public virtual int packetId
         {
             get
@@ -53,27 +54,27 @@
             }
         }
 
-        protected virtual void readCodeData(AmebaStream param1)
+        protected virtual void readCodeData(PiggStream stream)
         {
-            this.areaData.frontCode = param1.readUTF();
-            this.areaData.wallCode = param1.readUTF();
-            this.areaData.floorCode = param1.readUTF();
-            this.areaData.windowCode = param1.readUTF();
+            this.areaData.frontCode = stream.readUTF();
+            this.areaData.wallCode = stream.readUTF();
+            this.areaData.floorCode = stream.readUTF();
+            this.areaData.windowCode = stream.readUTF();
             return;
         }
-        protected virtual void writeCodeData(AmebaStream param1)
+        protected virtual void writeCodeData(PiggStream stream)
         {
-            param1.writeUTF(this.areaData.frontCode);
-            param1.writeUTF(this.areaData.wallCode);
-            param1.writeUTF(this.areaData.floorCode);
-            param1.writeUTF(this.areaData.windowCode);
+            stream.writeUTF(this.areaData.frontCode);
+            stream.writeUTF(this.areaData.wallCode);
+            stream.writeUTF(this.areaData.floorCode);
+            stream.writeUTF(this.areaData.windowCode);
             return;
         }
 
-        public virtual void readData(AmebaStream In)
+        public virtual void readData(PiggStream In)
         {
             PlaceFurniture furniture = null;
-            int num4;
+            int n;
             int num = 0;
             DefineFurniture furniture2 = null;
             int index = 0;
@@ -84,7 +85,7 @@
             DefinePet pet = null;
             PlacePet pet2 = null;
             PlaceActionItem item = null;
-            this.areaData = new AreaData();
+            this.areaData = new Yoda.Net.Networking.Data.Room.AreaData();
             this.areaData.categoryCode = In.readUTF();
             this.areaData.categoryName = In.readUTF();
             this.areaData.areaCode = In.readUTF();
@@ -95,8 +96,8 @@
 
 
             int capacity = In.readInt();
-            this.placeFurnitures = new ArrayList(capacity);
-            for (num4 = 0; num4 < capacity; num4++)
+            this.placeFurnitures = new List<PlaceFurniture>();
+            for (n = 0; n < capacity; n++)
             {
                 furniture = new PlaceFurniture
                 {
@@ -111,8 +112,8 @@
                 this.placeFurnitures.Add(furniture);
             }
             capacity = In.readInt();
-            this.defineFurnitures = new ArrayList(capacity);
-            for (num4 = 0; num4 < capacity; num4++)
+            this.defineFurnitures = new List<DefineFurniture>();
+            for (n = 0; n < capacity; n++)
             {
                 num = In.readShort();
                 furniture2 = new DefineFurniture
@@ -131,9 +132,9 @@
                 this.defineFurnitures.Add(furniture2);
             }
             capacity = In.readInt();
-            this.placeAvatars = new ArrayList(capacity);
-            this.defineAvatars = new ArrayList(capacity);
-            for (num4 = 0; num4 < capacity; num4++)
+            this.placeAvatars = new List<PlaceAvatar>();
+            this.defineAvatars = new List<DefineAvatar>();
+            for (n = 0; n < capacity; n++)
             {
                 avatar = new PlaceAvatar();
                 avatar2 = new DefineAvatar();
@@ -155,17 +156,17 @@
                     height = 0x60
                 };
                 avatar2.part = data2;
-                this.placeAvatars.Insert(num4, avatar);
-                this.defineAvatars.Insert(num4, avatar2);
+                this.placeAvatars.Insert(n, avatar);
+                this.defineAvatars.Insert(n, avatar2);
             }
             capacity = In.readInt();
-            this.placePets = new ArrayList(capacity);
-            this.definePets = new ArrayList(capacity);
-            for (num4 = 0; num4 < capacity; num4++)
+            this.placePets = new List<PlacePet>();
+            this.definePets = new List<DefinePet>();
+            for (n = 0; n < capacity; n++)
             {
                 pet = new DefinePet();
                 pet.data.readData(In);
-                this.definePets.Insert(num4, pet);
+                this.definePets.Insert(n, pet);
                 pet2 = new PlacePet
                 {
                     petId = pet.petId(),
@@ -175,11 +176,11 @@
                     direction = In.readByte(),
                     sleeping = In.readBoolean()
                 };
-                this.placePets.Insert(num4, pet2);
+                this.placePets.Insert(n, pet2);
             }
             capacity = In.readInt();
-            this.placeActionItems = new ArrayList(capacity);
-            for (num4 = 0; num4 < capacity; num4++)
+            this.placeActionItems = new List<PlaceActionItem>();
+            for (n = 0; n < capacity; n++)
             {
                 item = new PlaceActionItem
                 {
@@ -192,10 +193,10 @@
                     y = In.readShort(),
                     z = In.readShort()
                 };
-                this.placeActionItems.Insert(num4, item);
+                this.placeActionItems.Insert(n, item);
             }
             capacity = In.readInt();
-            for (num4 = 0; num4 < capacity; num4++)
+            for (n = 0; n < capacity; n++)
             {
                 item = new PlaceActionItem
                 {
@@ -216,28 +217,16 @@
             this.serverTime = In.readDouble();
             this.isRefleshedCosmeItem = In.readBoolean();
             this.isAllowRoomChange = In.readBoolean();
-            var _loc_3 = In.readByte();
-            var _loc_11 = new Hashtable();
-           var _loc_2 = 0;
-            while (_loc_2 < _loc_3)
+            var friendCount = In.readByte();
+            capacity = 0;
+            while (capacity < friendCount)
             {
 
-               var _loc_10 = In.readUTF();
-                _loc_11[_loc_10] = _loc_10;
-                _loc_2++;
+               var code = In.readUTF();
+               defineAvatars.Find(i => i.characterId == code).friend = true;
+                capacity++;
             }
-            var __loc_3 = this.defineAvatars.Count;
-            _loc_2 = 0;
-            while (_loc_2 < __loc_3)
-            {
-
-                var _loc_7 = (DefineAvatar)this.defineAvatars[_loc_2];
-                if (_loc_11[_loc_7.characterId] != null)
-                {
-                    _loc_7.friend = true;
-                }
-                _loc_2++;
-            }
+         
             int postion = (int)In.position;
             In.position = 0;
          //   Engine.Log(BytesConvert.ToHexString(In.readBytes(postion)));
@@ -245,11 +234,11 @@
 
         }
 
-        private PartData readPart(AmebaStream In, int Index)
+        private PartData readPart(PiggStream In, int Index)
         {
             return new PartData { height = In.readInt(), attachable = In.readBoolean(), sittable = In.readBoolean(), walkable = In.readBoolean(), wall = In.readByte(), attachDirection = In.readByte(), index = Index, rx = In.readByte(), ry = In.readByte() };
         }
-        private void WritePart(AmebaStream Out, PartData Part)
+        private void WritePart(PiggStream Out, PartData Part)
         {
             Out.writeInt(Part.height);
             Out.writeBoolean(Part.attachable);
@@ -260,7 +249,7 @@
             Out.writeByte((byte)Part.rx);
             Out.writeByte((byte)Part.ry);
         }
-        public virtual void writeData(AmebaStream Out)
+        public virtual void writeData(PiggStream Out)
         {
             PlaceAvatar avatar = null;
             DefineAvatar avatar2 = null;
@@ -362,11 +351,21 @@
 
             Out.writeBoolean(isAllowRoomChange);
             //フレンド
-            Out.writeByte(0);
+            Out.writeByte((byte)this.defineAvatars.FindAll(i=>i.friend).Count);
+            foreach(DefineAvatar av in this.defineAvatars)
+            {
+                if(av.friend)
+                Out.writeUTF(av.characterId);
+            }
+
+            
+
             int postion = (int)Out.position;
             Out.position = 0;
            // Engine.Log(BytesConvert.ToHexString(Out.readBytes(postion)));
             Out.position = postion;
+           
+
         }
 
 

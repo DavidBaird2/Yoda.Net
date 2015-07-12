@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Yoda.Net.Networking.Data.Action
 {
-    class ActionData
+    public class ActionData
     {
         public string type;
         public bool isDefault;
@@ -28,13 +28,13 @@ namespace Yoda.Net.Networking.Data.Action
             this.order = order;
             return;
         }
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             code = In.readUTF();
             title = In.readUTF();
             type = In.readUTF();
 
-            if (this.type.IndexOf(ActionStaticData.TYPE_OVER_REACTION_CODE) == 0)
+            if (this.type.IndexOf("over_reaction") == 0)
             {
                 this.isUnlocked = In.readBoolean();
                 this.rareRate = In.readInt();
@@ -43,13 +43,13 @@ namespace Yoda.Net.Networking.Data.Action
             order = In.readInt();
             isDefault = In.readBoolean();
         }
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(code);
             Out.writeUTF(title);
             Out.writeUTF(type);
 
-            if (this.type.IndexOf(ActionStaticData.TYPE_OVER_REACTION_CODE) == 0)
+            if (this.type.IndexOf("over_reaction") == 0)
             {
                 Out.writeBoolean(this.isUnlocked);
                Out.writeInt(  this.rareRate );

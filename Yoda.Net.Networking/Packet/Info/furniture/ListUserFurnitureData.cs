@@ -5,9 +5,7 @@
     using System;
     using System.Collections;
     
-    using Yoda.Net.Networking.Packet.Data.room;
-
-    public class ListUserFurnitureData : IPacket
+    public class ListUserFurnitureData : ICommandData
     {
 
 
@@ -19,12 +17,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
          
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
         }
     }

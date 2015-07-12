@@ -8,9 +8,12 @@ namespace Yoda.Net.Networking.Packet.Info.recycledarts
     
     
 
-    public class RecycleDartsGetData : IPacket
+    public class RecycleDartsGetData : ICommandData
     {
-        public string _gachaCode;
+        public RecycleDartsGetData()
+        {
+        }
+        public string gachaCode;
 
         public int packetId
         {
@@ -21,17 +24,17 @@ namespace Yoda.Net.Networking.Packet.Info.recycledarts
         }
         public RecycleDartsGetData(string gachaCode)
         {
-            this._gachaCode = gachaCode;
+            this.gachaCode = gachaCode;
             return;
         } 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-
+            throw new NotImplementedException();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            Out.writeUTF(_gachaCode);
+            Out.writeUTF(gachaCode);
         }
     }
 }

@@ -7,9 +7,11 @@ using System.Text;
 
 namespace Yoda.Net.Networking.Packet.Info.syncArea
 {
-    public class SyncDoMoveData : IPacket, IEncrypted
+    public class SyncDoMoveData : ICommandData, IEncrypted
     {
-
+        public SyncDoMoveData()
+        {
+        }
         private string _areaCategory;
         private int _x;
         private int _y;
@@ -22,20 +24,20 @@ namespace Yoda.Net.Networking.Packet.Info.syncArea
             }
         }
 
-        public SyncDoMoveData(string param1, int param2, int param3, int param4)
+        public SyncDoMoveData(string areaCategory, int x, int y, int z)
         {
-            _areaCategory = param1;
-            _x = param2;
-            _y = param3;
-            _z = param4;
+            _areaCategory = areaCategory;
+            _x = x;
+            _y = y;
+            _z = z;
             return;
         }
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
 
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(_areaCategory);
             Out.writeUTF(_areaCategory);

@@ -4,9 +4,8 @@
     using System;
     
     using System.Collections;
-    using Yoda.Net.Networking.Packet.Data.common;
 
-    public class ListUserItemData : IPacket
+    public class ListUserItemData : ICommandData
     {
 
         public int packetId
@@ -17,12 +16,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
 
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
 
         }

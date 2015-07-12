@@ -5,10 +5,10 @@ namespace Yoda.Net.Networking.Packet.Chat.game.data
 {
 
 
-    public class TableGameData : IPacket
+    public class TableGameData : ICommandData
     {
         public string method;
-        public AmebaStream data;
+        public PiggStream data;
 
         public virtual int packetId
         {
@@ -17,18 +17,18 @@ namespace Yoda.Net.Networking.Packet.Chat.game.data
                 return PacketId.TABLE_GAME;
             }
         }
-        public TableGameData(string param1, AmebaStream param2)
+        public TableGameData(string method, PiggStream data)
         {
-            this.method = param1;
-            this.data = param2;
+            this.method = method;
+            this.data = data;
             return;
         }
         public TableGameData()
         {
-            data = new AmebaStream();
+            data = new PiggStream();
             return;
         }
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             method = In.readUTF();
             if (In.readBoolean())
@@ -39,28 +39,9 @@ namespace Yoda.Net.Networking.Packet.Chat.game.data
         }
 
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            if (method == "surrender")
-            {
-                //Engine.Sessions.trackerSession.ChatClient.doCSTalk("サレンダー！");
-            }
-            if (method == "hit")
-            {
-              //  Engine.Sessions.trackerSession.ChatClient.doCSTalk("ヒット！");
-            }
-            if (method == "doubleDown")
-            {
-            //    Engine.Sessions.trackerSession.ChatClient.doCSTalk("ダブルダウン！");
-            }
-            if (method == "stay")
-            {
-            //    Engine.Sessions.trackerSession.ChatClient.doCSTalk("スタンド！");
-            }
-            if (method == "split")
-            {
-               // Engine.Sessions.trackerSession.ChatClient.doCSTalk("スプリット！");
-            }
+
             Out.writeUTF(method);
             if (data != null)
             {

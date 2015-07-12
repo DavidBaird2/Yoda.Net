@@ -4,7 +4,7 @@
     
     using System;
 
-    public class MoveActionItemData : IPacket, IEncrypted, IncludeClientTime
+    public class MoveActionItemData : ICommandData, IEncrypted, IncludeClientTime
     {
         public int sequence;
         public int x;
@@ -19,7 +19,7 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             sequence = In.readInt();
             x = In.readShort();
@@ -27,7 +27,7 @@
             z = In.readShort();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt((short)sequence);
             Out.writeShort((short)x);

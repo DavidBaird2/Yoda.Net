@@ -22,12 +22,19 @@ namespace Yoda.Net.Networking.Data.Diary
       
       public int totalDiaryPage;
 
-      public void readData(AmebaStream param1)
+      public void readData(PiggStream In)
       {
-         this.isDiaryIconShow = param1.readBoolean();
-         this.isDiaryReadEnable = param1.readBoolean();
-         this.isDiaryNewPage = param1.readBoolean();
-         this.totalDiaryPage = param1.readInt();
+         this.isDiaryIconShow = In.readBoolean();
+         this.isDiaryReadEnable = In.readBoolean();
+         this.isDiaryNewPage = In.readBoolean();
+         this.totalDiaryPage = In.readInt();
+      }
+        public void writeData(PiggStream Out)
+      {
+          Out.writeBoolean(this.isDiaryIconShow);
+            Out.writeBoolean(this.isDiaryReadEnable);
+           Out.writeBoolean( this.isDiaryNewPage);
+          Out.writeInt(this.totalDiaryPage);
       }
     }
 }

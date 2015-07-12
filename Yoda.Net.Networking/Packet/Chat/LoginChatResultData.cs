@@ -5,7 +5,7 @@
     
     
 
-    public class LoginChatResultData : IPacket
+    public class LoginChatResultData : ICommandData
     {
         public bool success;
         public int serverType;
@@ -22,13 +22,13 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             success = In.readBoolean();
             serverType = In.readByte();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeBoolean(success);
             Out.writeByte((byte)serverType);

@@ -1,12 +1,9 @@
 ﻿namespace Yoda.Net.Networking.Packet.Info.actionitem
 {
-    using Yoda.Net.Networking.Packet.Data.common;
-    
-    
     using System;
     using System.Collections;
     using Yoda.Net.Networking.Data.Common;
-    public class ListUserActionItemResultData : IPacket
+    public class ListUserActionItemResultData : ICommandData
     {
         public ArrayList list;
         public int max;
@@ -22,26 +19,26 @@
             }
         }
 
-        public void readData(AmebaStream param1)
+        public void readData(PiggStream In)
         {
-            UserActionItemData _loc4_ = null;
-            this.max = param1.readInt();
-            int _loc2_ = param1.readInt();
-            this.list = new ArrayList(_loc2_);
-            var _loc3_ = 0;
-            while (_loc3_ < _loc2_)
+            UserActionItemData useractiondata = null;
+            this.max = In.readInt();
+            int num = In.readInt();
+            this.list = new ArrayList(num);
+            var i = 0;
+            while (i < num)
             {
-                _loc4_ = new UserActionItemData();
-                _loc4_.readData(param1);
-                this.list.Add(_loc4_);
-                _loc3_++;
+                useractiondata = new UserActionItemData();
+                useractiondata.readData(In);
+                this.list.Add(useractiondata);
+                i++;
             }
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
 
-            return;
+            throw new NotImplementedException();
         }
     }
 }

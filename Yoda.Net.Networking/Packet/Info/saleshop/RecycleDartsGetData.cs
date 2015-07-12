@@ -8,7 +8,7 @@ namespace Yoda.Net.Networking.Packet.Info.saleshop
     
     
 
-    public class GetSalePoyonData : IPacket
+    public class GetSalePoyonData : ICommandData
     {
 
 
@@ -20,12 +20,12 @@ namespace Yoda.Net.Networking.Packet.Info.saleshop
             }
         }
      
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
 
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
         
         }

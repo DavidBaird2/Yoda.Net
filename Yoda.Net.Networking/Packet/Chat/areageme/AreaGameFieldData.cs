@@ -1,27 +1,22 @@
-﻿namespace Yoda.Net.Networking.Packet.Chat.areagame
+﻿namespace Yoda.Net.Networking.Packet.Chat.Areagame
 {
     
 
     using System;
     using System.Collections;
-    
-    
-    
-    
 
-
-    public class AreaGameFieldData : IPacket
+    public class AreaGameFieldData : ICommandData
     {
-        public AmebaStream data;
+        public PiggStream data;
         public int id;
         public AreaGameFieldData()
         {
 
         }
-        public AreaGameFieldData(int param1,  AmebaStream param2)
+        public AreaGameFieldData(int id,  PiggStream data)
         {
-            this.id = param1;
-            this.data = param2;
+            this.id = id;
+            this.data = data;
         }
 
         public int packetId
@@ -32,13 +27,13 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
+            throw new NotImplementedException();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-          //  Engine.Log("AreaGameFieldData::writeData  id="+ id);
             Out.writeInt((short) this.id);
             data.position = 0;
             Out.writeBytes(data.readBytes((int)data.length));

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Yoda.Net.Networking.Packet.Info.area
 {
-    public class ListBundleAreaData : IPacket
+    public class ListBundleAreaData : ICommandData
     {
         public int defaultAreaCount;
         public string bundle;
@@ -28,7 +28,7 @@ namespace Yoda.Net.Networking.Packet.Info.area
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.categoryId = In.readUTF();
             this.areaCode = In.readUTF();
@@ -60,7 +60,7 @@ namespace Yoda.Net.Networking.Packet.Info.area
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(categoryId);
             Out.writeUTF(areaCode);

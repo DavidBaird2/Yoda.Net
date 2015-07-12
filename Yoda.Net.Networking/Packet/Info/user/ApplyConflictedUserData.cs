@@ -1,5 +1,4 @@
-﻿
-namespace libPigg.net.info.user
+﻿namespace Yoda.Net.Networking.Packet.Info.User
 {
 
     using System;
@@ -7,7 +6,7 @@ namespace libPigg.net.info.user
     using Yoda.Net.Networking.Packet;
     using Yoda.Net.Networking.Packet.Info;
 
-    public class ApplyConflictedUserData : IPacket
+    public class ApplyConflictedUserData : ICommandData
     {
         public string userCode;
         public ApplyConflictedUserData()
@@ -22,12 +21,12 @@ namespace libPigg.net.info.user
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-
+            userCode = In.readUTF();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(userCode);
 

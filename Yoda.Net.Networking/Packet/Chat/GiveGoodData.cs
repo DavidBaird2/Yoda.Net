@@ -5,7 +5,7 @@
     
 
 
-    public class GiveGoodData : IPacket
+    public class GiveGoodData : ICommandData
     {
         public string code;
 
@@ -13,9 +13,9 @@
         {
         }
 
-        public GiveGoodData(string param1)
+        public GiveGoodData(string code)
         {
-            this.code = param1;
+            this.code = code;
         }
 
         public int packetId
@@ -26,13 +26,13 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.code = In.readUTF();
 
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(this.code);
         }

@@ -4,7 +4,7 @@
     using System;
     using System.Collections;
     using Yoda.Net.Networking.Data.Common;
-    public class ListUserItemResultData : IPacket
+    public class ListUserItemResultData : ICommandData
     {
         public int max;
         public ArrayList items;
@@ -17,26 +17,26 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-            UserItemData _loc_4 = null;
+   
             max = In.readInt();
-            var _loc_2 = In.readInt();
-            items = new ArrayList(_loc_2);
-            var _loc_3 = 0;
-            while (_loc_3 < _loc_2)
+            var count = In.readInt();
+            items = new ArrayList(count);
+            var i = 0;
+            while (i < count)
             {
-                
-                _loc_4 = new UserItemData();
-                _loc_4.readData(In);
-                items.Insert(_loc_3, _loc_4);
-                _loc_3++;
+
+                UserItemData uid = new UserItemData();
+                uid.readData(In);
+                items.Insert(i, uid);
+                i++;
             }
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-
+            throw new NotImplementedException();
         }
     }
 }

@@ -6,7 +6,7 @@
     using System.Collections;
     
 
-    public class PlaceActionItemResultData : IPacket
+    public class PlaceActionItemResultData : ICommandData
     {
         public int sequence;
         public int actionItemType;
@@ -25,7 +25,7 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             type = In.readUTF();
             code = In.readUTF();
@@ -37,7 +37,7 @@
             z = In.readShort();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(type);
             Out.writeUTF(code);

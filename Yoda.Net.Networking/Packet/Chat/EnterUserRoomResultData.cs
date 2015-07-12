@@ -13,10 +13,30 @@ namespace Yoda.Net.Networking.Packet.Chat
     using Yoda.Net.Networking.Data.Diary;
     using Yoda.Net.Networking.Data.Mannequin;
     using Yoda.Net.Networking.Data.Room;
+    using Yoda.Net.Networking.Data;
 
-
-    public class EnterUserRoomResultData : BaseEnterRoomResultData, IPacket
+    public class EnterUserRoomResultData : BaseEnterRoomResultData, ICommandData
     {
+
+        public sbyte defaultOwnerEnterRoomNum { get; set; }
+
+        public sbyte defaultVisitorEnterRoomNum { get; set; }
+
+        public DiaryRoomData diaryRoomData { get; set; }
+
+        public bool isSupportContest { get; set; }
+
+        public string contestCode { get; set; }
+
+        public List<PetSolveFurniturePlaceData> petSolveFurniturePlaceListData { get; set; }
+
+        public bool enablePetSolveFurniture { get; set; }
+
+        public sbyte allowMannequinDetail { get; set; }
+
+        public List<MannequinData> areaMannequins { get; set; }
+
+        internal EventArrowData _arrowEventData { get; set; }
 
         public EnterUserRoomResultData()
         {
@@ -36,189 +56,203 @@ namespace Yoda.Net.Networking.Packet.Chat
                 return AreaData.TYPE_ROOM;
             }
         }
-        override protected void readCodeData(AmebaStream param1)
+        override protected void readCodeData(PiggStream stream)
         {
-            areaData.frontCode = param1.readUTF();
-            areaData.wallCode = param1.readUTF();
-            areaData.floorCode = param1.readUTF();
-            areaData.windowCode = param1.readUTF();
+            areaData.frontCode = stream.readUTF();
+            areaData.wallCode = stream.readUTF();
+            areaData.floorCode = stream.readUTF();
+            areaData.windowCode = stream.readUTF();
             areaData.groundCode = "";
             return;
         }
-        override protected void writeCodeData(AmebaStream param1)
+        override protected void writeCodeData(PiggStream stream)
         {
-            param1.writeUTF(areaData.frontCode);
-            param1.writeUTF(areaData.wallCode);
-            param1.writeUTF(areaData.floorCode);
-            param1.writeUTF(areaData.windowCode);
+            stream.writeUTF(areaData.frontCode);
+            stream.writeUTF(areaData.wallCode);
+            stream.writeUTF(areaData.floorCode);
+            stream.writeUTF(areaData.windowCode);
 
             return;
         }
 
-        override public void readData(AmebaStream param1)
+        override public void readData(PiggStream stream)
         {
-            int _loc_6 = 0;
-            int _loc_7 = 0;
-            base.readData(param1);
-
-            var testArray = new AmebaStream();
-            base.writeData(testArray);
-            EnterUserRoomResultData result = new EnterUserRoomResultData();
-            testArray.position = 0;
-
-            //   result.readData(testArray);
+            int roomIndex = 0;
+            int userCount = 0;
+            base.readData(stream);
 
 
-            areaData.roomIndex = param1.readInt();
-            var _loc_2 = param1.readInt();
+
+            areaData.roomIndex = stream.readInt();
+            var roomcount = stream.readInt();
             //areaData.users = this.Vector.<int>([-1, -1, -1, -1, -1]);
-            Hashtable _loc_3 = new Hashtable();
+            Dictionary<int, int> roomusernum = new Dictionary<int, int>();
 
-            int _loc_4 = 0;
-            int _loc_5 = 0;
-            while (_loc_5 < _loc_2)
+            int maxcount = 0;
+            int i = 0;
+            while (i < roomcount)
             {
 
-                _loc_6 = param1.readInt();
-                _loc_7 = param1.readInt();
-                _loc_3[_loc_6.ToString()] = _loc_7.ToString();
-                if (_loc_6 > _loc_4)
+                roomIndex = stream.readInt();
+                userCount = stream.readInt();
+                roomusernum[roomIndex] = userCount;
+                if (roomIndex > maxcount)
                 {
-                    _loc_4 = _loc_6;
+                    maxcount = roomIndex;
                 }
-                _loc_5++;
+                i++;
             }
-            _loc_4++;
-            _loc_5 = 0;
-            while (_loc_5 < _loc_4)
+            maxcount++;
+            i = 0;
+            while (i < maxcount)
             {
 
-                if (_loc_3[_loc_5] != null)
+                if (roomusernum.ContainsKey(i))
                 {
-                    areaData.users[_loc_5.ToString()] = _loc_3[_loc_5];
+                    areaData.users[i] = (int)roomusernum[i];
                 }
-                _loc_5++;
+                i++;
             }
-            areaData.expansionSize = _loc_4 - 1;
-            areaData.hasGarden = !(_loc_3[0] == null);
+            areaData.expansionSize = maxcount - 1;
+            areaData.hasGarden = !((roomusernum.ContainsKey(0)));
             areaData.ownerData = new AreaOwnerData();
-            areaData.ownerData.readData(param1);
+            areaData.ownerData.readData(stream);
             areaData.hasLeftFootPrintToday = areaData.ownerData.hasLeftFootPrintToday;
             areaData.numFootPrintToday = areaData.ownerData.numFootPrintToday;
-            isPiggLifeAvailable = param1.readByte();
-            isPiggIslandAvailable = param1.readByte();
-            isPiggCafeAvailable = param1.readByte();
-            isPiggWorldAvailable = param1.readByte();
-            isCheckPlaceGift = param1.readBoolean();
-            areaData.ownerData.isGroupMessageEnabled = param1.readBoolean();
-            areaData.canMoveGarden = param1.readBoolean();
-            //  log("OneMessageUtil.ENABLE::" + OneMessageUtil.ENABLE);
-            /* if(OneMessageUtil.ENABLE)
-             {
-                log("一言メッセージ");*/
-            areaData.oneMessage = param1.readUTF();
-            /* log(areaData.oneMessage);
-          }*/
-            var _loc6_ = param1.readBoolean();
-            if (_loc6_ == true)
+            isPiggLifeAvailable = stream.readByte();
+            isPiggIslandAvailable = stream.readByte();
+            isPiggCafeAvailable = stream.readByte();
+            isPiggWorldAvailable = stream.readByte();
+            isCheckPlaceGift = stream.readBoolean();
+            areaData.ownerData.isGroupMessageEnabled = stream.readBoolean();
+            areaData.canMoveGarden = stream.readBoolean();
+
+            areaData.oneMessage = stream.readUTF();
+
+            var isEvent = stream.readBoolean();
+            if (isEvent == true)
             {
-                var _loc10_ = param1.readUTF();
-                var _loc11_ = param1.readUTF();
-                var _loc12_ = param1.readUTF();
-                var _loc13_ = param1.readUTF();
-                var _loc14_ = param1.readDouble();
-                var _loc15_ = param1.readDouble();
-                // var   _arrowEventData = new EventArrowData(_loc10_,_loc11_,_loc12_,_loc13_,_loc14_,_loc15_);
+                var swfCode = stream.readUTF();
+                var eventAreaMessage = stream.readUTF();
+                var category = stream.readUTF();
+                var subCategoryCode = stream.readUTF();
+                var startTime = stream.readDouble();
+                var endTime = stream.readDouble();
+                _arrowEventData = new EventArrowData(swfCode, eventAreaMessage, category, subCategoryCode, startTime, endTime);
             }
-            areaData.becomableFriend = param1.readBoolean();
-            defaultOwnerEnterRoomNum = param1.readByte();
-            defaultVisitorEnterRoomNum = param1.readByte();
+            areaData.becomableFriend = stream.readBoolean();
+            defaultOwnerEnterRoomNum = stream.readByte();
+            defaultVisitorEnterRoomNum = stream.readByte();
             diaryRoomData = new DiaryRoomData();
-            diaryRoomData.readData(param1);
-            areaData.isSupportContest = isSupportContest = param1.readBoolean();
+            diaryRoomData.readData(stream);
+            areaData.isSupportContest = isSupportContest = stream.readBoolean();
             if (isSupportContest)
             {
-                areaData.contestCode = contestCode = param1.readUTF();
+                areaData.contestCode = contestCode = stream.readUTF();
             }
             petSolveFurniturePlaceListData = new List<PetSolveFurniturePlaceData>();
-            var _loc2_ = param1.readInt();
-            var _loc5_ = 0;
-            while (_loc5_ < _loc2_)
+            var petslovefuruniNum = stream.readInt();
+            i = 0;
+            while (i < petslovefuruniNum)
             {
-                var _loc16_ = new PetSolveFurniturePlaceData();
-                _loc16_.furnitureId = param1.readUTF();
-                _loc16_.roomIndex = param1.readInt();
-                _loc16_.countSelf = param1.readInt();
-                _loc16_.countOther = param1.readInt();
-                _loc16_.countMax = param1.readInt();
-                petSolveFurniturePlaceListData.Add(_loc16_);
-                _loc5_++;
+                var petsloveData = new PetSolveFurniturePlaceData();
+                petsloveData.furnitureId = stream.readUTF();
+                petsloveData.roomIndex = stream.readInt();
+                petsloveData.countSelf = stream.readInt();
+                petsloveData.countOther = stream.readInt();
+                petsloveData.countMax = stream.readInt();
+                petSolveFurniturePlaceListData.Add(petsloveData);
+                i++;
             }
-            enablePetSolveFurniture = param1.readBoolean();
-            allowMannequinDetail = param1.readByte();
-            _loc2_ = param1.readByte();
-            //    Poyon66d4.Engine.Log("<<","\n=== EnterUserRoomResultData count=" + _loc2_);
-            areaMannequins = new List<MannequinData>(_loc2_);
-            _loc5_ = 0;
-            while (_loc5_ < _loc2_)
+            enablePetSolveFurniture = stream.readBoolean();
+            allowMannequinDetail = stream.readByte();
+            petslovefuruniNum = stream.readByte();
+     
+            areaMannequins = new List<MannequinData>(petslovefuruniNum);
+            i = 0;
+            while (i < petslovefuruniNum)
             {
-                var _loc7_ = new MannequinData();
-                _loc7_.readDataEnterRoom(param1);
-                areaMannequins.Add(_loc7_);
-                //  Poyon66d4.Engine.Log("<<","new MQ_ID:" + _loc7_.mannequinId);
-                _loc5_++;
+                var mannequindata = new MannequinData();
+                mannequindata.readDataEnterRoom(stream);
+                areaMannequins.Add(mannequindata);
+                i++;
             }
         }
-        public override void writeData(AmebaStream param1)
+        public override void writeData(PiggStream stream)
         {
-            base.writeData(param1);
-            param1.writeInt(areaData.roomIndex);
-            param1.writeInt(areaData.users.Count);
-            foreach (KeyValuePair<string, string> entry in areaData.users)
+            base.writeData(stream);
+            stream.writeInt(areaData.roomIndex);
+            stream.writeInt(areaData.users.Count);
+            foreach (KeyValuePair<int, int> entry in areaData.users)
             {
-                param1.writeInt(Convert.ToInt32(entry.Value));
-                param1.writeInt(Convert.ToInt32(entry.Key));
+                stream.writeInt(Convert.ToInt32(entry.Key));
+                stream.writeInt(Convert.ToInt32(entry.Value));
             }
 
 
-            areaData.ownerData = new AreaOwnerData();
-            areaData.ownerData.writeData(param1);
 
-            param1.writeByte((byte)isPiggLifeAvailable);
-            param1.writeByte((byte)isPiggIslandAvailable);
-            param1.writeByte((byte)isPiggCafeAvailable);
-            // log(isPiggCafeAvailable);
+            areaData.ownerData.writeData(stream);
+
+            stream.writeByte((byte)isPiggLifeAvailable);
+            stream.writeByte((byte)isPiggIslandAvailable);
+            stream.writeByte((byte)isPiggCafeAvailable);
+
+            stream.writeByte((byte)isPiggWorldAvailable);
+            stream.writeBoolean(isCheckPlaceGift);
+            stream.writeBoolean(areaData.ownerData.isGroupMessageEnabled);
+            stream.writeBoolean(areaData.canMoveGarden);
+            stream.writeUTF(areaData.oneMessage);
+
+            if (_arrowEventData != null)
+            {
+                stream.writeBoolean(true);
+                stream.writeUTF(_arrowEventData.swfCode);
+
+                stream.writeUTF(_arrowEventData.eventAreaMessage);
+
+
+                stream.writeUTF(_arrowEventData.category);
+
+                stream.writeUTF(_arrowEventData.subCategoryCode);
+
+                stream.writeDouble(_arrowEventData.startTime);
+                stream.writeDouble(_arrowEventData.endTime);
 
 
 
+            }
+            else
+            {
+                stream.writeBoolean(false);
+            }
 
-            param1.writeByte((byte)isPiggWorldAvailable);
-            param1.writeBoolean(isCheckPlaceGift);
-            param1.writeBoolean(areaData.ownerData.isGroupMessageEnabled);
-            param1.writeBoolean(areaData.canMoveGarden);
-            param1.writeUTF(areaData.oneMessage);
-            param1.writeBoolean(false);
-            param1.writeBoolean(areaData.becomableFriend);
+            stream.writeBoolean(areaData.becomableFriend);
+            stream.writeByte(defaultOwnerEnterRoomNum);
+            stream.writeByte(defaultVisitorEnterRoomNum);
+            diaryRoomData.writeData(stream);
+            stream.writeBoolean(isSupportContest);
+            if (isSupportContest)
+            {
+                stream.writeUTF(areaData.contestCode);
+            }
 
+            stream.writeInt(petSolveFurniturePlaceListData.Count);
+            foreach (PetSolveFurniturePlaceData data in petSolveFurniturePlaceListData)
+            {
+                stream.writeUTF(data.furnitureId);
+                stream.writeInt(data.roomIndex);
+                stream.writeInt(data.countSelf);
+                stream.writeInt(data.countOther);
+                stream.writeInt(data.countMax);
+            }
+            stream.writeBoolean(enablePetSolveFurniture);
+            stream.writeByte(allowMannequinDetail);
+            stream.writeByte((byte)areaMannequins.Count);
+            foreach (MannequinData data in areaMannequins)
+            {
+                data.writeDataEnterRoom(stream);
+            }
         }
 
-        public sbyte defaultOwnerEnterRoomNum { get; set; }
-
-        public sbyte defaultVisitorEnterRoomNum { get; set; }
-
-        public DiaryRoomData diaryRoomData { get; set; }
-
-        public bool isSupportContest { get; set; }
-
-        public string contestCode { get; set; }
-
-        public List<PetSolveFurniturePlaceData> petSolveFurniturePlaceListData { get; set; }
-
-        public bool enablePetSolveFurniture { get; set; }
-
-        public sbyte allowMannequinDetail { get; set; }
-
-        public List<MannequinData> areaMannequins { get; set; }
     }
 }
-

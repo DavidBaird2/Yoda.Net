@@ -1,11 +1,11 @@
 ﻿
 
 
-namespace Yoda.Net.Networking.Packet.Chat.game.data
+namespace Yoda.Net.Networking.Packet.Chat.Game.Data
 {
 
 
-    public class GameLeaveData : IPacket
+    public class GameLeaveData : ICommandData
     {
         public int gameRoomId;
         public string gameCode;
@@ -21,14 +21,14 @@ namespace Yoda.Net.Networking.Packet.Chat.game.data
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             gameRoomId = In.readInt();
             gameCode = In.readUTF();
         }
 
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(gameRoomId);
             Out.writeUTF(gameCode);

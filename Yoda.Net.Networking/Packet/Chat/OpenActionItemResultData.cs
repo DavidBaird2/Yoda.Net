@@ -3,7 +3,7 @@
 
     using System;
     using Yoda.Net.Networking.Data.Gift;
-    public class OpenActionItemResultData : IPacket
+    public class OpenActionItemResultData : ICommandData
     {
         public int sequence;
         public GiftData giftData;
@@ -21,7 +21,7 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
 
             sequence = In.readInt();
@@ -37,7 +37,7 @@
             giftData.actionItemType = In.readByte();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
    
         }

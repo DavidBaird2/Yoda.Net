@@ -4,7 +4,7 @@
     using System;
     
 
-    public class EnterQueueStartResultData :  IPacket,IEncrypted
+    public class EnterQueueStartResultData :  ICommandData
     {
 
         public int packetId
@@ -21,23 +21,23 @@
 
 
 
-        public void readData(AmebaStream param1)
+        public void readData(PiggStream stream)
         {
-            this.category = param1.readUTF();
-            this.subCategoryCode = param1.readUTF();
-            this.areaCode = param1.readUTF();
-            this.roomIndex = param1.readInt();
-            this.areaType = param1.readByte();
-            this.imagePath = param1.readUTF();
-            this.upperDescription = param1.readUTF();
-            this.lowerDescription = param1.readUTF();
-            this.count = param1.readInt();
+            this.category = stream.readUTF();
+            this.subCategoryCode = stream.readUTF();
+            this.areaCode = stream.readUTF();
+            this.roomIndex = stream.readInt();
+            this.areaType = stream.readByte();
+            this.imagePath = stream.readUTF();
+            this.upperDescription = stream.readUTF();
+            this.lowerDescription = stream.readUTF();
+            this.count = stream.readInt();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-
-            return;
+            throw new NotImplementedException();
+           
         }
 
 

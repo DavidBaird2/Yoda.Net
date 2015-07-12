@@ -12,7 +12,7 @@
         public short y;
         public short z;
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.petId = In.readInt();
             this.x = In.readShort();

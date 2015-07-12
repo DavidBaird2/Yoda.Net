@@ -1,10 +1,10 @@
-﻿namespace libPigg.net.info.user
+﻿namespace Yoda.Net.Networking.Packet.Info.User
 {
 
     using Yoda.Net.Networking;
     using Yoda.Net.Networking.Packet;
     using Yoda.Net.Networking.Packet.Info;
-    public class CreateUserResultData : IPacket
+    public class CreateUserResultData : ICommandData
     {
 
         public int packetId
@@ -15,12 +15,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
 
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
 
         }

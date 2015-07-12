@@ -4,7 +4,7 @@
     
     using System;
     using System.Collections;
-    public class CasinoBuyPointExecuteData : IPacket
+    public class CasinoBuyPointExecuteData : ICommandData
     {
         public int buypoint;
         public CasinoBuyPointExecuteData()
@@ -19,13 +19,13 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
 
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(buypoint);
             return;

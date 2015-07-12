@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Yoda.Net.Networking.Data.Gacha;
-using Yoda.Net.Networking.Packet.Data.gacha;
 
 
 
 namespace Yoda.Net.Networking.Packet.Info.gacha
 {
-    public class GetGachaResultData : IPacket
+    public class GetGachaResultData : ICommandData
     {
         public int paytType;
         public int point;
@@ -21,23 +20,19 @@ namespace Yoda.Net.Networking.Packet.Info.gacha
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             return;
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
+            throw new NotImplementedException();
+            /*
             gachaData = new GachaData();
             gachaData.readData(In);
-      /*      point = In.readInt();
-            gachaData.genderCode = In.readInt();
-            gachaData.playCount = In.readInt();
-            gachaData.isDisEnableCoupon = In.readBoolean();
-            gachaData.couponQuantiry = In.readInt();
-            gachaData.isEnableDarts = In.readBoolean();
-            paytType = gachaData.payType;*/
-            return;
+            */
+       
         }
 
         public int packetId

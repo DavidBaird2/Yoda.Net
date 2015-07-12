@@ -1,13 +1,13 @@
 ﻿
 
 
-namespace Yoda.Net.Networking.Packet.Chat.game.data
+namespace Yoda.Net.Networking.Packet.Chat.Game.Data
 {
 
-    public class GameData : IPacket
+    public class GameData : ICommandData
     {
         public int id;
-        public AmebaStream data;
+        public PiggStream data;
 
         public GameData()
         {
@@ -21,19 +21,18 @@ namespace Yoda.Net.Networking.Packet.Chat.game.data
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             id = In.readShort();
-            data = new AmebaStream();
+            data = new PiggStream();
             data.writeBytes(In.readBytes((int)(In.length - In.BaseStream.Position)));
             data.position = 0;
             
         }
 
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-           // Engine.Log("writeData:onGame::"+ id+ data.position+ data.length);
             Out.writeInt(id);
             data.position = 0;
             Out.writeBytes(data.readBytes((int)data.length));

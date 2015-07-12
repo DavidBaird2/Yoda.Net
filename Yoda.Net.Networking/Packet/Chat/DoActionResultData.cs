@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Yoda.Net.Networking.Packet.Chat
 {
-	public class DoActionResultData :IPacket 
+	public class DoActionResultData :ICommandData 
 	{
                public string userCode;
                public string actionCode;
@@ -28,17 +28,17 @@ namespace Yoda.Net.Networking.Packet.Chat
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.userCode = In.readUTF();
             this.actionCode = In.readUTF();
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-          // Out.writeUTF(code);
-            return;
+            Out.writeUTF(userCode);
+            Out.writeUTF(actionCode);
         }
 
 	}

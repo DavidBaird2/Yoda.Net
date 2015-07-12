@@ -14,13 +14,13 @@
         private BodyPositionData _position;
         private BodyPartData _part;
         private BodyItemData _item;
-        public CreateAvatarData(BodyPartData param1, BodyColorData param2, BodyPositionData param3, BodyItemData param4, string param5)
+        public CreateAvatarData(BodyPartData part, BodyColorData color, BodyPositionData position, BodyItemData item, string room)
         {
-            _part = param1;
-            _color = param2;
-            _position = param3;
-            _item = param4;
-            _room = param5;
+            _part = part;
+            _color = color;
+            _position = position;
+            _item = item;
+            _room = room;
             return;
         }
         public CreateAvatarData()
@@ -32,19 +32,18 @@
         }
         public byte[] binary()
         {
-            var _loc_1 = new AmebaStream();
+            var stream = new PiggStream();
 
-            //_part.gender = 2;
-            _part.writeData(_loc_1,true);
-            _color.writeData(_loc_1);
-            _position.writeData(_loc_1);
+            _part.writeData(stream,true);
+            _color.writeData(stream);
+            _position.writeData(stream);
             _item.items[0] = "skirt_standard_pink";
-            _item.writeData(_loc_1);
+            _item.writeData(stream);
           
-            _loc_1.writeUTF(_room);
-          //  _loc_1.compress();
-            _loc_1.position = 0;
-            byte[] data = _loc_1.readBytes((int)_loc_1.length);
+            stream.writeUTF(_room);
+
+            stream.position = 0;
+            byte[] data = stream.readBytes((int)stream.length);
             FileCompressionUtility util = new FileCompressionUtility();
             byte[] Compresseddata = util.Compress(data);
             return Compresseddata;
@@ -55,12 +54,12 @@
             FileCompressionUtility zlib = new FileCompressionUtility();
             byte[] _data = zlib.uncompress(cdata);
 
-            var _loc_1 = new AmebaStream(_data);
-            _part.readData(_loc_1,true);
-            _color.readData(_loc_1);
-            _position.readData(_loc_1);
-            _item.readData(_loc_1);
-            _room = _loc_1.readUTF();
+            var stream = new PiggStream(_data);
+            _part.readData(stream,true);
+            _color.readData(stream);
+            _position.readData(stream);
+            _item.readData(stream);
+            _room = stream.readUTF();
 
         }
 

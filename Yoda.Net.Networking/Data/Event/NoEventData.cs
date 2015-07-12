@@ -7,7 +7,7 @@ namespace Yoda.Net.Networking.Packet.Data.Event
 {
     public class NoEventData
     {
-               public bool image;
+        public bool image;
         public string ownerUserCode;
         public string originPath;
         public string thumbPath;

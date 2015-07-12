@@ -14,7 +14,7 @@
         public bool isPublic;
         public string description;
 
-       public void readData(AmebaStream In)
+       public void readData(PiggStream In)
         {
             title = In.readUTF();
             isPublic = In.readBoolean();
@@ -23,7 +23,7 @@
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(title);
             Out.writeBoolean(isPublic);
@@ -32,12 +32,12 @@
             return;
         }
 
-        public void setData(ClubConfigData param1)
+        public void setData(ClubConfigData stream)
         {
-            title = param1.title;
-            isPublic = param1.isPublic;
-            description = param1.description;
-            clubCode = param1.clubCode;
+            title = stream.title;
+            isPublic = stream.isPublic;
+            description = stream.description;
+            clubCode = stream.clubCode;
             return;
         }
 

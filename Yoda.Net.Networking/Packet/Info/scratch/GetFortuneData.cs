@@ -4,7 +4,7 @@
     
     using System;
 
-    public class GetFortuneData : IPacket
+    public class GetFortuneData : ICommandData
     {
   
         public int packetId
@@ -20,12 +20,12 @@
             return;
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
       
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
        
             return;

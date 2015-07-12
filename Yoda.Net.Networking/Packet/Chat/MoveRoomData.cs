@@ -5,7 +5,7 @@
     using System;
 
 
-    public class MoveRoomData : IPacket,IEncrypted
+    public class MoveRoomData : ICommandData,IEncrypted
     {
  public int room;
         public bool targetUser;
@@ -20,13 +20,13 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             room = In.readInt();
             targetUser = In.readBoolean();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(this.room);
             Out.writeBoolean(this.targetUser);

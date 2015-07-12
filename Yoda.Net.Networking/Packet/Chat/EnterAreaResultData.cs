@@ -1,11 +1,12 @@
 ﻿
+using System.Collections.Generic;
 using Yoda.Net.Networking.Data.Room;
 namespace Yoda.Net.Networking.Packet.Chat
 {
-    
-    
-    
-    
+
+
+
+
 
     public class EnterAreaResultData : BaseEnterRoomResultData
     {
@@ -24,7 +25,7 @@ namespace Yoda.Net.Networking.Packet.Chat
             }
         }
 
-            override public string commandType
+        override public string commandType
         {
             get
             {
@@ -32,50 +33,76 @@ namespace Yoda.Net.Networking.Packet.Chat
             }
         }
 
-        override public void readData(AmebaStream　param1) 
+        override public void readData(PiggStream stream)
         {
-            base.readData(param1);
-            return;
-            areaGameId = param1.readByte();
-            var _loc_2 = param1.readInt();
-              this.areaGameData= new byte[0];
-            if (_loc_2 != 0)
+            base.readData(stream);
+
+            areaGameId = stream.readByte();
+            var AreaGameDataBytes = stream.readInt();
+            this.areaGameData = new byte[0];
+            if (AreaGameDataBytes != 0)
             {
-                this.areaGameData = param1.readBytes(_loc_2);
-            //   param1.position = param1.position + _loc_2;
+                this.areaGameData = stream.readBytes(AreaGameDataBytes);
+
             }
-            isPiggDomeOpen = param1.readBoolean();
-            switch(areaData.categoryCode)
+            isPiggDomeOpen = stream.readBoolean();
+            switch (areaData.categoryCode)
             {
                 case "user":
                 case "club":
                 case "secret":
-                {
-                    break;
-                }
-                default:
-                {
-                    areaData.isPublished = param1.readBoolean();
-                    areaData.subCategoryCode = param1.readUTF();
-                    if (areaData.subCategoryCode == "casino_royale")
                     {
-                        areaData.isPublished = false;
+                        break;
                     }
-                    areaData.bundleCode = param1.readUTF();
-                    break;
-       
-                }
+                default:
+                    {
+                        areaData.isPublished = stream.readBoolean();
+                        areaData.zone = stream.readByte() + 1;
+                        areaData.subCategoryCode = stream.readUTF();
+
+                        areaData.bundleCode = stream.readUTF();
+                        var taglist = stream.readInt();
+                        areaData.tags = new Dictionary<int, int>(taglist);
+                        var i = 0;
+                        while (i < taglist)
+                        {
+                            areaData.tags[i] = stream.readByte();
+                            i++;
+                        }
+                        if (areaData.isMatchingArea = stream.readBoolean())
+                        {
+                            areaData.gameCode = stream.readUTF();
+                        }
+                        taglist = stream.readInt();
+                        defineTreasures = new List<DefineTreasure>(taglist);
+                        if (taglist > 0)
+                        {
+                            treasureId = stream.readInt();
+                            isTreasurePeriod = stream.readBoolean();
+                            var num = 0;
+                            while (num < taglist)
+                            {
+                                var treasure = new DefineTreasure();
+                                treasure.treasureCode = stream.readUTF();
+                                treasure.gotTreasure = stream.readBoolean();
+                                treasure.isPeriod = stream.readBoolean();
+                                defineTreasures.Add(treasure);
+                                num++;
+                            }
+                        }
+                        break;
+                    }
             }
             return;
         }
-        public override void writeData(AmebaStream Out)
+        public override void writeData(PiggStream Out)
         {
             base.writeData(Out);
             Out.writeByte((byte)areaGameId);
             Out.writeInt((int)areaGameData.Length);
             if (areaGameData.Length != 0)
             {
-                Out.writeBytes(new AmebaStream(areaGameData), 0, (int)areaGameData.Length);
+                Out.writeBytes(new PiggStream(areaGameData), 0, (int)areaGameData.Length);
             }
             Out.writeBoolean(isPiggDomeOpen);
             switch (areaData.categoryCode)
@@ -89,15 +116,42 @@ namespace Yoda.Net.Networking.Packet.Chat
                 default:
                     {
                         Out.writeBoolean(areaData.isPublished);
+                        Out.writeByte((byte)(areaData.zone - 1));
                         Out.writeUTF(areaData.subCategoryCode);
 
                         Out.writeUTF(areaData.bundleCode);
-
+                        Out.writeInt(areaData.tags.Count);
+                        foreach (KeyValuePair<int, int> e in areaData.tags)
+                        {
+                            Out.writeByte((byte)e.Value);
+                        }
+                        Out.writeBoolean(areaData.isMatchingArea);
+                        if (areaData.isMatchingArea)
+                        {
+                            Out.writeUTF(areaData.gameCode);
+                        }
+                        Out.writeInt(defineTreasures.Count);
+                        if (defineTreasures.Count > 0)
+                        {
+                            Out.writeInt(treasureId);
+                            Out.writeBoolean(isTreasurePeriod);
+                            foreach (DefineTreasure item in this.defineTreasures)
+                            {
+                                Out.writeUTF(item.treasureCode);
+                                Out.writeBoolean(item.gotTreasure);
+                                Out.writeBoolean(item.isPeriod);
+                            }
+                        }
                         break;
                     }
             }
             Out.writeBoolean(false);
         }
+
+        public List<DefineTreasure> defineTreasures { get; set; }
+
+        public bool isTreasurePeriod { get; set; }
+
+        public int treasureId { get; set; }
     }
 }
-

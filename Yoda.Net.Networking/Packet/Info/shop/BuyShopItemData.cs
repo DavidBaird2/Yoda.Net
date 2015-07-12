@@ -8,7 +8,7 @@ namespace Yoda.Net.Networking.Packet.Info.area
 
 
 
-    public class BuyShopItemData : IPacket, IEncrypted
+    public class BuyShopItemData : ICommandData, IEncrypted
     {
    
         public string itemCode;
@@ -27,7 +27,7 @@ namespace Yoda.Net.Networking.Packet.Info.area
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.shopCode = In.readUTF();
             this.itemType = In.readUTF();
@@ -37,7 +37,7 @@ namespace Yoda.Net.Networking.Packet.Info.area
             this.quantity = In.readInt();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(this.shopCode);
             Out.writeUTF(this.itemType);

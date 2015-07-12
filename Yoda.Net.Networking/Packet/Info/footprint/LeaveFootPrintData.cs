@@ -4,7 +4,7 @@
     
     using System;
     using System.Collections;
-    public class LeaveFootPrintData : IPacket, IEncrypted
+    public class LeaveFootPrintData : ICommandData, IEncrypted
     {
         public string code;
         public LeaveFootPrintData()
@@ -22,13 +22,13 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             code = In.readUTF();
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(code);
             return;

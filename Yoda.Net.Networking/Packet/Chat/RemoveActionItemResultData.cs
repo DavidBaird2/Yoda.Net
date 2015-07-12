@@ -4,7 +4,7 @@
     
     using System;
 
-    public class RemoveActionItemResultData : IPacket
+    public class RemoveActionItemResultData : ICommandData
     {
          public int sequence;
         public int actionItemType;
@@ -22,14 +22,15 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             sequence = In.readInt();
             actionItemType = In.readByte();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
+            throw new NotImplementedException();
         }
     }
 }

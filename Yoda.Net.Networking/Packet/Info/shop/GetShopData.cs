@@ -8,8 +8,11 @@ namespace Yoda.Net.Networking.Packet.Info.area
 
 
 
-    public class GetShopData : IPacket, IEncrypted
+    public class GetShopData : ICommandData, IEncrypted
     {
+        public GetShopData()
+        {
+        }
         public string shopCode;
         public string giftAcceptUser = "8874e43a01f8105e";
         public bool isAdminRequest;
@@ -21,24 +24,24 @@ namespace Yoda.Net.Networking.Packet.Info.area
                 return PacketId.GET_SHOP;
             }
         }
-        public GetShopData(string param1 = null, string param2 = null, bool param3 = false)
+        public GetShopData(string shopCode = null, string giftAcceptUser = null, bool isAdminRequest = false)
         {
-            this.shopCode = param1;
-            this.giftAcceptUser = param2;
-            this.isAdminRequest = param3;
+            this.shopCode = shopCode;
+            this.giftAcceptUser = giftAcceptUser;
+            this.isAdminRequest = isAdminRequest;
             return;
         } 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             shopCode = In.readUTF();
             giftAcceptUser = In.readUTF();
             isAdminRequest = In.readBoolean();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(shopCode);
-            Out.writeUTF("8874e43a01f8105e");
+            Out.writeUTF(giftAcceptUser);
             Out.writeBoolean(false);
         }
     }

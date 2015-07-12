@@ -1,11 +1,9 @@
 ﻿
-
-
-namespace Yoda.Net.Networking.Packet.Chat.game.data
+namespace Yoda.Net.Networking.Packet.Chat.Game.Data
 {
 
 
-    public class TableGameActionData : IPacket
+    public class TableGameActionData : ICommandData
     {
         public string method;
 
@@ -16,14 +14,18 @@ namespace Yoda.Net.Networking.Packet.Chat.game.data
                 return PacketId.TABLE_GAME_ACTION;
             }
         }
-        public TableGameActionData(string param1)
+        public TableGameActionData()
         {
-            this.method = param1;
+
+        }
+        public TableGameActionData(string method)
+        {
+            this.method = method;
 
             return;
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             method = In.readUTF();
 
@@ -31,7 +33,7 @@ namespace Yoda.Net.Networking.Packet.Chat.game.data
         }
 
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(method);
            

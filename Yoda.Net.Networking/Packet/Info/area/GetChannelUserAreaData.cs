@@ -7,13 +7,15 @@ using System.Text;
 
 namespace Yoda.Net.Networking.Packet.Info.area
 {
-    class GetChannelUserAreaData : IPacket
+    class GetChannelUserAreaData : ICommandData
     {
-
-        public string _userCode;
+        public GetChannelUserAreaData()
+        {
+        }
+        public string userCode;
         public GetChannelUserAreaData(string code)
         {
-            this._userCode = code;
+            this.userCode = code;
         }
         public int packetId
         {
@@ -23,18 +25,18 @@ namespace Yoda.Net.Networking.Packet.Info.area
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
 
-            _userCode = In.readUTF();
+            userCode = In.readUTF();
 
             return;
 
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            Out.writeUTF(_userCode);
+            Out.writeUTF(userCode);
 
             return;
         }

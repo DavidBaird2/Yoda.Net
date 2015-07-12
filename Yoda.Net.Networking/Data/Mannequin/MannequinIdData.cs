@@ -9,14 +9,14 @@ namespace Yoda.Net.Networking.Data.Mannequin
 {
     public class MannequinIdData
     {
-        public MannequinIdData(string param1 = null, int param2 = -1, string param3 = null, int param4 = -1, string param5 = "")
+        public MannequinIdData(string placeAreaCode = null, int sequence = -1, string furnitureId = null, int mode = -1, string operationId = "")
         {
 
-            this.placeAreaCode = param1;
-            this.sequence = param2;
-            this.furnitureId = param3;
-            this.mode = param4;
-            this.operationId = param5;
+            this.placeAreaCode = placeAreaCode;
+            this.sequence = sequence;
+            this.furnitureId = furnitureId;
+            this.mode = mode;
+            this.operationId = operationId;
         }
 
         public string placeAreaCode;
@@ -29,33 +29,38 @@ namespace Yoda.Net.Networking.Data.Mannequin
 
         public int mode;
 
-        public void readData(AmebaStream param1)
+        public void readData(PiggStream In)
         {
-            this.placeAreaCode = param1.readUTF();
-            this.sequence = param1.readInt();
-            this.furnitureId = param1.readUTF();
+            this.placeAreaCode = In.readUTF();
+            this.sequence = In.readInt();
+            this.furnitureId = In.readUTF();
         }
 
-        public void readAreaCodeAndSequenceData(AmebaStream param1)
+        public void readAreaCodeAndSequenceData(PiggStream stream)
         {
-            this.placeAreaCode = param1.readUTF();
-            this.sequence = param1.readInt();
+            this.placeAreaCode = stream.readUTF();
+            this.sequence = stream.readInt();
+        }
+        public void writeAreaCodeAndSequenceData(PiggStream Out)
+        {
+            Out.writeUTF(placeAreaCode);
+            Out.writeInt(sequence);
         }
 
-        public void writeData(AmebaStream param1)
+        public void writeData(PiggStream Out)
         {
-            param1.writeUTF(this.placeAreaCode);
-            param1.writeInt(this.sequence);
-            param1.writeUTF(this.furnitureId);
+            Out.writeUTF(this.placeAreaCode);
+            Out.writeInt(this.sequence);
+            Out.writeUTF(this.furnitureId);
         }
 
-        public bool isEqual(MannequinIdData param1)
+        public bool isEqual(MannequinIdData Stream)
         {
-            if (param1 == null)
+            if (Stream == null)
             {
                 return false;
             }
-            if (this.sequence == param1.sequence && this.placeAreaCode == param1.placeAreaCode)
+            if (this.sequence == Stream.sequence && this.placeAreaCode == Stream.placeAreaCode)
             {
                 return true;
             }

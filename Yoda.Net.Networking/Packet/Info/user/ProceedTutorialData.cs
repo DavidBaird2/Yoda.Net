@@ -1,4 +1,4 @@
-﻿namespace libPigg.net.info.user
+﻿namespace Yoda.Net.Networking.Packet.Info.User
 {
 
     using System;
@@ -6,13 +6,16 @@
     using Yoda.Net.Networking.Packet;
     using Yoda.Net.Networking.Packet.Info;
 
-    public class ProceedTutorialData : IPacket
+    public class ProceedTutorialData : ICommandData
     {
-        private int _step;
+        public ProceedTutorialData()
+        {
+        }
+        public int step;
 
         public ProceedTutorialData(int step)
         {
-            this._step = step;
+            this.step = step;
         }
         public int packetId
         {
@@ -22,14 +25,14 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-           _step= In.readInt();
+           step= In.readInt();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            Out.writeInt(_step);
+            Out.writeInt(step);
         }
     }
 }

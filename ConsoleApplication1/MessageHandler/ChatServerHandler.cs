@@ -8,16 +8,16 @@ using Yoda.Net.Proxy;
 
 namespace ConsoleApplication1
 {
-    class ChatServerHandler : IMessageDelegate
+    class ChatServerHandler : IMessageHandler
     {
+        private ProxySession session;
         public ChatServerHandler(ProxySession session)
         {
-
+            this.session = session;
         }
-        public CommandRouteOption onGetAreaResult(EnterUserRoomResultData data)
+        public CommandRoute onEnterUserRoomResult(EnterUserRoomResultData data)
         {
-            data.areaData.areaName = "test";
-            return CommandRouteOption.Nothing;
+            return CommandRoute.Nothing;
         }
     }
 }

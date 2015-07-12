@@ -5,9 +5,9 @@
     using Yoda.Net.Networking.Packet.Info;
     using System.Collections;
     using System;
-    using Yoda.Net.Networking.Packet.Data.pet;
+    using Yoda.Net.Networking.Data.Pet;
 
-    public class BuyPetResultData : IPacket
+    public class BuyPetResultData : ICommandData
     {
         public bool confirm;
         public bool insufficient;
@@ -29,7 +29,7 @@
         {
             return;
         }
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             data = new PetData();
             data.petId = In.readInt();
@@ -43,9 +43,10 @@
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            return;
+            throw new NotImplementedException();
+           
         }
     }
 }

@@ -15,7 +15,7 @@
         public short lip = -1;
         public short skin = 2;
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.skin = In.readShort();
             this.hair = In.readShort();
@@ -27,19 +27,19 @@
             this.eyeshadow = In.readShort();
         }
 
-        public void setData(BodyColorData param1)
+        public void setData(BodyColorData stream)
         {
-            this.skin = param1.skin;
-            this.hair = param1.hair;
-            this.eyebrow = param1.eyebrow;
-            this.eye = param1.eye;
-            this.beard = param1.beard;
-            this.lip = param1.lip;
-            this.cheek = param1.cheek;
-            this.eyeshadow = param1.eyeshadow;
+            this.skin = stream.skin;
+            this.hair = stream.hair;
+            this.eyebrow = stream.eyebrow;
+            this.eye = stream.eye;
+            this.beard = stream.beard;
+            this.lip = stream.lip;
+            this.cheek = stream.cheek;
+            this.eyeshadow = stream.eyeshadow;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeShort(this.skin);
             Out.writeShort(this.hair);

@@ -6,7 +6,7 @@
     using System.Runtime.InteropServices;
     
 
-    public class ErrorData : IPacket
+    public class ErrorData : ICommandData
     {
         public string message;
         public string exceptionClass;
@@ -27,33 +27,33 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-            var _loc_2 = In.readShort();
-            if (_loc_2 >= 0)
+            var len = In.readShort();
+            if (len >= 0)
             {
-                code = In.readUTFBytes(_loc_2);
+                code = In.readUTFBytes(len);
             }
-            _loc_2 = In.readShort();
-            if (_loc_2 >= 0)
+            len = In.readShort();
+            if (len >= 0)
             {
-                message = In.readUTFBytes(_loc_2);
+                message = In.readUTFBytes(len);
             }
-            _loc_2 = In.readShort();
-            if (_loc_2 >= 0)
+            len = In.readShort();
+            if (len >= 0)
             {
-                exceptionClass = In.readUTFBytes(_loc_2);
+                exceptionClass = In.readUTFBytes(len);
             }
-            _loc_2 = In.readShort();
-            if (_loc_2 >= 0)
+            len = In.readShort();
+            if (len >= 0)
             {
-                exceptionTrace = In.readUTFBytes(_loc_2);
+                exceptionTrace = In.readUTFBytes(len);
             }
             causePacketId = In.readShort();
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(code);
             Out.writeUTF(message);
@@ -64,7 +64,6 @@
         }
         public string toString()
         {
-          //  return "***** ERROR DATA *****\n" + code + "\n" + message + "\n" + exceptionClass + "\n" + exceptionTrace + "\n" + causePacketId + "\n";
             return "ERROR\n" + code + "\n" + message + "\n" + exceptionClass + "\n" + exceptionTrace + "\n" + causePacketId + "\n";
         }
     }

@@ -22,7 +22,7 @@
         /// <summary>
         /// clientのwriteの場合は先頭にgenderがあるのでreadの際注意が必要
         /// </summary>
-        public void readData(AmebaStream In,bool appendGender = false)
+        public void readData(PiggStream In,bool appendGender = false)
         {
             if (appendGender)
             {
@@ -41,24 +41,24 @@
             this.option = In.readShort();
         }
 
-        public void setData(BodyPartData param1)
+        public void setData(BodyPartData stream)
         {
-            this.gender = param1.gender;
-            this.beard = param1.beard;
-            this.eye = param1.eye;
-            this.eyebrow = param1.eyebrow;
-            this.face = param1.face;
-            this.hairBack = param1.hairBack;
-            this.hairFront = param1.hairFront;
-            this.mole1 = param1.mole1;
-            this.mole2 = param1.mole2;
-            this.mouth = param1.mouth;
-            this.nose = param1.nose;
+            this.gender = stream.gender;
+            this.beard = stream.beard;
+            this.eye = stream.eye;
+            this.eyebrow = stream.eyebrow;
+            this.face = stream.face;
+            this.hairBack = stream.hairBack;
+            this.hairFront = stream.hairFront;
+            this.mole1 = stream.mole1;
+            this.mole2 = stream.mole2;
+            this.mouth = stream.mouth;
+            this.nose = stream.nose;
         }
         /// <summary>
         /// clientのwriteの場合は先頭にgenderを付け加える必要がある
         /// </summary>
-        public void writeData(AmebaStream Out,bool appendGender = false)
+        public void writeData(PiggStream Out,bool appendGender = false)
         {
             if (appendGender)
             {

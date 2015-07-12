@@ -4,13 +4,16 @@
     
     using System;
 
-    public class UseActionItemData : IPacket
+    public class UseActionItemData : ICommandData
     {
-        private int _sequence;
-
-        public UseActionItemData(int param1)
+        public UseActionItemData()
         {
-            this._sequence = param1;
+        }
+        public int sequence;
+
+        public UseActionItemData(int sequence)
+        {
+            this.sequence = sequence;
         }
 
         public int packetId
@@ -21,13 +24,13 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            Out.writeInt(this._sequence);
+            Out.writeInt(this.sequence);
         }
     }
 }

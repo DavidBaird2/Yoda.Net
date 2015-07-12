@@ -6,20 +6,20 @@
     using System.Collections;
     using System;
 
-    public class BuyPetData : IPacket
+    public class BuyPetData : ICommandData
     {
-        private bool _confirm;
-        private string _areaCategory;
-        private string _areaCode;
-        private int _petId;
-        private bool _useCopon;
-        public BuyPetData(int param1, string param2, string param3, bool param4,bool useCopon)
+        public bool confirm;
+        public string areaCategory;
+        public string areaCode;
+        public int petId;
+        public bool useCopon;
+        public BuyPetData(int petId, string areaCategory, string areaCode, bool confirm,bool useCopon)
         {
-            _petId = param1;
-            _areaCategory = param2;
-            _areaCode = param3;
-            _confirm = param4;
-            _useCopon = useCopon;
+            this.petId = petId;
+            this.areaCategory = areaCategory;
+            this.areaCode = areaCode;
+            this.confirm = confirm;
+            this.useCopon = useCopon;
             return;
         }
 
@@ -34,18 +34,19 @@
         {
             return;
         }
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-            return;
+            throw new NotImplementedException();
+
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            Out.writeInt(_petId);
-            Out.writeUTF(_areaCategory);
-            Out.writeUTF(_areaCode);
-            Out.writeBoolean(_confirm);
-            Out.writeBoolean(_useCopon);
+            Out.writeInt(petId);
+            Out.writeUTF(areaCategory);
+            Out.writeUTF(areaCode);
+            Out.writeBoolean(confirm);
+            Out.writeBoolean(useCopon);
             return;
         }
     }

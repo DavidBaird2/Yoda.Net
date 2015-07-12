@@ -12,36 +12,36 @@ namespace Yoda.Net.Networking.Data.Action
     class ActionListData
     {
         public ArrayList list;
-        public ActionListData(ArrayList param1)
+        public ActionListData(ArrayList  list)
         {
-            list = param1;
+            this.list = list;
             return;
         }
-        public AmebaStream binary()
+        public PiggStream binary()
         {
-            var _loc_4 = new AmebaStream();
-            foreach (ActionData _loc_6 in list)
+            var stream = new PiggStream();
+            foreach (ActionData ad in list)
             {
-                _loc_4.writeUTF(_loc_6.code);
+                stream.writeUTF(ad.code);
 
             }
             FileCompressionUtility zlib = new FileCompressionUtility();
-            byte[] compressed = zlib.Compress(_loc_4.toArray());
-            _loc_4.position = 0;
-            return _loc_4;
+            byte[] compressed = zlib.Compress(stream.toArray());
+            stream.position = 0;
+            return stream;
         }
-        public void decompress(AmebaStream data, int actionCount)
+        public void decompress(PiggStream data, int actionCount)
         {
             FileCompressionUtility zlib = new FileCompressionUtility();
-            var stream = new AmebaStream(zlib.uncompress(data.toArrayLast()));
+            var stream = new PiggStream(zlib.uncompress(data.toArrayLast()));
             list = new ArrayList();
             int num = 0;
             while (num < actionCount)
             {
 
-                var _loc_6 = new ActionData();
-                _loc_6.code = stream.readUTF();
-                list.Add(_loc_6);
+                var ad = new ActionData();
+                ad.code = stream.readUTF();
+                list.Add(ad);
                 num++;
             }
         }

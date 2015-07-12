@@ -6,7 +6,7 @@ namespace Yoda.Net.Networking.Packet.Chat
     
     
 
-    public class PlaceFurnitureData : IPacket, IEncrypted
+    public class PlaceFurnitureData : ICommandData, IEncrypted
     {
         public string code;
         public int dir;
@@ -35,7 +35,7 @@ namespace Yoda.Net.Networking.Packet.Chat
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.code = In.readUTF();
             this.dir = In.readByte();
@@ -44,7 +44,7 @@ namespace Yoda.Net.Networking.Packet.Chat
             this.z = In.readInt();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(this.code);
             Out.writeByte((byte) this.dir);

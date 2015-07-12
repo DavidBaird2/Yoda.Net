@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Yoda.Net.Networking
 {
-    public interface IMessageDelegate
+    public interface IMessageHandler
     {
     }
 }

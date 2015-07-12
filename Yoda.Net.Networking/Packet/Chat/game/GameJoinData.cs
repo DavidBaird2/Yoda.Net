@@ -1,11 +1,11 @@
 ﻿
 
 
-namespace Yoda.Net.Networking.Packet.Chat.game.data
+namespace Yoda.Net.Networking.Packet.Chat.Game.Data
 {
 
 
-    public class GameJoinData : IPacket
+    public class GameJoinData : ICommandData
     {
         public int opts;
         public int gameRoomId;
@@ -23,23 +23,23 @@ namespace Yoda.Net.Networking.Packet.Chat.game.data
         }
         public virtual int packetId
         {
-             get
+            get
             {
-            return PacketId.GAME_JOIN;
+                return PacketId.GAME_JOIN;
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.gameRoomId = In.readInt();
             this.gameCode = In.readUTF();
             this.enableEntry = In.readBoolean();
             this.opts = In.readInt();
-            
+
         }
 
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(gameRoomId);
             Out.writeUTF(gameCode);

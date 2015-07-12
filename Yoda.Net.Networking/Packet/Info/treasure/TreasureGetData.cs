@@ -1,10 +1,13 @@
 ﻿namespace Yoda.Net.Networking.Packet.Info.shop
 {
-    
-    
+
+
     using System;
-    public class TreasureGetData : IPacket
+    public class TreasureGetData : ICommandData
     {
+        public TreasureGetData()
+        {
+        }
         private int _treasureId;
         private string _code;
         public TreasureGetData(int treasureId, string code)
@@ -22,17 +25,13 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-          /*  this.shopCode = In.readUTF();
-            this.itemType = In.readUTF();
-            this.itemCode = In.readUTF();
-            this.coupon = In.readBoolean();
-            this.shopType = In.readInt();
-            this.quantity = In.readInt();*/
+
+            throw new NotImplementedException();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(_treasureId);
             Out.writeUTF(_code);

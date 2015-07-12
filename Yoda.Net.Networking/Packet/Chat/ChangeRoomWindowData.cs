@@ -6,17 +6,20 @@ using System.Text;
 
 namespace Yoda.Net.Networking.Packet.Chat
 {
-	public class ChangeRoomWindowData :IPacket
-	{
-        public AmebaStream byteArray;
+    public class ChangeRoomWindowData : ICommandData
+    {
+        public PiggStream byteArray;
         public string method;
-        public ChangeRoomWindowData(string _method, AmebaStream _byteArray)
+        public ChangeRoomWindowData(string _method, PiggStream _byteArray)
         {
             this.method = _method;
             this.byteArray = _byteArray;
             return;
         }
+        public ChangeRoomWindowData()
+        {
 
+        }
         public int packetId
         {
             get
@@ -25,17 +28,17 @@ namespace Yoda.Net.Networking.Packet.Chat
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-            return;
+            throw new NotImplementedException();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(method);
             Out.writeBytes(this.byteArray, (int)this.byteArray.position, (int)(this.byteArray.length - this.byteArray.position));
             return;
         }
 
-	}
+    }
 }

@@ -5,8 +5,8 @@
     using System;
 
     using System.Collections;
-    using Yoda.Net.Networking.Packet.Data.footprint;
-    public class ListFootPrintResultData : IPacket
+    using Yoda.Net.Networking.Data.Footprint;
+    public class ListFootPrintResultData : ICommandData
     {
         private int _total;
         private ArrayList _footPrintList;
@@ -22,27 +22,28 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
 
-            var _loc_2 = In.readInt();
-            var _loc_3 = 0;
-            while (_loc_3 < _loc_2)
+            var num = In.readInt();
+            var i = 0;
+            while (i < num)
             {
-                FootPrintData _loc_4 = new FootPrintData();
-                _loc_4.userCode = In.readUTF();
-                _loc_4.nickname = In.readUTF();
-                _loc_4.amebaId = In.readUTF();
-                _loc_4.date = DateTime.Parse("1970/1/1 09:00").AddMilliseconds(In.readDouble());
-                _footPrintList.Add(_loc_4);
-                _loc_3++;
+                FootPrintData fpd = new FootPrintData();
+                fpd.userCode = In.readUTF();
+                fpd.nickname = In.readUTF();
+                fpd.amebaId = In.readUTF();
+                fpd.date = DateTime.Parse("1970/1/1 09:00").AddMilliseconds(In.readDouble());
+                _footPrintList.Add(fpd);
+                i++;
             }
             _total = In.readInt();
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
+            throw new NotImplementedException();
         }
         public ArrayList footPrintList
         {

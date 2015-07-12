@@ -8,9 +8,9 @@ namespace Yoda.Net.Networking.Packet.Info.area
     
     
     using System.Collections;
-    using Yoda.Net.Networking.Packet.Data.common.test;
+    using Yoda.Net.Networking.Data.Common;
 
-    public class ListBundleAreaResultData : IPacket
+    public class ListBundleAreaResultData : ICommandData
     {
         public string bundle;
         public string enterableDescription;
@@ -26,30 +26,30 @@ namespace Yoda.Net.Networking.Packet.Info.area
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-            AreaData _loc_4 = null;
+            AreaData area = null;
             areaName = In.readUTF();
             bundle = In.readUTF();
-            int _loc_2 = In.readInt();
+            int areacount = In.readInt();
             list = new ArrayList();
-            int _loc_3 = 0;
-            while (_loc_3 < _loc_2)
+            int i = 0;
+            while (i < areacount)
             {
                 
-                _loc_4 = new AreaData();
-                _loc_4.areaCode = In.readUTF();
-                _loc_4.categoryCode = In.readUTF();
-                _loc_4.name = In.readUTF();
-                _loc_4.description = In.readUTF();
-                _loc_4.isComingSoon = In.readBoolean();
-                _loc_4.game = In.readBoolean();
-                _loc_4.shop = In.readBoolean();
-                _loc_4.timeTravel = In.readBoolean();
-                _loc_4.capacity = In.readInt();
-                _loc_4.currentCount = In.readInt();
-                list.Add(_loc_4);
-                _loc_3++;
+                area = new AreaData();
+                area.areaCode = In.readUTF();
+                area.categoryCode = In.readUTF();
+                area.name = In.readUTF();
+                area.description = In.readUTF();
+                area.isComingSoon = In.readBoolean();
+                area.game = In.readBoolean();
+                area.shop = In.readBoolean();
+                area.timeTravel = In.readBoolean();
+                area.capacity = In.readInt();
+                area.currentCount = In.readInt();
+                list.Add(area);
+                i++;
             }
             enterable = In.readBoolean();
             if (!enterable)
@@ -63,23 +63,23 @@ namespace Yoda.Net.Networking.Packet.Info.area
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(areaName);
             Out.writeUTF(bundle);
             Out.writeInt(list.Count);
-            foreach(AreaData _loc_4 in list)
+            foreach(AreaData areadata in list)
             {
-                Out.writeUTF(_loc_4.areaCode);
-                Out.writeUTF(_loc_4.categoryCode);
-                Out.writeUTF(_loc_4.name);
-                Out.writeUTF(_loc_4.description);
-                Out.writeBoolean(_loc_4.isComingSoon);
-                Out.writeBoolean(_loc_4.game);
-                Out.writeBoolean(_loc_4.shop);
-                Out.writeBoolean(_loc_4.timeTravel);
-                Out.writeInt(_loc_4.capacity);
-                Out.writeInt(_loc_4.currentCount);
+                Out.writeUTF(areadata.areaCode);
+                Out.writeUTF(areadata.categoryCode);
+                Out.writeUTF(areadata.name);
+                Out.writeUTF(areadata.description);
+                Out.writeBoolean(areadata.isComingSoon);
+                Out.writeBoolean(areadata.game);
+                Out.writeBoolean(areadata.shop);
+                Out.writeBoolean(areadata.timeTravel);
+                Out.writeInt(areadata.capacity);
+                Out.writeInt(areadata.currentCount);
             }
             Out.writeBoolean(enterable);
             if (!enterable)

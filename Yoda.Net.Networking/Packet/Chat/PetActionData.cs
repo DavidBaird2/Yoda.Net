@@ -4,8 +4,11 @@
     
     using System;
 
-    public class PetActionData : IPacket
+    public class PetActionData : ICommandData
     {
+        public PetActionData()
+        {
+        }
         private string _actionCode;
         private int _petId;
 
@@ -23,11 +26,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
+            throw new NotImplementedException();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(this._petId);
             Out.writeUTF(this._actionCode);

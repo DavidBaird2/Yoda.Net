@@ -9,7 +9,7 @@
     {
         public ArrayList items;
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             int count = In.readInt();
             this.items = new ArrayList();
@@ -19,7 +19,7 @@
             }
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             if (this.items == null)
             {

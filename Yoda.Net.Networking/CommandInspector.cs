@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Yoda.Net.Common.Astar
+namespace Yoda.Net.Common
 {
-    class AsterNode
+    //コマンドの検証用
+    class CommandInspector
     {
     }
 }

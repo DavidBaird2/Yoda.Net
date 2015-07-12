@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 
-namespace Yoda.Net.Networking.Packet.Chat.casino
+namespace Yoda.Net.Networking.Packet.Chat.Casino
 {
 	public class CasinoGameJoinRequestData
 	{
@@ -18,7 +18,7 @@ namespace Yoda.Net.Networking.Packet.Chat.casino
          
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             gameCode = In.readUTF();
             balance = In.readInt();
@@ -27,9 +27,9 @@ namespace Yoda.Net.Networking.Packet.Chat.casino
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            return;
+            throw new NotImplementedException();
         }
 
         public int packetId

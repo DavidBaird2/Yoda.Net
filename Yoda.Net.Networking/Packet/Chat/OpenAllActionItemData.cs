@@ -4,7 +4,7 @@
     
     
 
-    public class OpenAllActionItemData : IPacket
+    public class OpenAllActionItemData : ICommandData
     {
         public int type;
         public string code;
@@ -21,12 +21,12 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
           
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
         }
     }

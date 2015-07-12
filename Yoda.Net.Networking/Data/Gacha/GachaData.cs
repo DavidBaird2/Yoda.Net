@@ -33,61 +33,9 @@ namespace Yoda.Net.Networking.Data.Gacha
         public static int PAY_TYPE_GOLD = 0;
         public static int PAY_TYPE_CANDY = 1;
         public static int PAY_TYPE_CASINO = 4;
-         public void readData(AmebaStream param1)
+         public void readData(PiggStream stream)
         {
-          /*  int _loc_2: = 0;
-            var _loc_4:CollectionCampaignIncentiveItemData = null;
-            var _loc_5:CollectionCampaignIncentiveItemData = null;
-            var _loc_6:GachaItemData = null;*/
-            code = param1.readUTF();
-            name = param1.readUTF();
-            payType = param1.readByte();
-            price = param1.readInt();
-            description = param1.readUTF();
-            description2 = param1.readUTF();
-            template = param1.readUTF();
-            infoUrl = param1.readUTF();
-            remainingFreePlayCount = param1.readInt();
-            campaignCode = param1.readUTF();
-          /*  var _loc_3:* = param1.readInt();
-            incentiveItemList = new Array(_loc_3);
-            _loc_2 = 0;
-            while (_loc_2 < _loc_3)
-            {
-                
-                _loc_4 = new CollectionCampaignIncentiveItemData();
-                _loc_4.itemName = param1.readUTF();
-                _loc_4.itemCode = param1.readUTF();
-                _loc_4.itemType = param1.readUTF();
-                _loc_4.isProvided = param1.readBoolean();
-                incentiveItemList[_loc_2] = _loc_4;
-                _loc_2++;
-            }
-            _loc_3 = param1.readInt();
-            incentiveThreeItemList = new Array(_loc_3);
-            _loc_2 = 0;
-            while (_loc_2 < _loc_3)
-            {
-                
-                _loc_5 = new CollectionCampaignIncentiveItemData();
-                _loc_5.itemName = param1.readUTF();
-                _loc_5.itemCode = param1.readUTF();
-                _loc_5.itemType = param1.readUTF();
-                _loc_5.isProvided = param1.readBoolean();
-                incentiveThreeItemList[_loc_2] = _loc_5;
-                _loc_2++;
-            }
-            featuredItems = new Array(param1.readInt());
-            _loc_2 = 0;
-            while (_loc_2 < featuredItems.length)
-            {
-                
-                _loc_6 = new GachaItemData();
-                _loc_6.readData(param1);
-                featuredItems[_loc_2] = _loc_6;
-                _loc_2++;
-            }*/
-            return;
+            throw new NotImplementedException();
         }
 
     }

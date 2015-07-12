@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Yoda.Net.Networking.Packet.Chat
 {
-	public class CampaignPontaCheckPointData :IPacket
+	public class CampaignPontaCheckPointData :ICommandData
 	{
         public CampaignPontaCheckPointData()
         {
@@ -22,12 +22,12 @@ namespace Yoda.Net.Networking.Packet.Chat
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             return;
         }

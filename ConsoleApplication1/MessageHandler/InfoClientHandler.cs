@@ -7,11 +7,12 @@ using Yoda.Net.Proxy;
 
 namespace ConsoleApplication1
 {
-    class InfoClientHandler : IMessageDelegate
+    class InfoClientHandler : IMessageHandler
     {
+        private ProxySession session;
         public InfoClientHandler(ProxySession session)
         {
-
+            this.session = session;
         }
     }
 }

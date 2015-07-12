@@ -14,7 +14,7 @@ namespace Yoda.Net.Client
         protected NetworkManager manager;
         protected CommandFactory factory;
 
-        public CommandClient(IMessageDelegate del, ServerType type)
+        public CommandClient(IMessageHandler del, ServerType type)
         {
             manager = new NetworkManager(del);
             manager.OnRecvPacket += manager_OnRecvPacket;
@@ -24,12 +24,12 @@ namespace Yoda.Net.Client
         }
 
 
-        void manager_OnRecvPacket(Header header, AmebaStream array, AmebaStream rawPacket)
+        void manager_OnRecvPacket(Header header, PiggStream array, PiggStream rawPacket)
         {
             switch (header.type)
             {
                 case NetworkManager.TYPE_COMMAND:
-                    IPacket data = (IPacket)this.factory.getDataClass(header.packetId);
+                    ICommandData data = (ICommandData)this.factory.getDataClass(header.packetId);
 
                     if (data == null)
                     {

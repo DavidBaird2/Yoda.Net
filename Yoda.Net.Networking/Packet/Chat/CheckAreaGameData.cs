@@ -8,7 +8,7 @@
     
     
 
-    public class CheckAreaGameData : IPacket, IEncrypted
+    public class CheckAreaGameData : ICommandData, IEncrypted
     {
         public string code;
         public string category;
@@ -16,6 +16,10 @@
         {
             code = AreaCode;
             category = AreaCategory;
+        }
+        public CheckAreaGameData()
+        {
+
         }
         public virtual int packetId
         {
@@ -25,13 +29,13 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             category = In.readUTF();
             code = In.readUTF();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(category);
             Out.writeUTF(code);

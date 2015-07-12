@@ -1,4 +1,4 @@
-﻿namespace libPigg.net.info.user
+﻿namespace Yoda.Net.Networking.Packet.Info.User
 {
 
     using System;
@@ -6,7 +6,7 @@
     using Yoda.Net.Networking.Packet;
     using Yoda.Net.Networking.Packet.Info;
 
-    public class GetUserCodeResultData : IPacket
+    public class GetUserCodeResultData : ICommandData
     {
         public string hexCode;
         public string method;
@@ -20,15 +20,15 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.hexCode = In.readUTF();
             this.method = In.readUTF();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-
+            throw new NotImplementedException();
         }
     }
 }

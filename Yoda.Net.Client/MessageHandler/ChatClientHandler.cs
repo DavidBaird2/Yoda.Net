@@ -7,7 +7,7 @@ using Yoda.Net.Networking;
 
 namespace Yoda.Net.Client.MessageHandler
 {
-    public class ChatClientHandler : IMessageDelegate
+    public class ChatClientHandler : IMessageHandler
     {
 
     }

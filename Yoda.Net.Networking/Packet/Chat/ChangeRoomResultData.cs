@@ -9,7 +9,7 @@ using Yoda.Net.Networking.Data.Room;
 
 namespace Yoda.Net.Networking.Packet.Chat
 {
-    public class ChangeRoomResultData : IPacket, IEncrypted
+    public class ChangeRoomResultData : ICommandData, IEncrypted
     {
         public int type;
         public DefineFurniture define;
@@ -26,28 +26,25 @@ namespace Yoda.Net.Networking.Packet.Chat
             }
         }
 
-        public void readData(AmebaStream param1)
+        public void readData(PiggStream stream)
         {
-            type = param1.readByte();
-            if (param1.readBoolean())
+            type = stream.readByte();
+            if (stream.readBoolean())
             {
-               int partCount =  param1.readShort();
+               int partCount =  stream.readShort();
                 define = new DefineFurniture();
-                define.characterId = param1.readUTF();
-                define.type = param1.readByte();
-                define.category = param1.readUTF();
-                define.name = param1.readUTF();
-                define.description = param1.readUTF();
-                define.actionCode = param1.readUTF();
-            /*    foreach(int i = 0;i <partCount;int++)
-                {
-                    
-                }*/
+                define.characterId = stream.readUTF();
+                define.type = stream.readByte();
+                define.category = stream.readUTF();
+                define.name = stream.readUTF();
+                define.description = stream.readUTF();
+                define.actionCode = stream.readUTF();
+
             }
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeByte((byte)type);
             if (define != null)

@@ -1,22 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Yoda.Net.Networking;
 using Yoda.Net.Networking.Packet.Chat;
 using Yoda.Net.Proxy;
 
 namespace ConsoleApplication1
 {
-    class ChatClientHandler : IMessageDelegate
+    class ChatClientHandler : IMessageHandler
     {
+        private ProxySession session;
         public ChatClientHandler(ProxySession session)
         {
- 
+            this.session = session;
         }
-        public CommandRouteOption onTalkData(TalkData data)
+
+        public CommandRoute onDoActionData(DoCrackActionData data)
         {
-            return CommandRouteOption.Nothing;
+            return CommandRoute.Edit;
         }
+
+
     }
 }

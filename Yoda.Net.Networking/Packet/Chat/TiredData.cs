@@ -4,13 +4,16 @@
     
     using System;
 
-    public class TiredData : IPacket, IEncrypted
+    public class TiredData : ICommandData, IEncrypted
     {
-        private int _level;
+        public TiredData()
+        {
+        }
+        private int level;
 
         public TiredData(int level)
         {
-            this._level = level;
+            this.level = level;
         }
 
         public int packetId
@@ -21,14 +24,14 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-            this._level = In.readByte();
+            this.level = In.readByte();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-            Out.writeByte((byte) this._level);
+            Out.writeByte((byte) this.level);
         }
     }
 }

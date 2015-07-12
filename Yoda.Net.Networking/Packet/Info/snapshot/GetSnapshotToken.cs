@@ -8,7 +8,7 @@ namespace Yoda.Net.Networking.Packet.Info.snapshot
     
     using System.Collections;
 
-    public class GetSnapshotTokenResult : IPacket
+    public class GetSnapshotTokenResult : ICommandData
     {
    public string token;
         public int packetId
@@ -22,12 +22,12 @@ namespace Yoda.Net.Networking.Packet.Info.snapshot
         {
             return;
         }
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.token = In.readUTF();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
 
         }

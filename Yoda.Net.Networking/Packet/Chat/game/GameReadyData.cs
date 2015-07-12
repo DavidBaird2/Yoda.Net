@@ -1,13 +1,17 @@
 ﻿
 
 
-namespace Yoda.Net.Networking.Packet.Chat.game.data
+using System;
+namespace Yoda.Net.Networking.Packet.Chat.Game.Data
 {
 
 
-    public class GameReadyData : IPacket
+    public class GameReadyData : ICommandData
     {
+        public GameReadyData()
+        {
 
+        }
         public virtual int packetId
         {
             get
@@ -16,14 +20,15 @@ namespace Yoda.Net.Networking.Packet.Chat.game.data
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
+            throw new NotImplementedException();
         }
 
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-
+            throw new NotImplementedException();
         }
 
 

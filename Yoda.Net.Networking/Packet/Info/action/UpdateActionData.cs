@@ -10,7 +10,7 @@ using Yoda.Net.Networking.Data.Action;
 
 namespace Yoda.Net.Networking.Packet.Info.action
 {
-    class UpdateActionData : IPacket
+    class UpdateActionData : ICommandData
     {
         public ActionListData _listData;
 
@@ -19,7 +19,7 @@ namespace Yoda.Net.Networking.Packet.Info.action
             return;
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             _listData = new ActionListData(new ArrayList());
             int count = In.readInt();
@@ -27,7 +27,7 @@ namespace Yoda.Net.Networking.Packet.Info.action
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(_listData.length());
             Out.writeBytes(_listData.binary().toArray());

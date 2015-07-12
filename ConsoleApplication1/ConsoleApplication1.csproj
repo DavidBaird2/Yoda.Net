@@ -44,10 +44,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChatClientHandler.cs" />
-    <Compile Include="ChatServerHandler.cs" />
-    <Compile Include="InfoClientHandler.cs" />
-    <Compile Include="InfoServerHandler.cs" />
+    <Compile Include="MessageHandler\ChatClientHandler.cs" />
+    <Compile Include="MessageHandler\ChatServerHandler.cs" />
+    <Compile Include="MessageHandler\InfoClientHandler.cs" />
+    <Compile Include="MessageHandler\InfoServerHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -56,6 +56,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Yoda.Net.Common\Yoda.Net.Common.csproj">
+      <Project>{9f3cf5e8-a6a7-4371-bdfb-77de184b0777}</Project>
+      <Name>Yoda.Net.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Yoda.Net.Networking\Yoda.Net.Networking.csproj">
       <Project>{b3bd942a-4344-476e-ae6f-0a7b50e1b6ae}</Project>
       <Name>Yoda.Net.Networking</Name>

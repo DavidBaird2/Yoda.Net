@@ -20,7 +20,7 @@
             return;
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             symbol = In.readInt();
             Base = In.readInt();
@@ -32,7 +32,7 @@
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeInt(symbol);
             Out.writeInt(Base);
@@ -56,18 +56,6 @@
             return;
         }
 
-        /* public function setData(param1:ClubEmblemData) : void
-         {
-             base = param1.base;
-             symbol = param1.symbol;
-             simple = param1.simple;
-             baseColor = param1.baseColor;
-             simpleColor = param1.simpleColor;
-             updateTime = param1.updateTime;
-             isMember = param1.isMember;
-             return;
-         }
-     */
     }
 }
 

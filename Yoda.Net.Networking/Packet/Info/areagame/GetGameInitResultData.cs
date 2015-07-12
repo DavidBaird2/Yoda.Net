@@ -4,9 +4,9 @@
     
     using System;
 
-    public class GetGameInitResultData : IPacket
+    public class GetGameInitResultData : ICommandData
     {
-        public AmebaStream byteArray;
+        public PiggStream byteArray;
         public int gameId;
         public string kind;
 
@@ -14,12 +14,12 @@
         public GetGameInitResultData()
         {
         }
-        public GetGameInitResultData(int param1, string param2, AmebaStream param4)
+        public GetGameInitResultData(int gameId, string kind, PiggStream byteArray)
         {
-            this.gameId = param1;
-            this.kind = param2;
+            this.gameId = gameId;
+            this.kind = kind;
 
-            this.byteArray = param4;
+            this.byteArray = byteArray;
         }
 
         public int packetId
@@ -30,17 +30,17 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.gameId = In.readByte();
             this.kind = In.readUTF();
 
-            AmebaStream array = new AmebaStream();
+            PiggStream array = new PiggStream();
             this.byteArray = array;
             In.readBytes(array);
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeByte((byte) this.gameId);
             Out.writeUTF(this.kind);

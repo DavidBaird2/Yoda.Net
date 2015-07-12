@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Yoda.Net.Common;
 using Yoda.Net.Networking.Packet;
 
 namespace Yoda.Net.Networking
@@ -12,16 +13,16 @@ namespace Yoda.Net.Networking
     {
 
         private Dictionary<int, MethodInfo> _handlers;
-        private Dictionary<int, IPacket> _dataClass;
+        private Dictionary<int, ICommandData> _dataClass;
         private ServerType _serverType;
-        private IMessageDelegate _messageDelegate;
+        private IMessageHandler _messageDelegate;
 
-        public CommandFactory(IMessageDelegate messageDelegate, ServerType type)
+        public CommandFactory(IMessageHandler messageDelegate, ServerType type)
         {
             _serverType = type;
             _messageDelegate = messageDelegate;
             _handlers = new Dictionary<int, MethodInfo>();
-            _dataClass = new Dictionary<int, IPacket>();
+            _dataClass = new Dictionary<int, ICommandData>();
             foreach (Type Type in Assembly.GetExecutingAssembly().GetTypes())
             {
                 string test = "." + Enum.GetName(typeof(ServerType), _serverType) + ".";
@@ -29,25 +30,28 @@ namespace Yoda.Net.Networking
                 {
                     continue;
                 }
-                if (Type.GetInterfaces().Contains(typeof(IPacket)))
+                if (Type.GetInterfaces().Contains(typeof(ICommandData)))
                 {
                     try
                     {
-                        IPacket instance = (IPacket)Type.InvokeMember
+                        ICommandData instance = (ICommandData)Type.InvokeMember
                             (null, BindingFlags.CreateInstance, null, null, null);
                         _dataClass[instance.packetId] = instance;
                     }
                     catch
                     {
                         //TODO : 
+                        Logger.Log(LogLevel.Attention, "Error : " + Type.FullName);
                     }
 
 
                 }
             }
-            foreach (KeyValuePair<int, IPacket> pair in _dataClass)
+
+
+            foreach (KeyValuePair<int, ICommandData> pair in _dataClass)
             {
-                IPacket data = (IPacket)pair.Value;
+                ICommandData data = (ICommandData)pair.Value;
                 string name = data.GetType().Name;
                 foreach (MethodInfo mi in _messageDelegate.GetType().GetMethods())
                 {
@@ -63,12 +67,12 @@ namespace Yoda.Net.Networking
                 }
             }
         }
-        public IMessageDelegate GetMessageDelegate()
+        public IMessageHandler GetMessageDelegate()
         {
             return _messageDelegate;
         }
 
-        public IPacket getDataClass(int id)
+        public ICommandData getDataClass(int id)
         {
             if (_dataClass.ContainsKey(id))
                 return _dataClass[id];

@@ -8,7 +8,7 @@
     
     
     using Yoda.Net.Networking.Packet.Chat;
-    public class ErrorData : IPacket
+    public class ErrorData : ICommandData
     {
         public string message;
         public string exceptionClass;
@@ -29,32 +29,32 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
-            var _loc_2 = In.readShort();
-            if (_loc_2 >= 0)
+            var num = In.readShort();
+            if (num >= 0)
             {
-                code = In.readUTFBytes(_loc_2);
+                code = In.readUTFBytes(num);
             }
-            _loc_2 = In.readShort();
-            if (_loc_2 >= 0)
+            num = In.readShort();
+            if (num >= 0)
             {
-                message = In.readUTFBytes(_loc_2);
+                message = In.readUTFBytes(num);
             }
-            _loc_2 = In.readShort();
-            if (_loc_2 >= 0)
+            num = In.readShort();
+            if (num >= 0)
             {
-                exceptionClass = In.readUTFBytes(_loc_2);
+                exceptionClass = In.readUTFBytes(num);
             }
-            _loc_2 = In.readShort();
-            if (_loc_2 >= 0)
+            num = In.readShort();
+            if (num >= 0)
             {
-                exceptionTrace = In.readUTFBytes(_loc_2);
+                exceptionTrace = In.readUTFBytes(num);
             }
             return;
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(code);
             Out.writeUTF(message);
@@ -64,7 +64,6 @@
         }
         public string toString()
         {
-            //return "***** ERROR DATA *****\n" + code + "\n" + message + "\n" + exceptionClass + "\n" + exceptionTrace + "\n" + causePacketId + "\n";
             return "ERROR\n" + code + "\n" + message + "\n" + exceptionClass + "\n" + exceptionTrace + "\n" + causePacketId + "\n";
         }
     }

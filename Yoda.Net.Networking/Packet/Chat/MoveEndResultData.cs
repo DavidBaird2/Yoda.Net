@@ -8,7 +8,7 @@
     
     
     using Yoda.Net.Networking.Packet.Chat;
-    public class MoveEndResultData : IPacket
+    public class MoveEndResultData : ICommandData
     {
         public short dir;
         public string hexCode;
@@ -27,7 +27,7 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.hexCode = In.readUTFBytes(0x10);
             this.x = In.readShort();
@@ -36,7 +36,7 @@
             this.dir = In.readByte();
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTFBytes(hexCode);
             Out.writeShort((short)this.x);

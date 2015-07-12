@@ -6,7 +6,7 @@
     using System.Collections;
 
 
-    public class NotifyFriendStatusData : IPacket
+    public class NotifyFriendStatusData : ICommandData
     {
 
         public int packetId
@@ -17,7 +17,7 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
 
             this.userCode = In.readUTF();
@@ -26,10 +26,10 @@
         }
 
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
 
-
+            throw new NotImplementedException();
         }
 
         public string userCode { get; set; }

@@ -5,10 +5,13 @@ namespace Yoda.Net.Networking.Packet.Chat.game.data
 {
 
 
-    public class TableGameShowResultData : IPacket
+    public class TableGameShowResultData : ICommandData
     {
         public string gameCode;
+        public TableGameShowResultData()
+        {
 
+        }
         public virtual int packetId
         {
             get
@@ -17,13 +20,13 @@ namespace Yoda.Net.Networking.Packet.Chat.game.data
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             gameCode = In.readUTF();
         }
 
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(gameCode);
         }

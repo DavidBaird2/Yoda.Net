@@ -4,18 +4,18 @@
     using System;
     
 
-    public class SystemActionData : IPacket, IEncrypted
+    public class SystemActionData : ICommandData, IEncrypted
     {
-        private string _code;
+
         public string code;
 
         public SystemActionData()
         {
         }
 
-        public SystemActionData(string param1)
+        public SystemActionData(string code)
         {
-            this._code = param1;
+            this.code = code;
         }
 
         public int packetId
@@ -26,18 +26,15 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.code = In.readUTF();
             
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
-        /*    Out.writeShort((byte)(this._code.Length+1));
-            Out.writeUTFBytes(this._code);
-            Out.writeBoolean(false);*/
-                 Out.writeUTF(this._code);
+                 Out.writeUTF(this.code);
         }
     }
 }

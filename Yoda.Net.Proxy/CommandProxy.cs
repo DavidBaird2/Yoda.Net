@@ -1,69 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-
 
 using System.Reflection;
 using Yoda.Net.Networking.Packet;
-using Yoda.Net.Networking.Packet.Info.Area;
 using System.Diagnostics;
-using System.Threading;
 using Yoda.Net.Networking;
-using DNS.Client;
 using Yoda.Net.Networking.Encryption;
 using Yoda.Net.Common;
 
 namespace Yoda.Net.Proxy
 {
-    public class CommandProxy
+    public class CommandProxyTest
     {
         private NetworkManager clientNetworkManager;
         private NetworkManager serverNetworkManager;
         private CommandProxyManager manager;
         private ProxySession session;
-        private IMessageDelegate clientDelegate;
-        private IMessageDelegate serverDelegate;
+        private IMessageHandler clientDelegate;
+        private IMessageHandler serverDelegate;
         private CommandFactory clientfactory;
         private CommandFactory serverfactory;
-        private int _connectionId;
-        public ServerType type;
-        private static string PIGG_INFO_SERVER_ADDR = "180.233.143.102";//info.pigg.ameba.jp
+        private static string PIGG_INFO_SERVER_ADDR = "180.233.143.102";
         private static int PIGG_INFO_SERVER_PORT = 1935;
-        public CommandProxy(ProxySession session, CommandProxyManager manager, ServerType type)
+        public ServerType type;
+        public CommandProxyTest(ProxySession session, CommandProxyManager manager, ServerType type)
         {
-            if(type == ServerType.Info)
+            this.session = session;
+            this.manager = manager;
+            this.type = type;
+            this.init();
+        }
+
+        private void init()
+        {
+            if (type == ServerType.Info)
             {
                 this.clientDelegate = session.InfoClientHandler;
                 this.serverDelegate = session.InfoServerHandler;
             }
-
-            if (type == ServerType.Chat)
+            else if (type == ServerType.Chat)
             {
                 this.clientDelegate = session.ChatClientHandler;
                 this.serverDelegate = session.ChatServerHandler;
             }
 
-            this.session = session;
             clientfactory = new CommandFactory(clientDelegate, type);
             serverfactory = new CommandFactory(serverDelegate, type);
 
-            this.type = type;
-            this.manager = manager;
-        }
-
-        public void Start(Socket clientSocket)
-        {
             clientNetworkManager = new NetworkManager(clientDelegate);
+
             clientNetworkManager.OnRecvPacket += onRecvPacketFromClient;
             clientNetworkManager.OnSocketClosed += onClientSocketClosed;
 
             serverNetworkManager = new NetworkManager(serverDelegate);
+
             serverNetworkManager.OnRecvPacket += onRecvPacketFromServer;
             serverNetworkManager.OnSocketClosed += onServerSocketClosed;
+        }
+        public void Start(Socket clientSocket)
+        {
 
             if (type == ServerType.Info)
                 serverNetworkManager.Connect(PIGG_INFO_SERVER_ADDR, PIGG_INFO_SERVER_PORT);
@@ -74,81 +69,49 @@ namespace Yoda.Net.Proxy
             clientNetworkManager.SetSocket(clientSocket);
         }
 
-        void onClientSocketClosed()
+
+        private void onServerSocketClosed()
         {
-            if (serverNetworkManager.Connected)
-                serverNetworkManager.StopClient();
+            clientNetworkManager.StopClient();
             manager.removeProxy(this);
         }
-        void onServerSocketClosed()
+        public void SendMessageToServer(ICommandData packet)
         {
-            if (clientNetworkManager.Connected)
-                clientNetworkManager.StopClient();
+            this.serverNetworkManager.SendCommand(packet);
+        }
+
+
+        private void onClientSocketClosed()
+        {
+            serverNetworkManager.StopClient();
+
             manager.removeProxy(this);
         }
-        private void onRecvPacketFromServer(Header header, AmebaStream array, AmebaStream rawPacket)
+        public void SendMessageToClient(ICommandData packet)
+        {
+            this.clientNetworkManager.SendCommand(packet);
+        }
+
+
+        private void onRecvPacketFromServer(Header header, PiggStream array, PiggStream rawPacket)
         {
 
-           Yoda.Net.Common.Logger.Log(Common.LogLevel.Attention,"onRecvPacketFromServer ::" + type.ToString() + header.length + " : " + array.position);
+            Yoda.Net.Common.Logger.Log(Common.LogLevel.Attention, "onRecvPacketFromServer : " + type.ToString());
             switch (header.type)
             {
                 case NetworkManager.TYPE_COMMAND:
-                    IPacket data = (IPacket)this.serverfactory.getDataClass(header.packetId);
-
-                    if (data == null)
-                    {
-                        clientNetworkManager.SendData(rawPacket.toArray());
-                        break;
-                        // cannot found data Class
-                    }
-                    try
-                    {
-                        data.readData(array);
-                    }
-                    catch(Exception ex)
-                    {
-                        //Error Read Data 
-                       Logger.Log(LogLevel.Infomation,"Error read Packet : "+data.GetType().FullName);
-                       Logger.Log(LogLevel.Infomation, ex.ToString());
-                        clientNetworkManager.SendData(rawPacket.toArray());
-                        break;
-                    }
-
-                    MethodInfo handler = (MethodInfo)serverfactory.getHandler(header.packetId);
-                    if (handler != null)
-                    {
-                        CommandRouteOption option = (CommandRouteOption)handler.Invoke(this.serverfactory.GetMessageDelegate(), new object[] { data });
-                        switch (option)
-                        {
-                            case CommandRouteOption.Nothing:
-                                clientNetworkManager.SendData(rawPacket.toArray());
-                                break;
-                            case CommandRouteOption.Edit:
-                                clientNetworkManager.SendCommand(data);
-                                break;
-                            case CommandRouteOption.Block:
-                                break;
-                        }
-                        return;
-                    }
-
-                    clientNetworkManager.SendData(rawPacket.toArray());
-                    //    Can not Found Handler 
+                    ProcessCommand(serverfactory, clientNetworkManager, header, array, rawPacket);
                     break;
-
                 case NetworkManager.TYPE_ID:
-
                     clientNetworkManager.connectionId = header.callId;
                     serverNetworkManager.connectionId = header.callId;
                     clientNetworkManager.SendData(rawPacket.toArray());
                     break;
                 case NetworkManager.TYPE_PING:
-                   Logger.Log(Common.LogLevel.Attention, "Recv Ping From Server IsInfo:" + type.ToString());
+                    Logger.Log(Common.LogLevel.Attention, "Recv Ping From " + type.ToString() + "Server");
                     clientNetworkManager.SendData(rawPacket.toArray());
                     break;
                 case NetworkManager.TYPE_ENC:
-
-
                     clientNetworkManager.encId = header.callId;
                     serverNetworkManager.encId = header.callId;
                     clientNetworkManager.SendData(rawPacket.toArray());
@@ -158,51 +121,12 @@ namespace Yoda.Net.Proxy
 
         }
 
-
-        private void onRecvPacketFromClient(Header header, AmebaStream array, AmebaStream rawPacket)
+        private void onRecvPacketFromClient(Header header, PiggStream array, PiggStream rawPacket)
         {
-
-            Logger.Log(Common.LogLevel.Attention, "onRecvPacketFromClient ::" + type.ToString());
             switch (header.type)
             {
                 case NetworkManager.TYPE_COMMAND:
-                    IPacket data = (IPacket)this.clientfactory.getDataClass(header.packetId);
-
-                    if (data == null)
-                    {
-                        serverNetworkManager.SendData(rawPacket.toArray());
-                        break;  // cannot found data Class
-                    }
-                    if (data is IEncrypted)
-                    {
-                        Des.decrypt(out array, array, clientNetworkManager.getEncryptionKey());
-                        //decrypt Array
-                    }
-
-                    data.readData(array);
-
-
-                    MethodInfo handler = (MethodInfo)clientfactory.getHandler(header.packetId);
-                    if (handler != null)
-                    {
-                        CommandRouteOption option = (CommandRouteOption)handler.Invoke(clientfactory.GetMessageDelegate(), new object[] { data });
-                        switch (option)
-                        {
-                            case CommandRouteOption.Nothing:
-                                serverNetworkManager.SendData(rawPacket.toArray());
-                                break;
-                            case CommandRouteOption.Edit:
-                                serverNetworkManager.SendCommand(data);
-                                break;
-                            case CommandRouteOption.Block:
-                                break;
-                        }
-                        return;
-                    }
-
-                    serverNetworkManager.SendData(rawPacket.toArray());
-                    //    Can not Found Handler 
-
+                    ProcessCommand(clientfactory, serverNetworkManager, header, array, rawPacket);
                     break;
                 case NetworkManager.TYPE_ID:
                     serverNetworkManager.SendData(rawPacket.toArray());
@@ -216,16 +140,70 @@ namespace Yoda.Net.Proxy
                     break;
 
             }
-
-
-
         }
 
 
-
-        private void Stop()
+        private void ProcessCommand(CommandFactory facroty, NetworkManager manager, Header header, PiggStream array, PiggStream rawPacket)
         {
+            try
+            {
+                ICommandData data = (ICommandData)facroty.getDataClass(header.packetId);
 
+                Logger.Log(Common.LogLevel.Attention, "onRecvPacket :: " + type.ToString());
+
+                if (data == null)
+                {
+                    manager.SendData(rawPacket.toArray());
+                    Logger.Log(Common.LogLevel.Attention, " Error: could not find data class id : " + header.packetId);
+                    return;
+                }
+                Logger.Log(Common.LogLevel.Attention, data.GetType().FullName);
+
+                if (data is IEncrypted)
+                {
+                    Des.decrypt(ref array, clientNetworkManager.getEncryptionKey());
+                }
+                try
+                {
+                    data.readData(array);
+                }
+                catch (NotImplementedException)
+                {
+                    Logger.Log(LogLevel.Infomation, "NotImplementedException : " + data.GetType().FullName);
+                }
+                catch (Exception exp)
+                {
+
+                    StackTrace trace = new StackTrace(exp, true);
+
+                    Logger.Log(LogLevel.Infomation, "Error read Packet : " + data.GetType().FullName + " : Num :" + trace.GetFrame(2).GetFileLineNumber());
+                    manager.SendData(rawPacket.toArray());
+                    return;
+                }
+
+                MethodInfo handler = (MethodInfo)facroty.getHandler(header.packetId);
+                if (handler != null)
+                {
+                    CommandRoute option = (CommandRoute)handler.Invoke(facroty.GetMessageDelegate(), new object[] { data });
+                    switch (option)
+                    {
+                        case CommandRoute.Nothing:
+                            manager.SendData(rawPacket.toArray());
+                            break;
+                        case CommandRoute.Edit:
+                            manager.SendCommand(data);
+                            break;
+                        case CommandRoute.Block:
+                            break;
+                    }
+                    return;
+                }
+                manager.SendData(rawPacket.toArray());  //    Can not Found Handler 
+            }catch(Exception ex )
+            {
+                Logger.Log(LogLevel.Sex, ex.ToString());
+            }
         }
+
     }
 }

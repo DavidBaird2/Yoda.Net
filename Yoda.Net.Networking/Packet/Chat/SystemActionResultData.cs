@@ -4,7 +4,7 @@
     using System;
     
 
-    public class SystemActionResultData : IPacket
+    public class SystemActionResultData : ICommandData
     {
         public string code;
         public string userCode;
@@ -12,9 +12,9 @@
         {
         }
 
-        public SystemActionResultData(string param1)
+        public SystemActionResultData(string code)
         {
-            this.code = param1;
+            this.code = code;
         }
 
         public int packetId
@@ -25,14 +25,14 @@
             }
         }
 
-        public void readData(AmebaStream In)
+        public void readData(PiggStream In)
         {
             this.userCode = In.readUTF();
             this.code = In.readUTF();
             
         }
 
-        public void writeData(AmebaStream Out)
+        public void writeData(PiggStream Out)
         {
             Out.writeUTF(this.userCode);
            Out.writeUTF(this.code);

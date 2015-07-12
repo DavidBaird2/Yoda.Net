@@ -11,13 +11,13 @@ namespace Yoda.Net.Proxy
 {
     public class CommandProxyManager
     {
-        private List<CommandProxy> sockets;
+        private List<CommandProxyTest> sockets;
         private TcpListener tcpListener;
         public ProxySession session;
 
         public void init()
         {
-            sockets = new List<CommandProxy>();
+            sockets = new List<CommandProxyTest>();
 
             tcpListener = new TcpListener(IPAddress.Any, 1935);
             tcpListener.Start();
@@ -40,13 +40,13 @@ namespace Yoda.Net.Proxy
 
             if (session.InfoProxy == null)
             {
-                session.InfoProxy = new CommandProxy(session, this, ServerType.Info);
+                session.InfoProxy = new CommandProxyTest(session, this, ServerType.Info);
                 session.InfoProxy.Start(clientSocket);
                 return;
 
             }
 
-            var chatProxy = new CommandProxy(session, this, ServerType.Chat);
+            var chatProxy = new CommandProxyTest(session, this, ServerType.Chat);
 
             session.ChatProxy.Add(chatProxy);
 
@@ -58,7 +58,7 @@ namespace Yoda.Net.Proxy
             tcpListener.BeginAcceptTcpClient(new AsyncCallback(NewConnection), tcpListener);
         }
 
-        public void removeProxy(CommandProxy proxy)
+        public void removeProxy(CommandProxyTest proxy)
         {
             if (proxy.type == ServerType.Info)
             {
