@@ -1,0 +1,725 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B3BD942A-4344-476E-AE6F-0A7B50E1B6AE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Yoda.Net.Networking</RootNamespace>
+    <AssemblyName>Yoda.Net.Networking</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.4.0.4\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="zlib.net">
+      <HintPath>..\packages\zlib.net.1.0.4.0\lib\zlib.net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AmebaStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CommandInspectException.cs" />
+    <Compile Include="Data\Announce\AnnounceData.cs" />
+    <Compile Include="Data\Announce\AnnounceEventData.cs" />
+    <Compile Include="Data\Announce\AnnounceQuestData.cs" />
+    <Compile Include="Data\Announce\AnnounceSaleShopData.cs" />
+    <Compile Include="Data\Announce\AnnounceSaleShopItemData.cs" />
+    <Compile Include="Data\Announce\PiggNewsData.cs" />
+    <Compile Include="Data\Area\HistoryAreaData.cs" />
+    <Compile Include="Data\Calendar\CalendarData.cs" />
+    <Compile Include="Data\Channel\TimeTable\TimetablePartyData.cs" />
+    <Compile Include="Data\Channel\TimeTable\TimetableVjData.cs" />
+    <Compile Include="Data\Collectioncampaign\CollectionCampaignItemData.cs" />
+    <Compile Include="Data\Common\PiggShopData.cs" />
+    <Compile Include="Data\Common\ShopBannerCodeInfo.cs" />
+    <Compile Include="Data\Common\ShopBannerData.cs" />
+    <Compile Include="Data\Common\ShopNewsClipData.cs" />
+    <Compile Include="Data\Common\ShopSaleInfoData.cs" />
+    <Compile Include="Data\Common\ShopSetItemData.cs" />
+    <Compile Include="Data\Common\SpecialLinkData.cs" />
+    <Compile Include="Data\Common\VipShopStatusInfo.cs" />
+    <Compile Include="Data\Cosme\CosmeItemData.cs" />
+    <Compile Include="Data\Event\EventPickupData.cs" />
+    <Compile Include="Data\Event\EventUserRankingData.cs" />
+    <Compile Include="Data\Event\MyRankingData.cs" />
+    <Compile Include="Data\Gacha\GachaItemData.cs" />
+    <Compile Include="Data\Gacha\GachaStepupBonusAdditionalFeatureData.cs" />
+    <Compile Include="Data\Gacha\GachaStepupBonusListData.cs" />
+    <Compile Include="Data\Gacha\GachaStepupBonusOneStepListData.cs" />
+    <Compile Include="Data\Gacha\GachaStepupItemData.cs" />
+    <Compile Include="Data\Gacha\GachaStepupOptionData.cs" />
+    <Compile Include="Data\Gacha\ShopGachaData.cs" />
+    <Compile Include="Data\Good\GoodData.cs" />
+    <Compile Include="Data\LogicShop\LogicShopData.cs" />
+    <Compile Include="Data\LogicShop\LogicShopInfo.cs" />
+    <Compile Include="Data\LogicShop\LogicShopItemData.cs" />
+    <Compile Include="Data\LogicShop\LogicShopPrice.cs" />
+    <Compile Include="Data\LogicShop\LogicUserPoint.cs" />
+    <Compile Include="Data\Messenger\FriendWaitingData.cs" />
+    <Compile Include="Data\Mygame\MyGameExternalGameData.cs" />
+    <Compile Include="Data\Pet\PetActionData.cs" />
+    <Compile Include="Data\Pet\PetProfileData.cs" />
+    <Compile Include="Data\Room\Wall.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CommandFactory.cs" />
+    <Compile Include="CommandInspector.cs" />
+    <Compile Include="Data\Action\ActionData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Action\ActionListData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Action\ActionStaticData.cs" />
+    <Compile Include="Data\Club\ClubAreaData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Club\ClubCreateData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Club\ClubMessageData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Club\ClubMessagePartData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Club\ProfileClubData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Common\AreaCategoryData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Common\AreaData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Common\AvatarData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Common\BodyColorData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Common\BodyItemData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Common\BodyPartData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Common\BodyPositionData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Common\Category.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Common\ClubConfigData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Common\ClubEmblemData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Common\ShopAnnounceData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Common\ShopData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Common\ShopGiftBuyData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Common\ShopItemData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Common\TravelAreaCategoryData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Common\TravelAreaData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Common\UserActionItemData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Common\UserItemData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Common\UserProfileData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Common\UserProfileMode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Cosme\CosmeDressUpItemData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Create\CreateAvatarData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Diary\DiaryRoomData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Event\EventData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Event\NoEventData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Footprint\FootPrintData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Gacha\GachaData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Gift\GiftData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Mannequin\MannequinBodyItemData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Mannequin\MannequinData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Mannequin\MannequinIdData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Messenger\MessengerUser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Pet\PetData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Pet\PetSolveFurniturePlaceData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Phone\PhoneGroupData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Phone\PhoneMemberData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Phone\PhoneMessageData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Room\AreaData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Room\AreaOwnerData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Room\DefineAvatar.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Room\DefineData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Room\DefineFurniture.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Room\DefinePet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Room\DefineTreasure.cs" />
+    <Compile Include="Data\Room\PartData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Room\PlaceActionItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Room\PlaceAvatar.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Room\PlaceData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Room\PlaceFurniture.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Room\PlacePet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Room\RoomData.cs" />
+    <Compile Include="Data\Room\StockFurniture.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Shop\ShopCoinBannerLinkInfo.cs" />
+    <Compile Include="Data\Time\RemainTimeData.cs" />
+    <Compile Include="Data\Time\RentalExpiredItemData.cs" />
+    <Compile Include="Encryption\Des.cs" />
+    <Compile Include="Game\TableGame\Baccarat\BaccaratModel.cs" />
+    <Compile Include="Game\TableGame\Blackjack\BlackjackDelegate.cs" />
+    <Compile Include="Game\TableGame\Blackjack\BlackjackModel.cs" />
+    <Compile Include="Game\TableGame\Blackjack\Data\BlackjackHitCardDate.cs" />
+    <Compile Include="Game\TableGame\Blackjack\Data\BlackjackInitialDealerDealData.cs" />
+    <Compile Include="Game\TableGame\Blackjack\Data\BlackjackInitialPlayerDealData.cs" />
+    <Compile Include="Game\TableGame\Blackjack\Data\BlackjackLuckyItemData.cs" />
+    <Compile Include="Game\TableGame\Blackjack\Data\BlackjackPlayerData.cs" />
+    <Compile Include="Game\TableGame\Blackjack\Data\BlackjackResultData.cs" />
+    <Compile Include="Game\TableGame\Blackjack\Data\BlackjackSoundData.cs" />
+    <Compile Include="Game\TableGame\Blackjack\Data\BlackjackTableRuleData.cs" />
+    <Compile Include="Game\TableGame\Blackjack\Data\BlackjackTableStateData.cs" />
+    <Compile Include="Game\TableGame\Roulette\RouletteModel.cs" />
+    <Compile Include="Game\TableGame\Slot\SlotModel.cs" />
+    <Compile Include="Game\TableGame\TableGameFacade.cs" />
+    <Compile Include="Game\TableGame\TableGameModel.cs" />
+    <Compile Include="Header.cs" />
+    <Compile Include="IMessageHandler.cs" />
+    <Compile Include="Packet\Chat\AddBlockUserData.cs" />
+    <Compile Include="Packet\Chat\BalloonModeChangeData.cs" />
+    <Compile Include="Packet\Chat\BalloonModeChangeResultData.cs" />
+    <Compile Include="Packet\Chat\AddBlockUserResultData.cs" />
+    <Compile Include="Packet\Chat\UpdatePointResultData.cs" />
+    <Compile Include="Packet\Chat\MoveFromToResultData.cs" />
+    <Compile Include="Packet\Chat\PlaceGiftData.cs" />
+    <Compile Include="Packet\Chat\UpdateNumFootPrintTodayData.cs" />
+    <Compile Include="Packet\Info\Announce\ListAnnounceEventResultData.cs" />
+    <Compile Include="Packet\Info\Announce\ListAnnounceResultData.cs" />
+    <Compile Include="Packet\Info\Announce\ListAnnounceQuestResultData.cs" />
+    <Compile Include="Packet\Info\Announce\ListAnnounceFirstDayResultData.cs" />
+    <Compile Include="Packet\Info\Calendar\ListCalendarData.cs" />
+    <Compile Include="Packet\Info\Calendar\ListCalendarResultData.cs" />
+    <Compile Include="Packet\Info\Channel\BoothCatalogRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Packet\Info\Channel\BoothCatalogResult.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Packet\Info\Channel\QuitFanRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Packet\Info\Channel\QuitFanResult.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Packet\Info\Cosme\ListCosmeticResultData.cs" />
+    <Compile Include="Packet\Info\Cosme\ListCosmeticData.cs" />
+    <Compile Include="Packet\Info\Friend\ListFriendshipRequestResultData.cs" />
+    <Compile Include="Packet\Info\Friend\AddFavoriteData .cs" />
+    <Compile Include="Packet\Info\Friend\AddFavoriteResultData.cs" />
+    <Compile Include="Packet\Info\Friend\CheckFriendshipRequestableData.cs" />
+    <Compile Include="Packet\Info\Friend\CheckFriendshipRequestableResultData.cs" />
+    <Compile Include="Packet\Info\Friend\AddMuteFavoriteData.cs" />
+    <Compile Include="Packet\Info\Friend\RequestFriendshipResultData.cs" />
+    <Compile Include="Packet\Info\Friend\RequestFriendshipData.cs" />
+    <Compile Include="Packet\Info\Friend\AddMuteFavoriteResultData.cs" />
+    <Compile Include="Packet\Info\Friend\ApproveFriendResultData.cs" />
+    <Compile Include="Packet\Info\Message\CheckBanWordResultData.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Packet\Info\Mission\ChallengeBeginnerData.cs" />
+    <Compile Include="Packet\Info\News\GetAmebaBarLinksData.cs" />
+    <Compile Include="Packet\Info\Rules\MustReadRules.cs" />
+    <Compile Include="Packet\Info\SaleShop\GetSaleShopAnnounceResultData.cs" />
+    <Compile Include="Packet\Info\SaleShop\GetSaleShopAnnounceData.cs" />
+    <Compile Include="Packet\Info\User\CreatePiggStepData.cs" />
+    <Compile Include="Packet\Info\User\GetUserBodyResultData.cs" />
+    <Compile Include="Packet\Info\User\GetUserBodyData.cs" />
+    <Compile Include="CommandManager.cs" />
+    <Compile Include="Util\IntExtensions.cs" />
+    <Compile Include="Packet\Chat\PetActionResultData.cs" />
+    <Compile Include="Packet\Chat\GoodPiggResultData.cs" />
+    <Compile Include="Packet\Chat\TiredResultData.cs" />
+    <Compile Include="Packet\Info\AnalysisLog\ActivityLogData.cs" />
+    <Compile Include="Packet\Info\Areamap\ListBundleTravelAreaData.cs" />
+    <Compile Include="Packet\Info\Area\AreaTopInfoResultData.cs" />
+    <Compile Include="Packet\Info\Area\AreaTopInfoData.cs" />
+    <Compile Include="Packet\Info\BigEvent\GetBiggEventStatusResultData.cs" />
+    <Compile Include="Packet\Info\BigEvent\GetBiggEventStatusData.cs" />
+    <Compile Include="Packet\Info\Cosme\GetShopCosmeticDetailResultData.cs" />
+    <Compile Include="Packet\Info\Cosme\GetShopCosmeticDetailData.cs" />
+    <Compile Include="Packet\Info\Event\CheckEventRankingData.cs" />
+    <Compile Include="Packet\Info\Event\CreateEventData.cs" />
+    <Compile Include="Packet\Info\Event\DeleteEventData.cs" />
+    <Compile Include="Packet\Info\Event\GetEventData.cs" />
+    <Compile Include="Packet\Info\Event\GetEventRankingData.cs" />
+    <Compile Include="Packet\Info\Event\ListEventRankingData.cs" />
+    <Compile Include="Packet\Info\Event\ListEventSummaryData.cs" />
+    <Compile Include="Packet\Info\Event\RegistWarningReleasedData.cs" />
+    <Compile Include="Packet\Info\Event\SendRecieveApprovalData.cs" />
+    <Compile Include="Packet\Info\Event\SearchEventData.cs" />
+    <Compile Include="Packet\Info\Event\ListEventSummaryResultData.cs" />
+    <Compile Include="Packet\Info\Event\SearchEventResultData.cs" />
+    <Compile Include="Packet\Info\Event\ListEventRankingResultData .cs" />
+    <Compile Include="Packet\Info\Event\RegistWarningReleasedResultData.cs" />
+    <Compile Include="Packet\Info\Event\DeleteEventResultData.cs" />
+    <Compile Include="Packet\Info\Event\CreateEventResultData.cs" />
+    <Compile Include="Packet\Info\Event\UpdateEventData.cs" />
+    <Compile Include="Packet\Info\Event\UpdateEventResultData.cs" />
+    <Compile Include="Packet\Info\Event\GetEventRankingResultData.cs" />
+    <Compile Include="Packet\Info\Event\CheckEventRankingResultData.cs" />
+    <Compile Include="Packet\Info\Event\LikeEventResultData.cs" />
+    <Compile Include="Packet\Info\Event\OpenNoticeBoradeCreatePanelResultData.cs" />
+    <Compile Include="Packet\Info\Event\OpenNoticeBoradeCreatePanelData.cs" />
+    <Compile Include="Packet\Info\Gold\CheckGoldData .cs" />
+    <Compile Include="Packet\Info\Gold\CheckGoldResultData.cs" />
+    <Compile Include="Packet\Info\Good\ListGoodResultData.cs" />
+    <Compile Include="Packet\Info\MyGame\NotificationMyGameStatus.cs" />
+    <Compile Include="Packet\Info\Phone\CreateGroupResultData.cs" />
+    <Compile Include="Packet\Info\Phone\ListMemberResultData.cs" />
+    <Compile Include="Packet\Info\Phone\CheckPhoneMessage.cs" />
+    <Compile Include="Packet\Info\Phone\ListGroupMessageResultData.cs" />
+    <Compile Include="Packet\Info\Phone\ListGroupResultData.cs" />
+    <Compile Include="Packet\Info\Phone\RefuseMemberData.cs" />
+    <Compile Include="Packet\Info\Phone\UpdateGroupData.cs" />
+    <Compile Include="Packet\Info\Phone\RemoveMemberData.cs" />
+    <Compile Include="Packet\Info\Phone\ListMemberData.cs" />
+    <Compile Include="Packet\Info\Phone\ListGroupMessageData.cs" />
+    <Compile Include="Packet\Info\Phone\ListGroupMemberData.cs" />
+    <Compile Include="Packet\Info\Phone\ListGroupData.cs" />
+    <Compile Include="Packet\Info\Phone\ConfirmGroupMessageAlert.cs" />
+    <Compile Include="Packet\Info\Phone\AddPhoneMemberData.cs" />
+    <Compile Include="Packet\Info\Phone\AddMessageData.cs" />
+    <Compile Include="Packet\Info\NotificationData.cs" />
+    <Compile Include="Packet\Info\Shop\GetMultipleShopFurnnitureDetailData.cs" />
+    <Compile Include="Packet\Info\Shop\GetPiggShopSeriesResult.cs" />
+    <Compile Include="Packet\Info\Shop\GetPiggShopSeries.cs" />
+    <Compile Include="Packet\Info\Shop\GetPiggShopGachaResult.cs" />
+    <Compile Include="Packet\Info\Shop\GetPiggShopRecommendResult.cs" />
+    <Compile Include="Packet\Info\Shop\GetPiggShopCategory.cs" />
+    <Compile Include="Packet\Info\Shop\GetPiggShopCategoryResult.cs" />
+    <Compile Include="Packet\Info\Shop\GetShopFurnitureDetailResultData.cs" />
+    <Compile Include="Packet\Info\Shop\GetShopFurnnitureDetailData.cs" />
+    <Compile Include="Packet\Info\Shop\GetMultipleShopResultData.cs" />
+    <Compile Include="Packet\Info\Shop\GetPiggShopResultData.cs" />
+    <Compile Include="Packet\Info\Shop\GetPiggShopData.cs" />
+    <Compile Include="Packet\Info\Shop\GetPiggShopRanking.cs" />
+    <Compile Include="Packet\Info\Shop\GetPiggShopRankingResult.cs" />
+    <Compile Include="Packet\Info\Shop\GetMultipleShop.cs" />
+    <Compile Include="SocketManager.cs" />
+    <Compile Include="PacketType.cs" />
+    <Compile Include="Packet\Chat\AddSubRoomData.cs" />
+    <Compile Include="Packet\Chat\AppearUserData.cs" />
+    <Compile Include="Packet\Chat\areageme\AreaGameFieldData.cs" />
+    <Compile Include="Packet\Chat\areageme\AreaGameFieldResultData.cs" />
+    <Compile Include="Packet\Chat\areageme\AreaGameJoinData.cs" />
+    <Compile Include="Packet\Chat\areageme\AreaGameJoinResultData.cs" />
+    <Compile Include="Packet\Chat\areageme\AreaGameLeaveData.cs" />
+    <Compile Include="Packet\Chat\areageme\AreaGamePlayData.cs" />
+    <Compile Include="Packet\Chat\areageme\AreaGamePlayResultData.cs" />
+    <Compile Include="Packet\Chat\BanData.cs" />
+    <Compile Include="Packet\Chat\BaseEnterRoomResultData.cs" />
+    <Compile Include="Packet\Chat\CampaignPontaCheckPointData.cs" />
+    <Compile Include="Packet\Chat\CampaignPontaGivePointData.cs" />
+    <Compile Include="Packet\Chat\CancelTypingData.cs" />
+    <Compile Include="Packet\Chat\CancelTypingResultData.cs" />
+    <Compile Include="Packet\Chat\casino\CasinoGameJoinRequestData.cs" />
+    <Compile Include="Packet\Chat\ChangeRoomData.cs" />
+    <Compile Include="Packet\Chat\ChangeRoomResultData.cs" />
+    <Compile Include="Packet\Chat\ChangeRoomSizeData.cs" />
+    <Compile Include="Packet\Chat\ChangeRoomWindowData.cs" />
+    <Compile Include="Packet\Chat\channel\UpdateFanRequest.cs" />
+    <Compile Include="Packet\Chat\CheckAreaGameData.cs" />
+    <Compile Include="Packet\Chat\CheckAreaGameResultData.cs" />
+    <Compile Include="Packet\Chat\DoActionData.cs" />
+    <Compile Include="Packet\Chat\DoActionResultData.cs" />
+    <Compile Include="Packet\Chat\DoCrackActionData.cs" />
+    <Compile Include="Packet\Chat\EnterAreaResultData.cs" />
+    <Compile Include="Packet\Chat\EnterQueueResultData.cs" />
+    <Compile Include="Packet\Chat\EnterQueueStartResultData.cs" />
+    <Compile Include="Packet\Chat\EnterRoomData.cs" />
+    <Compile Include="Packet\Chat\EnterRoomExecuteData.cs" />
+    <Compile Include="Packet\Chat\EnterRoomFullResultData.cs" />
+    <Compile Include="Packet\Chat\EnterRoomReadyResultData.cs" />
+    <Compile Include="Packet\Chat\EnterUserGardenResultData.cs" />
+    <Compile Include="Packet\Chat\EnterUserRoomResultData.cs" />
+    <Compile Include="Packet\Chat\ErrorData.cs" />
+    <Compile Include="Packet\Chat\EventArrowData.cs" />
+    <Compile Include="Packet\Chat\FinishDressupData.cs" />
+    <Compile Include="Packet\Chat\FinishDressupResultData.cs" />
+    <Compile Include="Packet\Chat\FinishShopData.cs" />
+    <Compile Include="Packet\Chat\FinishShopResultData.cs" />
+    <Compile Include="Packet\Chat\ForceMoveData.cs" />
+    <Compile Include="Packet\Chat\ForceMoveResultData.cs" />
+    <Compile Include="Packet\Chat\game\GameData.cs" />
+    <Compile Include="Packet\Chat\game\GameJoinData.cs" />
+    <Compile Include="Packet\Chat\game\GameLeaveData.cs" />
+    <Compile Include="Packet\Chat\game\GameReadyData.cs" />
+    <Compile Include="Packet\Chat\game\GameResultData.cs" />
+    <Compile Include="Packet\Chat\game\TableGameAbortResultData.cs" />
+    <Compile Include="Packet\Chat\game\TableGameActionData.cs" />
+    <Compile Include="Packet\Chat\game\TableGameData.cs" />
+    <Compile Include="Packet\Chat\game\TableGameResultData.cs" />
+    <Compile Include="Packet\Chat\game\TableGameShowResultData.cs" />
+    <Compile Include="Packet\Chat\GiveGoodData.cs" />
+    <Compile Include="Packet\Chat\LeaveUserData.cs" />
+    <Compile Include="Packet\Chat\LoginChatData.cs" />
+    <Compile Include="Packet\Chat\LoginChatResultData.cs" />
+    <Compile Include="Packet\Chat\MissionCompleteData.cs" />
+    <Compile Include="Packet\Chat\MoveActionItemData.cs" />
+    <Compile Include="Packet\Chat\MoveActionItemResultData.cs" />
+    <Compile Include="Packet\Chat\MoveData.cs" />
+    <Compile Include="Packet\Chat\MoveEndData.cs" />
+    <Compile Include="Packet\Chat\MoveEndResultData.cs" />
+    <Compile Include="Packet\Chat\MoveFromToData.cs" />
+    <Compile Include="Packet\Chat\MoveFurnitureData.cs" />
+    <Compile Include="Packet\Chat\MoveFurnitureResultData.cs" />
+    <Compile Include="Packet\Chat\MoveResultData.cs" />
+    <Compile Include="Packet\Chat\MoveRoomData.cs" />
+    <Compile Include="Packet\Chat\OpenActionItemResultData.cs" />
+    <Compile Include="Packet\Chat\OpenAllActionItemData.cs" />
+    <Compile Include="Packet\Chat\PacketId.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Packet\Chat\PetActionData.cs" />
+    <Compile Include="Packet\Chat\PetAppearResultData.cs" />
+    <Compile Include="Packet\Chat\PetFollowFurnitureData.cs" />
+    <Compile Include="Packet\Chat\PetLeaveResultData.cs" />
+    <Compile Include="Packet\Chat\PetMoveData.cs" />
+    <Compile Include="Packet\Chat\PetMoveEndData.cs" />
+    <Compile Include="Packet\Chat\PetMoveEndResultData.cs" />
+    <Compile Include="Packet\Chat\PetMoveResultData.cs" />
+    <Compile Include="Packet\Chat\PetPlaceData.cs" />
+    <Compile Include="Packet\Chat\PetPlaceResultData.cs" />
+    <Compile Include="Packet\Chat\PetTalkResultData.cs" />
+    <Compile Include="Packet\Chat\PetTreasureProfileData.cs" />
+    <Compile Include="Packet\Chat\PlaceActionItemData.cs" />
+    <Compile Include="Packet\Chat\PlaceActionItemResultData.cs" />
+    <Compile Include="Packet\Chat\PlaceFurnitureData.cs" />
+    <Compile Include="Packet\Chat\PlaceFurnitureResultData.cs" />
+    <Compile Include="Packet\Chat\ReceivePenaltyResultData.cs" />
+    <Compile Include="Packet\Chat\RemoveActionItemData.cs" />
+    <Compile Include="Packet\Chat\RemoveActionItemResultData.cs" />
+    <Compile Include="Packet\Chat\RemoveFurnitureData.cs" />
+    <Compile Include="Packet\Chat\RemoveFurnitureResultData.cs" />
+    <Compile Include="Packet\Chat\ResetRoomData.cs" />
+    <Compile Include="Packet\Chat\RoomActionData.cs" />
+    <Compile Include="Packet\Chat\SendPenaltyResultData.cs" />
+    <Compile Include="Packet\Chat\SendTypingData.cs" />
+    <Compile Include="Packet\Chat\SendTypingResultData.cs" />
+    <Compile Include="Packet\Chat\ShuffleGoOutData.cs" />
+    <Compile Include="Packet\Chat\StartDressupData.cs" />
+    <Compile Include="Packet\Chat\StartDressupResultData.cs" />
+    <Compile Include="Packet\Chat\StartShopData.cs" />
+    <Compile Include="Packet\Chat\StartShopResultData.cs" />
+    <Compile Include="Packet\Chat\SystemActionData.cs" />
+    <Compile Include="Packet\Chat\SystemActionResultData.cs" />
+    <Compile Include="Packet\Chat\TableGameTalkResultData.cs" />
+    <Compile Include="Packet\Chat\TalkData.cs" />
+    <Compile Include="Packet\Chat\TalkResultData.cs" />
+    <Compile Include="Packet\Chat\TiredData.cs" />
+    <Compile Include="Packet\Chat\UseActionItemData.cs" />
+    <Compile Include="Packet\Chat\UseActionItemResultData.cs" />
+    <Compile Include="Packet\Chat\UserEffectData.cs" />
+    <Compile Include="Packet\Chat\UserEffectResultData.cs" />
+    <Compile Include="Packet\IEncrypted.cs" />
+    <Compile Include="Packet\IncludeClientTime.cs" />
+    <Compile Include="Packet\Info\ActionItem\ListUserActionItemData.cs" />
+    <Compile Include="Packet\Info\ActionItem\ListUserActionItemResultData.cs" />
+    <Compile Include="Packet\Info\Action\ListActionResultData.cs" />
+    <Compile Include="Packet\Info\Action\UpdateActionData.cs" />
+    <Compile Include="Packet\Info\AreaGame\AreaGameFieldData.cs" />
+    <Compile Include="Packet\Info\AreaGame\AreaGameFieldResultData.cs" />
+    <Compile Include="Packet\Info\AreaGame\GetGameInitData.cs" />
+    <Compile Include="Packet\Info\AreaGame\GetGameInitResultData.cs" />
+    <Compile Include="Packet\Info\AreaGame\GetGameUpdateByMethodData.cs" />
+    <Compile Include="Packet\Info\AreaGame\GetGameUpdateData.cs" />
+    <Compile Include="Packet\Info\AreaGame\GetGameUpdateResultData.cs" />
+    <Compile Include="Packet\Info\Area\GetAreaData.cs" />
+    <Compile Include="Packet\Info\Area\GetAreaResultData.cs" />
+    <Compile Include="Packet\Info\Area\GetChannelUserAreaData.cs" />
+    <Compile Include="Packet\Info\Area\GetChannelUserAreaResultData.cs" />
+    <Compile Include="Packet\Info\Area\GetUserAreaData.cs" />
+    <Compile Include="Packet\Info\Area\GetUserAreaResultData.cs" />
+    <Compile Include="Packet\Info\Area\ListBundleAreaData.cs" />
+    <Compile Include="Packet\Info\Area\ListBundleAreaResultData.cs" />
+    <Compile Include="Packet\Info\Area\NotifyUserClubEnteredData.cs" />
+    <Compile Include="Packet\Info\Area\NotifyUserRoomEnteredData.cs" />
+    <Compile Include="Packet\Info\BeginnerShop\GetBeginnerShopData.cs" />
+    <Compile Include="Packet\Info\Casino\CasinoBuyPointExecuteData.cs" />
+    <Compile Include="Packet\Info\Club\ListClubAreaResultData.cs" />
+    <Compile Include="Packet\Info\Club\UpdateClubUserTypeData.cs" />
+    <Compile Include="Packet\Info\Create\CreateAvatarData.cs" />
+    <Compile Include="Packet\Info\ErrorData.cs" />
+    <Compile Include="Packet\Info\Event\GetEventAreaData.cs" />
+    <Compile Include="Packet\Info\Event\GetEventAreaResultData.cs" />
+    <Compile Include="Packet\Info\Event\GetEventResultData.cs" />
+    <Compile Include="Packet\Info\Event\LikeEventData.cs" />
+    <Compile Include="Packet\Info\Footprint\LeaveFootPrintData.cs" />
+    <Compile Include="Packet\Info\Footprint\ListFootPrintData.cs" />
+    <Compile Include="Packet\Info\Footprint\ListFootPrintResultData.cs" />
+    <Compile Include="Packet\Info\Friend\ListFriendData.cs" />
+    <Compile Include="Packet\Info\Friend\ListFriendResultData.cs" />
+    <Compile Include="Packet\Info\Friend\ListFriendshipRequestData.cs" />
+    <Compile Include="Packet\Info\Friend\NotifyFriendStatusData.cs" />
+    <Compile Include="Packet\Info\Furniture\ListAdminFurnitureResultData.cs" />
+    <Compile Include="Packet\Info\Furniture\ListUserFurnitureData.cs" />
+    <Compile Include="Packet\Info\Furniture\ListUserFurnitureResultData.cs" />
+    <Compile Include="Packet\Info\Gacha\GetGachaData.cs" />
+    <Compile Include="Packet\Info\Gacha\GetGachaResultData.cs" />
+    <Compile Include="Packet\Info\Gacha\PlayGachaData.cs" />
+    <Compile Include="Packet\Info\Good\ListGoodData.cs" />
+    <Compile Include="Packet\Info\Item\ListUserItemData.cs" />
+    <Compile Include="Packet\Info\Item\ListUserItemResultData.cs" />
+    <Compile Include="Packet\Info\Item\TrashItemData.cs" />
+    <Compile Include="Packet\Info\Item\UseActionItemData.cs" />
+    <Compile Include="Packet\Info\User\LoginData.cs" />
+    <Compile Include="Packet\Info\Maintenance\MaintenanceScheduleResult.cs" />
+    <Compile Include="Packet\Info\Mannequin\SwapMannequinData.cs" />
+    <Compile Include="Packet\Info\Message\CheckBanWordData.cs" />
+    <Compile Include="Packet\Info\PacketId.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Packet\Info\Pet\BuyPetData.cs" />
+    <Compile Include="Packet\Info\Pet\BuyPetResultData.cs" />
+    <Compile Include="Packet\Info\Pet\GetPetProfileData.cs" />
+    <Compile Include="Packet\Info\Pet\GetPetProfileResultData.cs" />
+    <Compile Include="Packet\Info\Pet\SetPetProfileData.cs" />
+    <Compile Include="Packet\Info\Phone\CreateGroupData.cs" />
+    <Compile Include="Packet\Info\Recycledarts\RecycleDartsGetData.cs" />
+    <Compile Include="Packet\Info\SaleShop\GetSalePoyonData.cs" />
+    <Compile Include="Packet\Info\Scratch\ChooseScratchData.cs" />
+    <Compile Include="Packet\Info\Scratch\GetFortuneData.cs" />
+    <Compile Include="Packet\Info\Scratch\GetScratchData.cs" />
+    <Compile Include="Packet\Info\Scratch\ListScratchData.cs" />
+    <Compile Include="Packet\Info\Scratch\OpenScratchData.cs" />
+    <Compile Include="Packet\Info\Shop\BuyGiftItemData.cs" />
+    <Compile Include="Packet\Info\Shop\BuyGiftItemResultData.cs" />
+    <Compile Include="Packet\Info\Shop\BuyShopItemData.cs" />
+    <Compile Include="Packet\Info\Shop\BuyShopItemResultData.cs" />
+    <Compile Include="Packet\Info\Shop\GetShopData.cs" />
+    <Compile Include="Packet\Info\Shop\GetShopResultData.cs" />
+    <Compile Include="Packet\Info\Snapshot\GetSnapshotToken.cs" />
+    <Compile Include="Packet\Info\Snapshot\GetSnapshotTokenResult.cs" />
+    <Compile Include="Packet\Info\SyncArea\SyncDoMoveData.cs" />
+    <Compile Include="Packet\Info\SyncArea\SyncDoTalkData.cs" />
+    <Compile Include="Packet\Info\Travel\ListBundleTravelAreaData.cs" />
+    <Compile Include="Packet\Info\Areamap\ListBundleTravelAreaResultData.cs" />
+    <Compile Include="Packet\Info\Travel\ListTravelAreaResultData.cs" />
+    <Compile Include="Packet\Info\Treasure\TreasureGetData.cs" />
+    <Compile Include="Packet\Info\User\ApplyConflictedUserData.cs" />
+    <Compile Include="Packet\Info\User\ConflictedPiggData.cs" />
+    <Compile Include="Packet\Info\User\ConflictedPiggResultData.cs" />
+    <Compile Include="Packet\Info\User\CreateUserData.cs" />
+    <Compile Include="Packet\Info\User\CreateUserResultData.cs" />
+    <Compile Include="Packet\Info\User\DressupData.cs" />
+    <Compile Include="Packet\Info\User\GetUserCodeData.cs" />
+    <Compile Include="Packet\Info\User\GetUserCodeResultData.cs" />
+    <Compile Include="Packet\Info\User\GetUserProfileData.cs" />
+    <Compile Include="Packet\Info\User\GetUserProfileResultData.cs" />
+    <Compile Include="Packet\Info\User\LoginResultData.cs" />
+    <Compile Include="Packet\Info\User\ProceedTutorialData.cs" />
+    <Compile Include="Packet\Info\User\StartCreateUserData.cs" />
+    <Compile Include="Packet\Info\User\StartCreateUserResultData.cs" />
+    <Compile Include="Packet\Info\Ust\UstData.cs" />
+    <Compile Include="Packet\Info\Ust\UstResultData.cs" />
+    <Compile Include="Packet\Info\Vote\VoteSendData.cs" />
+    <Compile Include="Packet\ICommandData.cs" />
+    <Compile Include="PolicyServer.cs" />
+    <Compile Include="ServerType.cs" />
+    <Compile Include="Util\PacketUtil.cs" />
+    <Compile Include="Util\StartupPositionUtil.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\Rental\" />
+    <Folder Include="Data\Travel\" />
+    <Folder Include="Game\Abacus\" />
+    <Folder Include="Game\AreaGame\Fishing\" />
+    <Folder Include="Game\Menko\" />
+    <Folder Include="Game\Reversi\" />
+    <Folder Include="Game\TableGame\Baccarat\Data\" />
+    <Folder Include="Game\TableGame\Roulette\Data\" />
+    <Folder Include="Game\TableGame\Slot\Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Yoda.Net.Common\Yoda.Net.Common.csproj">
+      <Project>{9f3cf5e8-a6a7-4371-bdfb-77de184b0777}</Project>
+      <Name>Yoda.Net.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

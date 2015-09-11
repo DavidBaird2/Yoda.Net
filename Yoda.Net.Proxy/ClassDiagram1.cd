@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SuperWebSocket.SubProtocol.SubRequestInfo" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="6" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SuperWebSocket.SubProtocol.SubProtocolBase&lt;TWebSocketSession&gt;" Collapsed="true">
+    <Position X="6" Y="7" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SuperWebSocket.SubProtocol.SubCommandFilterAttribute" Collapsed="true">
+    <Position X="12" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuperWebSocket.SubProtocol.SubCommandBase&lt;TWebSocketSession&gt;" Collapsed="true">
+    <Position X="3.5" Y="4" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SuperWebSocket.SubProtocol.SubCommandBase" Collapsed="true">
+    <Position X="5.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuperWebSocket.SubProtocol.JsonSubCommandBase&lt;TWebSocketSession, TJsonCommandInfo&gt;" Collapsed="true">
+    <Position X="2.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuperWebSocket.SubProtocol.JsonSubCommand&lt;TWebSocketSession, TJsonCommandInfo&gt;" Collapsed="true">
+    <Position X="3.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuperWebSocket.SubProtocol.JsonSubCommand&lt;TJsonCommandInfo&gt;" Collapsed="true">
+    <Position X="3.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuperWebSocket.SubProtocol.BasicSubProtocol&lt;TWebSocketSession&gt;" Collapsed="true">
+    <Position X="6" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuperWebSocket.SubProtocol.BasicSubProtocol" Collapsed="true">
+    <Position X="6" Y="9.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuperWebSocket.SubProtocol.BasicSubCommandParser" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="4" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SuperWebSocket.SubProtocol.AsyncJsonSubCommand&lt;TWebSocketSession, TJsonCommandInfo&gt;" Collapsed="true">
+    <Position X="1.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuperWebSocket.SubProtocol.AsyncJsonSubCommand&lt;TJsonCommandInfo&gt;" Collapsed="true">
+    <Position X="1.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuperWebSocket.Protocol.WebSocketReceiveFilterBase" Collapsed="true">
+    <Position X="8.5" Y="7" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuperWebSocket.Protocol.CloseStatusCodeRfc6455" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12" Y="4" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SuperWebSocket.Protocol.CloseStatusCodeHybi10" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="4" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SuperWebSocket.WebSocketSession&lt;TWebSocketSession&gt;" Collapsed="true">
+    <Position X="2.25" Y="10" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SuperWebSocket.WebSocketSession" Collapsed="true">
+    <Position X="3.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuperWebSocket.WebSocketServer&lt;TWebSocketSession&gt;" Collapsed="true">
+    <Position X="6" Y="11" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SuperWebSocket.WebSocketServer" Collapsed="true">
+    <Position X="6" Y="12.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuperWebSocket.WebSocketProtocol" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.75" Y="6" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SuperWebSocket.TextEncodingBinaryDataConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12" Y="6" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SuperWebSocket.JsonWebSocketSession&lt;TWebSocketSession&gt;" Collapsed="true">
+    <Position X="1" Y="11.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuperWebSocket.JsonWebSocketSession" Collapsed="true">
+    <Position X="1" Y="13" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuperWebSocket.Extensions" Collapsed="true">
+    <Position X="10.25" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuperWebSocket.Config.SubProtocolConfigCollection" Collapsed="true">
+    <Position X="8.5" Y="6" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuperWebSocket.Config.SubProtocolConfig" Collapsed="true">
+    <Position X="13.75" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuperWebSocket.Config.CommandConfigCollection" Collapsed="true">
+    <Position X="8.5" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuperWebSocket.Config.CommandConfig" Collapsed="true">
+    <Position X="13.75" Y="4" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="SuperWebSocket.SubProtocol.ISubRequestInfo" Collapsed="true">
+    <Position X="12" Y="9" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="SuperWebSocket.SubProtocol.ISubProtocol&lt;TWebSocketSession&gt;" Collapsed="true">
+    <Position X="10.25" Y="9" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="SuperWebSocket.SubProtocol.ISubCommandFilterLoader" Collapsed="true">
+    <Position X="8.5" Y="9" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="SuperWebSocket.SubProtocol.ISubCommand&lt;TWebSocketSession&gt;" Collapsed="true">
+    <Position X="13.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="SuperWebSocket.Protocol.IWebSocketFragment" Collapsed="true">
+    <Position X="13.75" Y="9" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="SuperWebSocket.Protocol.IProtocolProcessor" Collapsed="true">
+    <Position X="12" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="SuperWebSocket.Protocol.ICloseStatusCode" Collapsed="true">
+    <Position X="10.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="SuperWebSocket.IWebSocketSession" Collapsed="true">
+    <Position X="10.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="SuperWebSocket.IWebSocketServer" Collapsed="true">
+    <Position X="8.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="SuperWebSocket.IBinaryDataConverter" Collapsed="true">
+    <Position X="8.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Yu Gothic UI" Size="9" />
+</ClassDiagram>
