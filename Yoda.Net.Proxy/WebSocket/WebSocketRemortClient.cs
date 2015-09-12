@@ -22,38 +22,16 @@ namespace Yoda.Net.Proxy.WebSocket
         }
         public void SendCommand(Networking.Packet.ICommandData data)
         {
+    
+            var body = new PiggStream();
+            data.writeData(body);
 
             var stream = new PiggStream();
             stream.writeShort(SocketManager.TYPE_COMMAND);
             stream.writeInt(0);
-            stream.position = 11;
-            stream.writeByte(0);
-
-            var buffer = new PiggStream();
-            if (data is IEncrypted)
-            {
-
-                data.writeData(buffer);
-                if (data is IncludeClientTime)
-                {
-                    buffer.writeDate(DateTime.Now);
-                }
-                buffer.position = 0;
-                Des.Encrypt(ref buffer, brige.EncryptionKey);
-                stream.writeBytes(buffer.toArray());
-            }
-            else
-            {
-                data.writeData(stream);
-                if (data is IncludeClientTime)
-                {
-                    buffer.writeDate(DateTime.Now);
-                }
-            }
-            stream.position = 6;
             stream.writeShort((short)data.packetId);
-            stream.writeInt(((int)stream.length - 12));
-            stream.position = 0;
+            stream.writeInt(((int)body.length));
+            stream.writeBytes(body.toArray());
             this.SendData(stream.toArray());
         }
 

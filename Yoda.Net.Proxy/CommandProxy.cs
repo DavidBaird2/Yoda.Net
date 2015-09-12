@@ -60,6 +60,7 @@ namespace Yoda.Net.Proxy
         {
             try
             {
+                array.position = 0;
                 ICommandData data = (ICommandData)facroty.getDataClass(header.packetId);
                 if (data == null)
                 {
@@ -71,8 +72,10 @@ namespace Yoda.Net.Proxy
                 }
                 Logger.WriteLine(Common.LogLevel.Attention, data.GetType().Name + 
                     " (" + brige.GetServerType().ToString().ToUpper() + ")");
+
                 if (data is IEncrypted)
                     Des.Decrypt(ref array, brige.EncryptionKey);
+
                 try
                 {
                     data.readData(array);

@@ -40,6 +40,7 @@ namespace Yoda.Net.Proxy.Socket
                     socketBrige.SendDataToServer(rawPacket.toArray());
                     break;
                 case SocketManager.TYPE_ENC:
+                    
                     socketBrige.SendDataToServer(rawPacket.toArray());
                     break;
 
